@@ -21,15 +21,15 @@
 }
 
 .ti-tablet:before {
-    content: "\e609";
+    content: url("https://img.icons8.com/ios-filled/25/forward-arrow.png");
 }
 
 .ti-shopping-cart:before {
-    content: url("https://img.icons8.com/ios/25/shopping-cart--v1.png");
+    content: url("https://img.icons8.com/ios-filled/25/000000/shopping-cart.png");
 }
 
 .ti-zoom-in:before {
-    content: url("https://img.icons8.com/ios/25/zoom-in--v1.png");
+    content: url("https://img.icons8.com/ios-filled/25/ff0000/like--v1.png");
 }
 
 .ti-plus:before {
@@ -49,7 +49,7 @@
 }
 
 .ti-heart:before {
-    content: url("https://img.icons8.com/ios/25/like--v1.png");
+    content: url("https://img.icons8.com/ios-filled/25/000000/forward-arrow.png");
 }
 
 .ti-close:before {
@@ -57,12 +57,11 @@
 }
 
 .ti-angle-right:before {
-    content: url("https://img.icons8.com/ios/32/000000/less-than-2.png");
-    transform: rotate(180deg);
+    content: url("https://img.icons8.com/ios/25/forward--v1.png");
 }
 
 .ti-angle-left:before {
-    content: url("https://img.icons8.com/ios/32/less-than-2.png");
+    content: url("https://img.icons8.com/ios/25/back--v1.png");
 }
 
 .ti-home:before {

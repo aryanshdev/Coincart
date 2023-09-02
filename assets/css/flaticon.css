@@ -31,7 +31,8 @@
 	}
 
 	.flaticon-shopping-cart:before {
-	    content: "\f101";
+		
+	    content: url("https://img.icons8.com/ios/25/search--v1.png");
 	}
 
 	.flaticon-user:before {
