@@ -21,15 +21,15 @@
 }
 
 .ti-tablet:before {
-    content: "\e609";
+    content: url("https://img.icons8.com/ios-filled/25/forward-arrow.png");
 }
 
 .ti-shopping-cart:before {
-    content: "\e60d";
+    content: url("https://img.icons8.com/ios-filled/25/000000/shopping-cart.png");
 }
 
 .ti-zoom-in:before {
-    content: url("https://img.icons8.com/ios-filled/20/ffc0cb/like--v1.png");
+    content: url("https://img.icons8.com/ios-filled/25/ff0000/like--v1.png");
 }
 
 .ti-plus:before {
@@ -49,7 +49,7 @@
 }
 
 .ti-heart:before {
-    content: "\e634";
+    content: url("https://img.icons8.com/ios-filled/25/000000/forward-arrow.png");
 }
 
 .ti-close:before {
