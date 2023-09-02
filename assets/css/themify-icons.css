@@ -29,7 +29,7 @@
 }
 
 .ti-zoom-in:before {
-    content: "\e611";
+    content: url("https://img.icons8.com/ios-filled/20/ffc0cb/like--v1.png");
 }
 
 .ti-plus:before {
@@ -57,11 +57,11 @@
 }
 
 .ti-angle-right:before {
-    content: "\e649";
+    content: url("https://img.icons8.com/ios/25/forward--v1.png");
 }
 
 .ti-angle-left:before {
-    content: "\e64a";
+    content: url("https://img.icons8.com/ios/25/back--v1.png");
 }
 
 .ti-home:before {
