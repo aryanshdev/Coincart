@@ -25,11 +25,11 @@
 }
 
 .ti-shopping-cart:before {
-    content: "\e60d";
+    content: url("https://img.icons8.com/ios/25/shopping-cart--v1.png");
 }
 
 .ti-zoom-in:before {
-    content: "\e611";
+    content: url("https://img.icons8.com/ios/25/zoom-in--v1.png");
 }
 
 .ti-plus:before {
@@ -49,7 +49,7 @@
 }
 
 .ti-heart:before {
-    content: "\e634";
+    content: url("https://img.icons8.com/ios/25/like--v1.png");
 }
 
 .ti-close:before {
@@ -57,11 +57,12 @@
 }
 
 .ti-angle-right:before {
-    content: "\e649";
+    content: url("https://img.icons8.com/ios/32/000000/less-than-2.png");
+    transform: rotate(180deg);
 }
 
 .ti-angle-left:before {
-    content: "\e64a";
+    content: url("https://img.icons8.com/ios/32/less-than-2.png");
 }
 
 .ti-home:before {

@@ -34,7 +34,7 @@
 }
 
 .fa-angle-down:before {
-    content: "\f107"
+    content: url("https://img.icons8.com/ios/11/expand-arrow--v1.png")
 }
 
 .fa-behance:before {
