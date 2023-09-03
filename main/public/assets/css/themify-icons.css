@@ -53,7 +53,7 @@
 }
 
 .ti-close:before {
-    content: "\e646";
+    content: url("https://img.icons8.com/ios-filled/ffffff/25/multiply.png");
 }
 
 .ti-angle-right:before {

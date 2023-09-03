@@ -35,5 +35,5 @@ content: url("https://img.icons8.com/sf-regular-filled/ff7f00/30/shopping-cart.p
 	}
 
 	.flaticon-user:before {
-	    content: "\f102";
+	    content: url("https://img.icons8.com/fluency-systems-filled/ff7f00/30/user.png");
 	}

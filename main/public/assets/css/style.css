@@ -199,7 +199,7 @@ hr {
 }
 
 #back-top {
-    background: #FF2020;
+    background: #FF7F00;
     height: 40px;
     width: 40px;
     right: 31px;
@@ -304,7 +304,7 @@ hr {
     position: relative;
     border-style: solid;
     border-width: 1px;
-    border-top-color: #FF2020;
+    border-top-color: #FF7F00;
     border-bottom-color: transparent;
     border-left-color: transparent;
     border-right-color: transparent;
@@ -706,7 +706,7 @@ hr {
 }
 
 .btn {
-    background: #FF2020;
+    background: #FF7F00;
     font-family: "Jost", sans-serif;
     text-transform: inherit !important;
     padding: 22px 32px;
@@ -782,7 +782,7 @@ hr {
     color: #fff !important;
     font-size: 16px;
     margin-right: 10px;
-    color: #FF2020;
+    color: #FF7F00;
     -webkit-transition: all .3s ease-out 0s;
     -moz-transition: all .3s ease-out 0s;
     -ms-transition: all .3s ease-out 0s;
@@ -809,7 +809,7 @@ hr {
 }
 
 .border-btn:hover {
-    color: #FF2020
+    color: #FF7F00
 }
 
 .border-btn:hover::before {
@@ -818,7 +818,7 @@ hr {
 }
 
 .border-btn:hover i {
-    color: #FF2020 !important
+    color: #FF7F00 !important
 }
 
 .browse-btn {
@@ -839,7 +839,7 @@ hr {
 }
 
 .browse-btn:hover {
-    color: #FF2020;
+    color: #FF7F00;
     letter-spacing: 1px
 }
 
@@ -849,7 +849,7 @@ hr {
 
 .submit-btn {
     width: 100%;
-    background: #FF2020;
+    background: #FF7F00;
     font-family: "Jost", sans-serif;
     text-transform: inherit !important;
     padding: 25px 43px;
@@ -941,7 +941,7 @@ hr {
     top: 0;
     width: 101%;
     height: 101%;
-    background: #FF2020;
+    background: #FF7F00;
     z-index: 1;
     border-radius: 5px;
     transition: transform 0.5s;
@@ -994,23 +994,23 @@ hr {
 
 .boxed-btn {
     background: #fff;
-    color: #FF2020 !important;
+    color: #FF7F00 !important;
     display: inline-block;
     padding: 18px 44px;
     font-family: "Jost", sans-serif;
     font-size: 14px;
     font-weight: 400;
     border: 0;
-    border: 1px solid #FF2020;
+    border: 1px solid #FF7F00;
     text-align: center;
-    color: #FF2020;
+    color: #FF7F00;
     cursor: pointer
 }
 
 .boxed-btn:hover {
-    background: #FF2020;
+    background: #FF7F00;
     color: #fff !important;
-    border: 1px solid #FF2020
+    border: 1px solid #FF7F00
 }
 
 .boxed-btn:focus {
@@ -1136,7 +1136,7 @@ hr {
 }
 
 .header-area .header-top .header-info-right .header-social li a:hover i {
-    color: #FF2020;
+    color: #FF7F00;
     transform: rotateY(180deg);
     -webkit-transform: rotateY(180deg);
     -moz-transform: rotateY(180deg);
@@ -1209,7 +1209,7 @@ hr {
 }
 
 .header-area .header-mid .menu-wrapper .main-menu ul li:hover>a {
-    color: #FF2020
+    color: #FF7F00
 }
 
 .header-area .header-mid .menu-wrapper .main-menu ul li.new {
@@ -1219,7 +1219,7 @@ hr {
 .header-area .header-mid .menu-wrapper .main-menu ul li.new::before {
     position: absolute;
     content: "New";
-    background: #FF2020;
+    background: #FF7F00;
     color: #fff;
     text-align: center;
     border-radius: 4px;
@@ -1235,7 +1235,7 @@ hr {
     position: absolute;
     height: 9px;
     width: 6px;
-    background: #FF2020;
+    background: #FF7F00;
     content: "";
     right: 32px;
     top: 30px;
@@ -1264,7 +1264,7 @@ hr {
     opacity: 0;
     box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.05);
     padding: 17px 0;
-    border-top: 3px solid #FF2020;
+    border-top: 3px solid #FF7F00;
     border-radius: 7px 7px 3px 3px;
     -webkit-transition: all .2s ease-out 0s;
     -moz-transition: all .2s ease-out 0s;
@@ -1286,7 +1286,7 @@ hr {
 }
 
 .header-area .header-mid .menu-wrapper .main-menu ul ul.submenu>li>a:hover {
-    color: #FF2020;
+    color: #FF7F00;
     background: none;
     letter-spacing: 0.4px
 }
@@ -1348,7 +1348,7 @@ hr {
 }
 
 .header-area .header-mid .menu-wrapper .header-right span:hover {
-    color: #FF2020;
+    color: #FF7F00;
     top: -10px
 }
 
@@ -1361,7 +1361,7 @@ hr {
 @media (max-width: 575px) {
     .header-area .header-mid .menu-wrapper .header-right span {
         padding: 6px 9px;
-        color: #FF2020
+        color: #FF7F00
     }
 }
 
@@ -1377,7 +1377,7 @@ hr {
     transition: all .4s ease-out 0s;
     position: absolute;
     content: "1";
-    background: #FF2020;
+    background: #FF7F00;
     color: #fff;
     text-align: center;
     border-radius: 50%;
@@ -1434,7 +1434,7 @@ hr {
     max-width: 1296px;
     z-index: 999;
     text-align: center;
-    background: #FF2020;
+    background: #ff7f00;
     box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2)
 }
 
@@ -1577,7 +1577,7 @@ hr {
 }
 
 .slider-area .hero-caption span {
-    color: #FF2020;
+    color: #FF7F00;
     font-family: "Clicker Script", cursive;
     font-size: 50px;
     line-height: 1.2;
@@ -2123,7 +2123,7 @@ hr {
     display: -ms-flexbox;
     display: -webkit-flex;
     display: flex;
-    background-color: #FF2020;
+    background-color: #FF7F00;
     padding: 29px 20px 29px 80px
 }
 
@@ -2323,8 +2323,8 @@ hr {
 }
 
 .nav-button nav .nav-tabs .nav-link.active {
-    color: #FF2020;
-    border-bottom: 4px solid #FF2020;
+    color: #FF7F00;
+    border-bottom: 4px solid #FF7F00;
     background: none
 }
 
@@ -2335,7 +2335,7 @@ hr {
 }
 
 .nav-button nav .nav-tabs .nav-link:hover {
-    border-bottom: 4px solid #FF2020
+    border-bottom: 4px solid #FF7F00
 }
 
 @media (max-width: 575px) {
@@ -2464,7 +2464,7 @@ hr {
 }
 
 .latest-items .properties .properties-card .properties-img .socal_icon a:hover {
-    background: #FF2020;
+    background: #FF7F00;
     color: #fff
 }
 
@@ -2514,7 +2514,7 @@ hr {
 }
 
 .latest-items .properties:hover .properties-caption h3 a {
-    color: #FF2020
+    color: #FF7F00
 }
 
 .latest-items .properties:hover .properties-caption .properties-footer .price span {
@@ -2553,7 +2553,7 @@ hr {
 }
 
 .latest-items-active button.slick-arrow i:hover {
-    color: #FF2020
+    color: #FF7F00
 }
 
 .latest-items-active button.slick-prev {
@@ -2634,7 +2634,7 @@ hr {
     font-family: "Jost", sans-serif;
     text-transform: capitalize;
     font-size: 20px;
-    color: #FF2020;
+    color: #FF7F00;
     margin-bottom: 10px;
     display: block
 }
@@ -2701,7 +2701,7 @@ hr {
     width: 24%;
     height: 60px;
     border: 0;
-    background: #FF2020;
+    background: #FF7F00;
     border-radius: 0;
     padding: 13px 24px;
     color: #fff;
@@ -2757,7 +2757,7 @@ hr {
 }
 
 .footer-wrapper .footer-area .info.error {
-    color: #FF2020
+    color: #FF7F00
 }
 
 .footer-bottom-area .footer-border {
@@ -2774,11 +2774,11 @@ hr {
 }
 
 .footer-bottom-area .footer-copy-right p i {
-    color: #FF2020
+    color: #FF7F00
 }
 
 .footer-bottom-area .footer-copy-right p a {
-    color: #FF2020
+    color: #FF7F00
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -2822,7 +2822,7 @@ hr {
 }
 
 .footer-social a:hover {
-    color: #FF2020
+    color: #FF7F00
 }
 
 .footer-social a:hover i {
@@ -2962,7 +2962,7 @@ hr {
 }
 
 .category-listing .single-listing .select-Categories .container input:checked~.checkmark {
-    background-color: #FF2020;
+    background-color: #FF7F00;
     border: 2px solid transparent
 }
 
@@ -3109,8 +3109,8 @@ hr {
 
 .p_filter_widgets .list li.active a:before,
 .p_filter_widgets .list li:hover a:before {
-    background: #FF2020;
-    border-color: #FF2020
+    background: #FF7F00;
+    border-color: #FF7F00
 }
 
 .p_filter_widgets .list li:last-child {
@@ -3344,7 +3344,7 @@ hr {
     height: 10px;
     width: 10px;
     border-radius: 50%;
-    background: #FF2020;
+    background: #FF7F00;
     display: inline-block;
     position: absolute;
     right: 3px;
@@ -3460,7 +3460,7 @@ hr {
 }
 
 .check_title h2 a {
-    color: #FF2020;
+    color: #FF7F00;
     text-decoration: underline
 }
 
@@ -3658,7 +3658,7 @@ hr {
 }
 
 .billing_details .contact_form .form-group .creat_account a {
-    color: #FF2020
+    color: #FF7F00
 }
 
 .order_box {
@@ -3762,8 +3762,8 @@ hr {
 }
 
 .order_box .payment_item.active h4:before {
-    background: #FF2020;
-    border-color: #FF2020
+    background: #FF7F00;
+    border-color: #FF7F00
 }
 
 .order_box .creat_account {
@@ -3777,7 +3777,7 @@ hr {
 }
 
 .order_box .creat_account a {
-    color: #FF2020
+    color: #FF7F00
 }
 
 .radion_btn input[type="radio"] {
@@ -3845,8 +3845,8 @@ hr {
 }
 
 .radion_btn input[type="radio"]:checked~.check {
-    border: 1px solid #FF2020;
-    background: #FF2020
+    border: 1px solid #FF7F00;
+    background: #FF7F00
 }
 
 .radion_btn input[type="radio"]:checked~.check::before {
@@ -3862,7 +3862,7 @@ hr {
 }
 
 .cart_area .btn_1:hover {
-    border: 1px solid #FF2020 !important
+    border: 1px solid #FF7F00 !important
 }
 
 .checkout-cap {
@@ -3918,8 +3918,8 @@ hr {
 }
 
 .checkout-cap input[type=checkbox]:checked+label:before {
-    background-color: #FF2020;
-    border-color: #FF2020;
+    background-color: #FF7F00;
+    border-color: #FF7F00;
     color: #fff;
     line-height: 18px
 }
@@ -4074,7 +4074,7 @@ hr {
 }
 
 .login-form-area .login-form .login-footer p a {
-    color: #FF2020
+    color: #FF7F00
 }
 
 .login-check {
@@ -4130,20 +4130,20 @@ hr {
 }
 
 .login-check input[type=checkbox]:checked+label:before {
-    background-color: #FF2020;
-    border-color: #FF2020;
+    background-color: #FF7F00;
+    border-color: #FF7F00;
     color: #fff;
     line-height: 18px
 }
 
 .login-check a {
-    color: #FF2020;
+    color: #FF7F00;
     font-size: 14px;
     font-weight: 400
 }
 
 .login-check a:hover {
-    color: #FF2020
+    color: #FF7F00
 }
 
 @media (max-width: 575px) {
@@ -4297,11 +4297,11 @@ hr {
 }
 
 .register-form-area .register-form .register-footer p a {
-    color: #FF2020
+    color: #FF7F00
 }
 
 .submit-btn3 {
-    background: #FF2020;
+    background: #FF7F00;
     height: 60px;
     padding: 10px 43px;
     border: 0;
@@ -4376,7 +4376,7 @@ hr {
 }
 
 .home-blog .single-blogs .blogs-cap h5 a:hover {
-    color: #FF2020
+    color: #FF7F00
 }
 
 .home-blog .single-blogs .blogs-cap p {
@@ -4395,7 +4395,7 @@ hr {
 }
 
 .home-blog .single-blogs:hover .blogs-cap h5 a {
-    color: #FF2020
+    color: #FF7F00
 }
 
 .blog_area a {
@@ -4406,7 +4406,7 @@ hr {
 
 .blog_area a:hover,
 .blog_area a :hover {
-    background: -webkit-linear-gradient(131deg, #FF2020 0%, #FF2020 99%);
+    background: -webkit-linear-gradient(131deg, #FF7F00 0%, #FF7F00 99%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     text-decoration: none;
@@ -4453,7 +4453,7 @@ hr {
 }
 
 .blog_details a:hover {
-    color: #FF2020
+    color: #FF7F00
 }
 
 .blog_details h2 {
@@ -4511,7 +4511,7 @@ hr {
     left: 10px;
     display: block;
     color: #fff;
-    background-color: #FF2020;
+    background-color: #FF7F00;
     padding: 8px 15px;
     border-radius: 5px
 }
@@ -4593,7 +4593,7 @@ hr {
 }
 
 .blog_right_sidebar .search_widget .input-group button {
-    background: #FF2020;
+    background: #FF7F00;
     border-left: 0;
     border: 1px solid #f0e9ff;
     padding: 12px 15px;
@@ -4711,7 +4711,7 @@ hr {
 }
 
 .blog_right_sidebar .tag_cloud_widget ul li a:hover {
-    background: #FF2020;
+    background: #FF7F00;
     color: #fff !important;
     -webkit-text-fill-color: #fff;
     text-decoration: none;
@@ -4896,7 +4896,7 @@ hr {
 }
 
 .single-post-area .blog-author a:hover {
-    color: #FF2020
+    color: #FF7F00
 }
 
 .single-post-area .blog-author p {
