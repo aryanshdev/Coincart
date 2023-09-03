@@ -33,11 +33,11 @@
 }
 
 .ti-plus:before {
-    content: "\e61a";
+    content: url("https://img.icons8.com/android/000000/12/plus.png");
 }
 
 .ti-minus:before {
-    content: "\e622";
+    
 }
 
 .ti-arrow-right:before {

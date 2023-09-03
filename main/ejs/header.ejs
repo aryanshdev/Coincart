@@ -1,87 +1,105 @@
-<!doctype html>
+<!DOCTYPE html>
 <html class="no-js" lang="zxx">
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <title><%= title %></title>
-    <meta name="description" content>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/icon/favicon.png">
+    <meta name="description" content />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="assets/img/icon/favicon.png"
+    />
 
-    <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./assets/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="./assets/css/slicknav.css">
-    <link rel="stylesheet" href="./assets/css/flaticon.css">
-    <link rel="stylesheet" href="./assets/css/animate.min.css">
-    <link rel="stylesheet" href="./assets/css/price_rangs.css">
-    <link rel="stylesheet" href="./assets/css/magnific-popup.css">
-    <link rel="stylesheet" href="./assets/css/fontawesome-all.min.css">
-    <link rel="stylesheet" href="./assets/css/themify-icons.css">
-    <link rel="stylesheet" href="./assets/css/slick.css">
-    <link rel="stylesheet" href="./assets/css/nice-select.css">
-    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/css/owl.carousel.min.css" />
+    <link rel="stylesheet" href="./assets/css/slicknav.css" />
+    <link rel="stylesheet" href="./assets/css/flaticon.css" />
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <link rel="stylesheet" href="./assets/css/price_rangs.css" />
+    <link rel="stylesheet" href="./assets/css/magnific-popup.css" />
+    <link rel="stylesheet" href="./assets/css/fontawesome-all.min.css" />
+    <link rel="stylesheet" href="./assets/css/themify-icons.css" />
+    <link rel="stylesheet" href="./assets/css/slick.css" />
+    <link rel="stylesheet" href="./assets/css/nice-select.css" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
     <script nonce="ac10095a-9557-4835-8e77-b07730521b4d">
-        (function (w, d) {
-            ! function (db, dc, dd, de) {
-                db[dd] = db[dd] || {};
-                db[dd].executed = [];
-                db.zaraz = {
-                    deferred: [],
-                    listeners: []
-                };
-                db.zaraz.q = [];
-                db.zaraz._f = function (df) {
-                    return async function () {
-                        var dg = Array.prototype.slice.call(arguments);
-                        db.zaraz.q.push({
-                            m: df,
-                            a: dg
-                        })
-                    }
-                };
-                for (const dh of ["track", "set", "debug"]) db.zaraz[dh] = db.zaraz._f(dh);
-                db.zaraz.init = () => {
-                    var di = dc.getElementsByTagName(de)[0],
-                        dj = dc.createElement(de),
-                        dk = dc.getElementsByTagName("title")[0];
-                    dk && (db[dd].t = dc.getElementsByTagName("title")[0].text);
-                    db[dd].x = Math.random();
-                    db[dd].w = db.screen.width;
-                    db[dd].h = db.screen.height;
-                    db[dd].j = db.innerHeight;
-                    db[dd].e = db.innerWidth;
-                    db[dd].l = db.location.href;
-                    db[dd].r = dc.referrer;
-                    db[dd].k = db.screen.colorDepth;
-                    db[dd].n = dc.characterSet;
-                    db[dd].o = (new Date).getTimezoneOffset();
-                    if (db.dataLayer)
-                        for (const dp of Object.entries(Object.entries(dataLayer).reduce(((dq, dr) => ({
-                            ...dq[1],
-                            ...dr[1]
-                        })), {}))) zaraz.set(dp[0], dp[1], {
-                            scope: "page"
-                        });
-                    db[dd].q = [];
-                    for (; db.zaraz.q.length;) {
-                        const ds = db.zaraz.q.shift();
-                        db[dd].q.push(ds)
-                    }
-                    dj.defer = !0;
-                    for (const dt of [localStorage, sessionStorage]) Object.keys(dt || {}).filter((dv => dv.startsWith("_zaraz_"))).forEach((du => {
-                        try {
-                            db[dd]["z_" + du.slice(7)] = JSON.parse(dt.getItem(du))
-                        } catch {
-                            db[dd]["z_" + du.slice(7)] = dt.getItem(du)
-                        }
-                    }));
-                    dj.referrerPolicy = "origin";
-                    dj.src = "/cdn-cgi/zaraz/s.js?z=" + btoa(encodeURIComponent(JSON.stringify(db[dd])));
-                    di.parentNode.insertBefore(dj, di)
-                };
-                ["complete", "interactive"].includes(dc.readyState) ? zaraz.init() : db.addEventListener("DOMContentLoaded", zaraz.init)
-            }(w, d, "zarazData", "script");
-        })(window, document);
+      (function (w, d) {
+        !(function (db, dc, dd, de) {
+          db[dd] = db[dd] || {};
+          db[dd].executed = [];
+          db.zaraz = {
+            deferred: [],
+            listeners: [],
+          };
+          db.zaraz.q = [];
+          db.zaraz._f = function (df) {
+            return async function () {
+              var dg = Array.prototype.slice.call(arguments);
+              db.zaraz.q.push({
+                m: df,
+                a: dg,
+              });
+            };
+          };
+          for (const dh of ["track", "set", "debug"])
+            db.zaraz[dh] = db.zaraz._f(dh);
+          db.zaraz.init = () => {
+            var di = dc.getElementsByTagName(de)[0],
+              dj = dc.createElement(de),
+              dk = dc.getElementsByTagName("title")[0];
+            dk && (db[dd].t = dc.getElementsByTagName("title")[0].text);
+            db[dd].x = Math.random();
+            db[dd].w = db.screen.width;
+            db[dd].h = db.screen.height;
+            db[dd].j = db.innerHeight;
+            db[dd].e = db.innerWidth;
+            db[dd].l = db.location.href;
+            db[dd].r = dc.referrer;
+            db[dd].k = db.screen.colorDepth;
+            db[dd].n = dc.characterSet;
+            db[dd].o = new Date().getTimezoneOffset();
+            if (db.dataLayer)
+              for (const dp of Object.entries(
+                Object.entries(dataLayer).reduce(
+                  (dq, dr) => ({
+                    ...dq[1],
+                    ...dr[1],
+                  }),
+                  {}
+                )
+              ))
+                zaraz.set(dp[0], dp[1], {
+                  scope: "page",
+                });
+            db[dd].q = [];
+            for (; db.zaraz.q.length; ) {
+              const ds = db.zaraz.q.shift();
+              db[dd].q.push(ds);
+            }
+            dj.defer = !0;
+            for (const dt of [localStorage, sessionStorage])
+              Object.keys(dt || {})
+                .filter((dv) => dv.startsWith("_zaraz_"))
+                .forEach((du) => {
+                  try {
+                    db[dd]["z_" + du.slice(7)] = JSON.parse(dt.getItem(du));
+                  } catch {
+                    db[dd]["z_" + du.slice(7)] = dt.getItem(du);
+                  }
+                });
+            dj.referrerPolicy = "origin";
+            dj.src =
+              "/cdn-cgi/zaraz/s.js?z=" +
+              btoa(encodeURIComponent(JSON.stringify(db[dd])));
+            di.parentNode.insertBefore(dj, di);
+          };
+          ["complete", "interactive"].includes(dc.readyState)
+            ? zaraz.init()
+            : db.addEventListener("DOMContentLoaded", zaraz.init);
+        })(w, d, "zarazData", "script");
+      })(window, document);
     </script>
-</head>
+  </head>
+</html>

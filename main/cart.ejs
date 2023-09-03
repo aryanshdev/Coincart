@@ -1,0 +1,360 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+    <%- include("ejs/header.ejs") -%>
+
+    <body>
+
+        <%- include("ejs/navbar.ejs") -%>
+
+    <main>
+
+        <div class="hero-area section-bg2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="slider-area">
+                            <div class="slider-height2 slider-bg4 d-flex align-items-center justify-content-center">
+                                <div class="hero-caption hero-caption2">
+                                    <h2>Cart</h2>
+                                    <nav aria-label="breadcrumb">
+                                        <ol class="breadcrumb justify-content-center">
+                                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                            <li class="breadcrumb-item"><a href="#">Cart</a></li>
+                                        </ol>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <section class="cart_area">
+            <div class="container">
+                <div class="cart_inner">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Product</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="media">
+                                            <div class="d-flex">
+                                                <img src="assets/img/gallery/best-books1.jpg" alt />
+                                            </div>
+                                            <div class="media-body">
+                                                <p>Minimalistic shop for multipurpose use</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <h5>$360.00</h5>
+                                    </td>
+                                    <td>
+                                        <div class="product_count">
+                                            <span class="input-number-decrement"> <i class="ti-minus"></i></span>
+                                            <input class="input-number" type="text" value="1" min="0" max="10">
+                                            <span class="input-number-increment"> <i class="ti-plus"></i></span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <h5>$720.00</h5>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="media">
+                                            <div class="d-flex">
+                                                <img src="assets/img/gallery/best_selling1.jpg" alt />
+                                            </div>
+                                            <div class="media-body">
+                                                <p>Minimalistic shop for multipurpose use</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <h5>$360.00</h5>
+                                    </td>
+                                    <td>
+                                        <div class="product_count">
+                                            <span class="input-number-decrement"> <i class="ti-minus"></i></span>
+                                            <input class="input-number2" type="text" value="1" min="0" max="10">
+                                            <span class="input-number-increment"> <i class="ti-plus"></i></span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <h5>$720.00</h5>
+                                    </td>
+                                </tr>
+                                <tr class="bottom_button">
+                                    <td>
+                                        <a class="btn" href="#">Update Cart</a>
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        <div class="cupon_text float-right">
+                                            <a class="btn" href="#">Close Coupon</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        <h5>Subtotal</h5>
+                                    </td>
+                                    <td>
+                                        <h5>$2160.00</h5>
+                                    </td>
+                                </tr>
+                                <tr class="shipping_area">
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        <h5>Shipping</h5>
+                                    </td>
+                                    <td>
+                                        <div class="shipping_box">
+                                            <ul class="list">
+                                                <li>
+                                                    Flat Rate: $5.00
+                                                    <input type="radio"
+                                                        aria-label="Radio button for following text input">
+                                                </li>
+                                                <li>
+                                                    Free Shipping
+                                                    <input type="radio"
+                                                        aria-label="Radio button for following text input">
+                                                </li>
+                                                <li>
+                                                    Flat Rate: $10.00
+                                                    <input type="radio"
+                                                        aria-label="Radio button for following text input">
+                                                </li>
+                                                <li class="active">
+                                                    Local Delivery: $2.00
+                                                    <input type="radio"
+                                                        aria-label="Radio button for following text input">
+                                                </li>
+                                            </ul>
+                                            <h6>
+                                                Calculate Shipping
+                                                <i class="fa fa-caret-down" aria-hidden="true"></i>
+                                            </h6>
+                                            <select class="shipping_select">
+                                                <option value="1">Bangladesh</option>
+                                                <option value="2">India</option>
+                                                <option value="4">Pakistan</option>
+                                            </select>
+                                            <select class="shipping_select section_bg">
+                                                <option value="1">Select a State</option>
+                                                <option value="2">Select a State</option>
+                                                <option value="4">Select a State</option>
+                                            </select>
+                                            <input class="post_code" type="text" placeholder="Postcode/Zipcode" />
+                                            <a class="btn" href="#">Update Details</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="checkout_btn_inner float-right">
+                            <a class="btn" href="#">Continue Shopping</a>
+                            <a class="btn checkout_btn" href="#">Proceed to checkout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    <footer>
+        <div class="footer-wrapper gray-bg">
+            <div class="footer-area footer-padding">
+
+                <section class="subscribe-area">
+                    <div class="container">
+                        <div class="row justify-content-between subscribe-padding">
+                            <div class="col-xxl-3 col-xl-3 col-lg-4">
+                                <div class="subscribe-caption">
+                                    <h3>Subscribe Newsletter</h3>
+                                    <p>Subscribe newsletter to get 5% on all products.</p>
+                                </div>
+                            </div>
+                            <div class="col-xxl-5 col-xl-6 col-lg-7 col-md-9">
+                                <div class="subscribe-caption">
+                                    <form action="#">
+                                        <input type="text" placeholder="Enter your email">
+                                        <button class="subscribe-btn">Subscribe</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-xxl-2 col-xl-2 col-lg-4">
+
+                                <div class="footer-social">
+                                    <a href="https://bit.ly/sai4ull"><i class="fab fa-facebook"></i></a>
+                                    <a href="#"><i class="fab fa-instagram"></i></a>
+                                    <a href="#"><i class="fab fa-youtube"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="container">
+                    <div class="row justify-content-between">
+                        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-8">
+                            <div class="single-footer-caption mb-50">
+                                <div class="single-footer-caption mb-20">
+
+                                    <div class="footer-logo mb-35">
+                                        <a href="index.html"><img src="assets/img/logo/logo2_footer.png" alt></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-2 col-md-4 col-sm-6">
+                            <div class="single-footer-caption mb-50">
+                                <div class="footer-tittle">
+                                    <h4>Shop Men</h4>
+                                    <ul>
+                                        <li><a href="#">Clothing Fashion</a></li>
+                                        <li><a href="#">Winter</a></li>
+                                        <li><a href="#">Summer</a></li>
+                                        <li><a href="#">Formal</a></li>
+                                        <li><a href="#">Casual</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-2 col-md-4 col-sm-6">
+                            <div class="single-footer-caption mb-50">
+                                <div class="footer-tittle">
+                                    <h4>Shop Women</h4>
+                                    <ul>
+                                        <li><a href="#">Clothing Fashion</a></li>
+                                        <li><a href="#">Winter</a></li>
+                                        <li><a href="#">Summer</a></li>
+                                        <li><a href="#">Formal</a></li>
+                                        <li><a href="#">Casual</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-2 col-md-4 col-sm-6">
+                            <div class="single-footer-caption mb-50">
+                                <div class="footer-tittle">
+                                    <h4>Baby Collection</h4>
+                                    <ul>
+                                        <li><a href="#">Clothing Fashion</a></li>
+                                        <li><a href="#">Winter</a></li>
+                                        <li><a href="#">Summer</a></li>
+                                        <li><a href="#">Formal</a></li>
+                                        <li><a href="#">Casual</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-2 col-md-4 col-sm-6">
+                            <div class="single-footer-caption mb-50">
+                                <div class="footer-tittle">
+                                    <h4>Quick Links</h4>
+                                    <ul>
+                                        <li><a href="#">Track Your Order</a></li>
+                                        <li><a href="#">Support</a></li>
+                                        <li><a href="#">FAQ</a></li>
+                                        <li><a href="#">Carrier</a></li>
+                                        <li><a href="#">About</a></li>
+                                        <li><a href="#">Contact Us</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom-area">
+                <div class="container">
+                    <div class="footer-border">
+                        <div class="row">
+                            <div class="col-xl-12 ">
+                                <div class="footer-copy-right text-center">
+                                    <p>Copyright &copy;
+                                        <script>document.write(new Date().getFullYear());</script> All rights reserved |
+                                        This template is made with <i class="fa fa-heart color-danger"
+                                            aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank"
+                                            rel="nofollow noopener">Colorlib</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div id="back-top">
+        <a class="wrapper" title="Go to Top" href="#">
+            <div class="arrows-container">
+                <div class="arrow arrow-one">
+                </div>
+                <div class="arrow arrow-two">
+                </div>
+            </div>
+        </a>
+    </div>
+
+
+    <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
+    <script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="./assets/js/popper.min.js"></script>
+    <script src="./assets/js/bootstrap.min.js"></script>
+
+    <script src="./assets/js/owl.carousel.min.js"></script>
+    <script src="./assets/js/slick.min.js"></script>
+    <script src="./assets/js/jquery.slicknav.min.js"></script>
+
+    <script src="./assets/js/wow.min.js"></script>
+    <script src="./assets/js/jquery.magnific-popup.js"></script>
+    <script src="./assets/js/jquery.nice-select.min.js"></script>
+    <script src="./assets/js/jquery.counterup.min.js"></script>
+    <script src="./assets/js/waypoints.min.js"></script>
+    <script src="./assets/js/price_rangs.js"></script>
+
+    <script src="./assets/js/contact.js"></script>
+    <script src="./assets/js/jquery.form.js"></script>
+    <script src="./assets/js/jquery.validate.min.js"></script>
+    <script src="./assets/js/mail-script.js"></script>
+    <script src="./assets/js/jquery.ajaxchimp.min.js"></script>
+
+    <script src="./assets/js/plugins.js"></script>
+    <script src="./assets/js/main.js"></script>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-23581568-13');
+    </script>
+    <script defer
+        src="https://static.cloudflareinsights.com/beacon.min.js/v8b253dfea2ab4077af8c6f58422dfbfd1689876627854"
+        integrity="sha512-bjgnUKX4azu3dLTVtie9u6TKqgx29RBwfj3QXYt5EKfWM/9hPSAI/4qcV5NACjwAo8UtTeWefx6Zq5PHcMm7Tg=="
+        data-cf-beacon='{"rayId":"800d669998e83a27","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2023.8.0","si":100}'
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
