@@ -50,8 +50,8 @@
                                     <!-- Cart is not empty -->
                                     <% for (let i = 0; i < item_in_cart; i++) { %>
                                         
-                                        <% subTotal += i*i*10%>
-                                      <%- include("ejs/cart_item.ejs", {primg : productsInCart[i].product_img ,index: i, productName:productsInCart[i].product_name, productPrice:productsInCart[i].product_price, quantity:productsInCart[i].quantity}) -%>
+                                        <% subTotal +=  %>
+                                      <%- include("ejs/cart_item.ejs", {primg :productsInCart[i].product_img ,index: i, productName:productsInCart[i].product_name, productPrice:productsInCart[i].product_price, quantity:productsInCart[i].quantity}) -%>
                                     <% } %>
                                   <% } else { %>
                                     <!-- Cart is empty -->

@@ -59,10 +59,6 @@ app.get("/cart", (req, res) => {
 
     return Promise.all(promises)
       .then((cartProducts) => {
-        return cartProducts;
-      })
-      .finally(() => {
-        console.log('rendering');
         res.render(__dirname + "/cart.ejs", {
           title: "Cart",
           productsInCart: cartProducts,
@@ -70,8 +66,9 @@ app.get("/cart", (req, res) => {
       });
   })
   .catch((error) => {
-    console.error("Error:", error);
+    res.send(error);
   });
+
 
 });
 
