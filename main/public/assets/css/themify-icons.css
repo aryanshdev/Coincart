@@ -37,7 +37,7 @@
 }
 
 .ti-minus:before {
-    
+    content: url("https://img.icons8.com/android/000000/12/minus.png");
 }
 
 .ti-arrow-right:before {

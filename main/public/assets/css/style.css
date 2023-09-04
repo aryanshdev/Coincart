@@ -3200,17 +3200,19 @@ hr {
 .cart_area .product_count .input-number-increment {
   position: absolute;
   right: 0;
+  padding: 10px;
   border-left: 1px solid #eee;
   display: inline-block;
 }
 
 .cart_area .product_count .input-number-increment:after {
   position: absolute;
-  content: "";
   left: 0;
   bottom: 7px;
   width: 100%;
-  height: 1px;
+  height: auto;
+  padding: 10px;
+  display: inline-block;
   background-color: #eee;
 }
 
@@ -3258,6 +3260,11 @@ hr {
 
 .cart_inner .table tbody tr td .media .d-flex {
   padding-right: 30px;
+}
+
+.qt-selector{
+width: 60%;
+margin: 0;
 }
 
 .cart_inner .table tbody tr td .media .d-flex img {
@@ -4040,6 +4047,10 @@ hr {
 }
 
 @media only screen and (min-width: 576px) and (max-width: 767px) {
+  .qt-selector{
+    width: 100%;
+    }
+
   .login-form-area .login-form {
     padding: 40px 20px 20px 26px;
     min-width: 95%;

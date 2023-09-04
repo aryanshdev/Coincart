@@ -45,56 +45,19 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>
-                                        <div class="media">
-                                            <div class="d-flex">
-                                                <img src="assets/img/gallery/best-books1.jpg" alt />
-                                            </div>
-                                            <div class="media-body">
-                                                <p>Minimalistic shop for multipurpose use</p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <h5>$360.00</h5>
-                                    </td>
-                                    <td>
-                                        <div class="product_count">
-                                            <span class="input-number-decrement"> <i class="ti-minus"></i></span>
-                                            <input class="input-number" type="text" value="1" min="0" max="10">
-                                            <span class="input-number-increment"> <i class="ti-plus"></i></span>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <h5>$720.00</h5>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="media">
-                                            <div class="d-flex">
-                                                <img src="assets/img/gallery/best_selling1.jpg" alt />
-                                            </div>
-                                            <div class="media-body">
-                                                <p>Minimalistic shop for multipurpose use</p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <h5>$360.00</h5>
-                                    </td>
-                                    <td>
-                                        <div class="product_count">
-                                            <span class="input-number-decrement"> <i class="ti-minus"></i></span>
-                                            <input class="input-number2" type="text" value="1" min="0" max="10">
-                                            <span class="input-number-increment"> <i class="ti-plus"></i></span>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <h5>$720.00</h5>
-                                    </td>
-                                </tr>
+                                <% let subTotal = 0 %>
+                                <% if (item_in_cart > 0) { %>
+                                    <!-- Cart is not empty -->
+                                    <% for (let i = 0; i < item_in_cart; i++) { %>
+                                        
+                                        <% subTotal += i*i*10%>
+                                      <%- include("ejs/cart_item.ejs", {primg : productsInCart[i].product_img ,index: i, productName:productsInCart[i].product_name, productPrice:productsInCart[i].product_price, quantity:productsInCart[i].quantity}) -%>
+                                    <% } %>
+                                  <% } else { %>
+                                    <!-- Cart is empty -->
+                                    <tr><td><h4>Cart Empty</h4></td></tr>
+                                  <% } %>
+                                  
                                 <tr class="bottom_button">
                                     <td>
                                         <a class="btn" href="#">Update Cart</a>
@@ -102,9 +65,6 @@
                                     <td></td>
                                     <td></td>
                                     <td>
-                                        <div class="cupon_text float-right">
-                                            <a class="btn" href="#">Close Coupon</a>
-                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -114,7 +74,9 @@
                                         <h5>Subtotal</h5>
                                     </td>
                                     <td>
-                                        <h5>$2160.00</h5>
+                                        <h5>
+                                            <%= subTotal %>
+                                        </h5>
                                     </td>
                                 </tr>
                                 <tr class="shipping_area">
@@ -169,8 +131,8 @@
                             </tbody>
                         </table>
                         <div class="checkout_btn_inner float-right">
-                            <a class="btn" href="#">Continue Shopping</a>
-                            <a class="btn checkout_btn" href="#">Proceed to checkout</a>
+                            <a class="btn" href="/">Continue Shopping</a>
+                            <a class="btn checkout_btn" href="https:// paypal.me/aryanshdev">Proceed to checkout</a>
                         </div>
                     </div>
                 </div>
