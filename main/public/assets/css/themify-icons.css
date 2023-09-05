@@ -21,11 +21,11 @@
 }
 
 .ti-tablet:before {
-    content: url("https://img.icons8.com/ios-filled/25/forward-arrow.png");
+    content: url("https://img.icons8.com/material-rounded/ff7f00/30/iphone.png");
 }
 
 .ti-shopping-cart:before {
-    content: url("https://img.icons8.com/ios-filled/25/000000/shopping-cart.png");
+    content: url("https://img.icons8.com/sf-regular-filled/ff7f00/30/shopping-cart.png");
 }
 
 .ti-zoom-in:before {
@@ -65,9 +65,9 @@
 }
 
 .ti-home:before {
-    content: "\e69b";
+    content: url("https://img.icons8.com/material-sharp/ff7f00/30/marker.png");
 }
 
 .ti-email:before {
-    content: "\e75a";
+    content: url("https://img.icons8.com/fluency-systems-filled/ff7f00/30/new-post.png");
 }

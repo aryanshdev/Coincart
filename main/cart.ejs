@@ -1,13 +1,9 @@
-<!doctype html>
-<html class="no-js" lang="zxx">
-    <%- include("ejs/header.ejs") -%>
+<%- include("ejs/header.ejs") -%>
 
-    <body>
+<body>
 
-        <%- include("ejs/navbar.ejs") -%>
-
+    <%- include("ejs/navbar.ejs") -%>
     <main>
-
         <div class="hero-area section-bg2">
             <div class="container">
                 <div class="row">
@@ -15,10 +11,10 @@
                         <div class="slider-area">
                             <div class="slider-height2 slider-bg4 d-flex align-items-center justify-content-center">
                                 <div class="hero-caption hero-caption2">
-                                    <h2>Cart</h2>
+                                    <h2><%= name ? name.split(" ")[0] + "'s Cart" : "Cart" %> </h2>
                                     <nav aria-label="breadcrumb">
                                         <ol class="breadcrumb justify-content-center">
-                                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                            <li class="breadcrumb-item"><a href="/">Home</a></li>
                                             <li class="breadcrumb-item"><a href="#">Cart</a></li>
                                         </ol>
                                     </nav>
@@ -49,8 +45,7 @@
                                 <% if (item_in_cart > 0) { %>
                                     <!-- Cart is not empty -->
                                     <% for (let i = 0; i < item_in_cart; i++) { %>
-                                        
-                                        <% subTotal +=  %>
+                                        <% subTotal +=  productsInCart[i].quantity*productsInCart[i].product_price %>
                                       <%- include("ejs/cart_item.ejs", {primg :productsInCart[i].product_img ,index: i, productName:productsInCart[i].product_name, productPrice:productsInCart[i].product_price, quantity:productsInCart[i].quantity}) -%>
                                     <% } %>
                                   <% } else { %>
@@ -180,7 +175,7 @@
                                 <div class="single-footer-caption mb-20">
 
                                     <div class="footer-logo mb-35">
-                                        <a href="index.html"><img src="assets/img/logo/logo2_footer.png" alt></a>
+                                        <a href="/"><img src="assets/img/logo/logo2_footer.png" alt></a>
                                     </div>
                                 </div>
                             </div>

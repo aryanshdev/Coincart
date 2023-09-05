@@ -1,0 +1,345 @@
+<%- include("ejs/header.ejs") -%>
+
+<body>
+
+    <%- include("ejs/navbar.ejs") -%>
+    <main>
+
+      <div class="hero-area section-bg2">
+        <div class="container">
+          <div class="row">
+            <div class="col-xl-12">
+              <div class="slider-area">
+                <div
+                  class="slider-height2 slider-bg4 d-flex align-items-center justify-content-center"
+                >
+                  <div class="hero-caption hero-caption2">
+                    <h2>Contact</h2>
+                    <nav aria-label="breadcrumb">
+                      <ol class="breadcrumb justify-content-center">
+                        <li class="breadcrumb-item">
+                          <a href="index.html">Home</a>
+                        </li>
+                        <li class="breadcrumb-item"><a href="#">Contact</a></li>
+                      </ol>
+                    </nav>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section class="contact-section">
+        <div class="container">
+          <div class="d-none d-sm-block mb-5 pb-4">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3670.5358699645058!2d76.84871217543369!3d23.07747147913534!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x397ce9ceaaaaaaab%3A0xa224b6b82b421f83!2sVIT%20Bhopal%20University!5e0!3m2!1sen!2sin!4v1693845294450!5m2!1sen!2sin" width="100%" height="350px" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+</div>
+          <div class="row">
+            <div class="col-12">
+              <h2 class="contact-title">Get in Touch</h2>
+            </div>
+            <div class="col-lg-8">
+              <form
+                class="form-contact contact_form"
+                action="/contact"
+                method="post"
+                id="contactForm"
+              >
+                <div class="row">
+                  <div class="col-12">
+                    <div class="form-group">
+                      <textarea
+                        class="form-control w-100"
+                        name="message"
+                        id="message"
+                        cols="30"
+                        rows="5"
+                        onfocus="this.placeholder = ''"
+                        onblur="this.placeholder = 'Enter Message'"
+                        placeholder=" Enter Message"
+                      ></textarea>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <input
+                        class="form-control valid"
+                        name="name"
+                        id="name"
+                        type="text"
+                        onfocus="this.placeholder = ''"
+                        onblur="this.placeholder = 'Enter your name'"
+                        placeholder="Enter your name"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <input
+                        class="form-control valid"
+                        name="email"
+                        id="email"
+                        type="email"
+                        onfocus="this.placeholder = ''"
+                        onblur="this.placeholder = 'Enter email address'"
+                        placeholder="Email"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-group">
+                      <input
+                        class="form-control"
+                        name="subject"
+                        id="subject"
+                        type="text"
+                        onfocus="this.placeholder = ''"
+                        onblur="this.placeholder = 'Enter Subject'"
+                        placeholder="Enter Subject"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group mt-3">
+                  <button
+                    type="submit"
+                    class="button button-contactForm boxed-btn"
+                  >
+                    Send
+                  </button>
+                </div>
+              </form>
+            </div>
+            <div class="col-lg-3 offset-lg-1">
+              <div class="media contact-info">
+                <span class="contact-info__icon"><i class="ti-home"></i></span>
+                <div class="media-body">
+                  <h3>VIT Bhopal University, Sehore.</h3>
+                  <p>Madhya Pradesh, India 466114</p>
+                </div>
+              </div>
+              <div class="media contact-info">
+                <span class="contact-info__icon"
+                  ><i class="ti-tablet"></i
+                ></span>
+                <div class="media-body">
+                  <h3>+91 12345 67890</h3>
+                  <p>Mon to Saturday 9am to 8pm</p>
+                </div>
+              </div>
+              <div class="media contact-info">
+                <span class="contact-info__icon"><i class="ti-email"></i></span>
+                <div class="media-body">
+                  <h3>
+                    admin@coincart.web
+                  </h3>
+                  <p>Send us your query anytime!</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <div class="footer-wrapper gray-bg">
+        <div class="footer-area footer-padding">
+          <section class="subscribe-area">
+            <div class="container">
+              <div class="row justify-content-between subscribe-padding">
+                <div class="col-xxl-3 col-xl-3 col-lg-4">
+                  <div class="subscribe-caption">
+                    <h3>Subscribe Newsletter</h3>
+                    <p>Subscribe newsletter to get 5% on all products.</p>
+                  </div>
+                </div>
+                <div class="col-xxl-5 col-xl-6 col-lg-7 col-md-9">
+                  <div class="subscribe-caption">
+                    <form action="#">
+                      <input type="text" placeholder="Enter your email" />
+                      <button class="subscribe-btn">Subscribe</button>
+                    </form>
+                  </div>
+                </div>
+                <div class="col-xxl-2 col-xl-2 col-lg-4">
+                  <div class="footer-social">
+                    <a href="https://bit.ly/sai4ull"
+                      ><i class="fab fa-facebook"></i
+                    ></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <div class="container">
+            <div class="row justify-content-between">
+              <div class="col-xl-3 col-lg-3 col-md-6 col-sm-8">
+                <div class="single-footer-caption mb-50">
+                  <div class="single-footer-caption mb-20">
+                    <div class="footer-logo mb-35">
+                      <a href="index.html"
+                        ><img src="assets/img/logo/logo2_footer.png" alt
+                      /></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-2 col-lg-2 col-md-4 col-sm-6">
+                <div class="single-footer-caption mb-50">
+                  <div class="footer-tittle">
+                    <h4>Shop Men</h4>
+                    <ul>
+                      <li><a href="#">Clothing Fashion</a></li>
+                      <li><a href="#">Winter</a></li>
+                      <li><a href="#">Summer</a></li>
+                      <li><a href="#">Formal</a></li>
+                      <li><a href="#">Casual</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-2 col-lg-2 col-md-4 col-sm-6">
+                <div class="single-footer-caption mb-50">
+                  <div class="footer-tittle">
+                    <h4>Shop Women</h4>
+                    <ul>
+                      <li><a href="#">Clothing Fashion</a></li>
+                      <li><a href="#">Winter</a></li>
+                      <li><a href="#">Summer</a></li>
+                      <li><a href="#">Formal</a></li>
+                      <li><a href="#">Casual</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-2 col-lg-2 col-md-4 col-sm-6">
+                <div class="single-footer-caption mb-50">
+                  <div class="footer-tittle">
+                    <h4>Baby Collection</h4>
+                    <ul>
+                      <li><a href="#">Clothing Fashion</a></li>
+                      <li><a href="#">Winter</a></li>
+                      <li><a href="#">Summer</a></li>
+                      <li><a href="#">Formal</a></li>
+                      <li><a href="#">Casual</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-2 col-lg-2 col-md-4 col-sm-6">
+                <div class="single-footer-caption mb-50">
+                  <div class="footer-tittle">
+                    <h4>Quick Links</h4>
+                    <ul>
+                      <li><a href="#">Track Your Order</a></li>
+                      <li><a href="#">Support</a></li>
+                      <li><a href="#">FAQ</a></li>
+                      <li><a href="#">Carrier</a></li>
+                      <li><a href="#">About</a></li>
+                      <li><a href="#">Contact Us</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom-area">
+          <div class="container">
+            <div class="footer-border">
+              <div class="row">
+                <div class="col-xl-12">
+                  <div class="footer-copy-right text-center">
+                    <p>
+                      Copyright &copy;
+                      <script
+                        data-cfasync="false"
+                        src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"
+                      ></script>
+                      <script>
+                        document.write(new Date().getFullYear());
+                      </script>
+                      All rights reserved | This template is made with
+                      <i
+                        class="fa fa-heart color-danger"
+                        aria-hidden="true"
+                      ></i>
+                      by
+                      <a
+                        href="https://colorlib.com"
+                        target="_blank"
+                        rel="nofollow noopener"
+                        >Colorlib</a
+                      >
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <div id="back-top">
+      <a class="wrapper" title="Go to Top" href="#">
+        <div class="arrows-container">
+          <div class="arrow arrow-one"></div>
+          <div class="arrow arrow-two"></div>
+        </div>
+      </a>
+    </div>
+
+    <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
+    <script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="./assets/js/popper.min.js"></script>
+    <script src="./assets/js/bootstrap.min.js"></script>
+
+    <script src="./assets/js/owl.carousel.min.js"></script>
+    <script src="./assets/js/slick.min.js"></script>
+    <script src="./assets/js/jquery.slicknav.min.js"></script>
+
+    <script src="./assets/js/wow.min.js"></script>
+    <script src="./assets/js/jquery.magnific-popup.js"></script>
+    <script src="./assets/js/jquery.nice-select.min.js"></script>
+    <script src="./assets/js/jquery.counterup.min.js"></script>
+    <script src="./assets/js/waypoints.min.js"></script>
+    <script src="./assets/js/price_rangs.js"></script>
+
+    <script src="./assets/js/contact.js"></script>
+    <script src="./assets/js/jquery.form.js"></script>
+    <script src="./assets/js/jquery.validate.min.js"></script>
+    <script src="./assets/js/mail-script.js"></script>
+    <script src="./assets/js/jquery.ajaxchimp.min.js"></script>
+
+    <script src="./assets/js/plugins.js"></script>
+    <script src="./assets/js/main.js"></script>
+
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "UA-23581568-13");
+    </script>
+    <script
+      defer
+      src="https://static.cloudflareinsights.com/beacon.min.js/v8b253dfea2ab4077af8c6f58422dfbfd1689876627854"
+      integrity="sha512-bjgnUKX4azu3dLTVtie9u6TKqgx29RBwfj3QXYt5EKfWM/9hPSAI/4qcV5NACjwAo8UtTeWefx6Zq5PHcMm7Tg=="
+      data-cf-beacon='{"rayId":"80177d584ccc1bd2","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2023.8.0","si":100}'
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

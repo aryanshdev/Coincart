@@ -8,37 +8,39 @@
             <main class="login-bg">
 
                 <div class="register-form-area">
-                    <div class="register-form text-center">
+<form method="post" action="/register">
+    <div class="register-form text-center">
 
-                        <div class="register-heading">
-                            <span>Sign Up</span>
-                            <p>Create your account to get full access</p>
-                        </div>
+        <div class="register-heading">
+            <span>Sign Up</span>
+            <p>Create your account to get full access</p>
+        </div>
 
-                        <div class="input-box">
-                            <div class="single-input-fields">
-                                <label>Full name</label>
-                                <input type="text" placeholder="Enter full name">
-                            </div>
-                            <div class="single-input-fields">
-                                <label>Email Address</label>
-                                <input type="email" placeholder="Enter email address">
-                            </div>
-                            <div class="single-input-fields">
-                                <label>Password</label>
-                                <input type="password" placeholder="Enter Password">
-                            </div>
-                            <div class="single-input-fields">
-                                <label>Confirm Password</label>
-                                <input type="password" placeholder="Confirm Password">
-                            </div>
-                        </div>
+        <div class="input-box">
+            <div class="single-input-fields">
+                <label>Full name *</label>
+                <input required name="name" type="text" placeholder="Enter full name">
+            </div>
+            <div class="single-input-fields">
+                <label>Email Address *</label>
+                <input required name="email"  type="email" placeholder="Enter email address">
+            </div>
+            <div class="single-input-fields">
+                <label>Password *</label>
+                <input minlength="6" maxlength="16" name="password" required  type="password" placeholder="Enter Password">
+            </div>
+            <div class="single-input-fields">
+                <label>Confirm Password *</label>
+                <input minlength="6" maxlength="16" name="password_con"  type="password" placeholder="Confirm Password">
+            </div>
+        </div>
 
-                        <div class="register-footer">
-                            <p> Already have an account? <a href="/login"> Login</a> here</p>
-                            <button class="submit-btn3">Sign Up</button>
-                        </div>
-                    </div>
+        <div class="register-footer">
+            <p> Already have an account? <a href="/login"> Login</a> here</p>
+            <button type="submit" class="submit-btn3">Sign Up</button>
+        </div>
+    </div>
+</form>
                 </div>
 
             </main>
