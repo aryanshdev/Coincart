@@ -20,7 +20,7 @@ app.get("/", (req, res) => {
   app.locals.item_in_cart = item_in_cart;
   var priceValues = [];
   fetch(
-    "https://rest.coinapi.io/v1/exchangerate/USD?invert=true&filter_asset_id=bnb;btc;eth;ltc;sol;usdt",
+    "https://rest.coinapi.io/v1/exchangerate/USD?invert=true&filter_asset_id=bnb;btc;eth;ltc;sol",
     {
       headers: {
         "X-CoinAPI-Key": "D1F5B2A4-6DAF-4C46-BB24-08446E6C6BCE",
@@ -37,7 +37,6 @@ app.get("/", (req, res) => {
       (error) => (
         console.log(error),
         (priceValues = [
-          "Unable To Fetch Currently",
           "Unable To Fetch Currently",
           "Unable To Fetch Currently",
           "Unable To Fetch Currently",
@@ -54,7 +53,7 @@ app.get("/", (req, res) => {
         ltcPrice: priceValues[3],
         bnbPrice: priceValues[0],
         solPrice: priceValues[4],
-        usdtPrice: priceValues[5],
+        
       });
     });
 });
@@ -63,7 +62,7 @@ app.get("/login", (req, res) => {
   app.locals.item_in_cart = item_in_cart;
   var priceValues = [];
   fetch(
-    "https://rest.coinapi.io/v1/exchangerate/USD?invert=true&filter_asset_id=bnb;btc;eth;ltc;sol;usdt",
+    "https://rest.coinapi.io/v1/exchangerate/USD?invert=true&filter_asset_id=bnb;btc;eth;ltc;sol",
     {
       headers: {
         "X-CoinAPI-Key": "D1F5B2A4-6DAF-4C46-BB24-08446E6C6BCE",
@@ -80,7 +79,6 @@ app.get("/login", (req, res) => {
       (error) => (
         console.log(error),
         (priceValues = [
-          "Unable To Fetch Currently",
           "Unable To Fetch Currently",
           "Unable To Fetch Currently",
           "Unable To Fetch Currently",
@@ -98,7 +96,7 @@ app.get("/login", (req, res) => {
           ltcPrice: priceValues[3],
           bnbPrice: priceValues[0],
           solPrice: priceValues[4],
-          usdtPrice: priceValues[5],
+          
         });
       } else {
         res.redirect("/account");
@@ -109,7 +107,7 @@ app.get("/login", (req, res) => {
 app.get("/account", (req, res) => {
   var priceValues = [];
   fetch(
-    "https://rest.coinapi.io/v1/exchangerate/USD?invert=true&filter_asset_id=bnb;btc;eth;ltc;sol;usdt",
+    "https://rest.coinapi.io/v1/exchangerate/USD?invert=true&filter_asset_id=bnb;btc;eth;ltc;sol",
     {
       headers: {
         "X-CoinAPI-Key": "D1F5B2A4-6DAF-4C46-BB24-08446E6C6BCE",
@@ -126,7 +124,6 @@ app.get("/account", (req, res) => {
       (error) => (
         console.log(error),
         (priceValues = [
-          "Unable To Fetch Currently",
           "Unable To Fetch Currently",
           "Unable To Fetch Currently",
           "Unable To Fetch Currently",
@@ -143,7 +140,7 @@ app.get("/account", (req, res) => {
         ltcPrice: priceValues[3],
         bnbPrice: priceValues[0],
         solPrice: priceValues[4],
-        usdtPrice: priceValues[5],
+        
       });
     });
 });
@@ -151,7 +148,7 @@ app.get("/account", (req, res) => {
 app.get("/register", (req, res) => {
   var priceValues = [];
   fetch(
-    "https://rest.coinapi.io/v1/exchangerate/USD?invert=true&filter_asset_id=bnb;btc;eth;ltc;sol;usdt",
+    "https://rest.coinapi.io/v1/exchangerate/USD?invert=true&filter_asset_id=bnb;btc;eth;ltc;sol",
     {
       headers: {
         "X-CoinAPI-Key": "D1F5B2A4-6DAF-4C46-BB24-08446E6C6BCE",
@@ -168,7 +165,6 @@ app.get("/register", (req, res) => {
       (error) => (
         console.log(error),
         (priceValues = [
-          "Unable To Fetch Currently",
           "Unable To Fetch Currently",
           "Unable To Fetch Currently",
           "Unable To Fetch Currently",
@@ -186,7 +182,7 @@ app.get("/register", (req, res) => {
         ltcPrice: priceValues[3],
         bnbPrice: priceValues[0],
         solPrice: priceValues[4],
-        usdtPrice: priceValues[5],
+        
       });
     });
 });
@@ -194,7 +190,7 @@ app.get("/register", (req, res) => {
 app.get("/product-:id", (req, res) => {
   var priceValues = [];
   fetch(
-    "https://rest.coinapi.io/v1/exchangerate/USD?invert=true&filter_asset_id=bnb;btc;eth;ltc;sol;usdt",
+    "https://rest.coinapi.io/v1/exchangerate/USD?invert=true&filter_asset_id=bnb;btc;eth;ltc;sol",
     {
       headers: {
         "X-CoinAPI-Key": "D1F5B2A4-6DAF-4C46-BB24-08446E6C6BCE",
@@ -211,7 +207,6 @@ app.get("/product-:id", (req, res) => {
       (error) => (
         console.log(error),
         (priceValues = [
-          "Unable To Fetch Currently",
           "Unable To Fetch Currently",
           "Unable To Fetch Currently",
           "Unable To Fetch Currently",
@@ -241,7 +236,7 @@ app.get("/product-:id", (req, res) => {
             ltcPrice: priceValues[3],
             bnbPrice: priceValues[0],
             solPrice: priceValues[4],
-            usdtPrice: priceValues[5],
+            
           });
         })
         .catch((error) => {
@@ -267,7 +262,7 @@ app.get("/product-:id", (req, res) => {
 app.get("/cart", (req, res) => {
   var priceValues = [];
   fetch(
-    "https://rest.coinapi.io/v1/exchangerate/USD?invert=true&filter_asset_id=bnb;btc;eth;ltc;sol;usdt",
+    "https://rest.coinapi.io/v1/exchangerate/USD?invert=true&filter_asset_id=bnb;btc;eth;ltc;sol",
     {
       headers: {
         "X-CoinAPI-Key": "D1F5B2A4-6DAF-4C46-BB24-08446E6C6BCE",
@@ -284,7 +279,6 @@ app.get("/cart", (req, res) => {
       (error) => (
         console.log(error),
         (priceValues = [
-          "Unable To Fetch Currently",
           "Unable To Fetch Currently",
           "Unable To Fetch Currently",
           "Unable To Fetch Currently",
@@ -329,7 +323,7 @@ app.get("/cart", (req, res) => {
                   ltcPrice: priceValues[3],
                   bnbPrice: priceValues[0],
                   solPrice: priceValues[4],
-                  usdtPrice: priceValues[5],
+                  
                 });
               });
             } else {
@@ -343,7 +337,7 @@ app.get("/cart", (req, res) => {
                 ltcPrice: priceValues[3],
                 bnbPrice: priceValues[0],
                 solPrice: priceValues[4],
-                usdtPrice: priceValues[5],
+                
               });
             }
           })
@@ -362,7 +356,7 @@ app.get("/cart", (req, res) => {
           ltcPrice: priceValues[3],
           bnbPrice: priceValues[0],
           solPrice: priceValues[4],
-          usdtPrice: priceValues[5],
+          
         });
       }
     });
@@ -392,7 +386,7 @@ app.post("/login", (req, res) => {
 app.get("/contact", (req, res) => {
   var priceValues = [];
   fetch(
-    "https://rest.coinapi.io/v1/exchangerate/USD?invert=true&filter_asset_id=bnb;btc;eth;ltc;sol;usdt",
+    "https://rest.coinapi.io/v1/exchangerate/USD?invert=true&filter_asset_id=bnb;btc;eth;ltc;sol",
     {
       headers: {
         "X-CoinAPI-Key": "D1F5B2A4-6DAF-4C46-BB24-08446E6C6BCE",
@@ -414,7 +408,6 @@ app.get("/contact", (req, res) => {
           "Unable To Fetch Currently",
           "Unable To Fetch Currently",
           "Unable To Fetch Currently",
-          "Unable To Fetch Currently",
         ])
       )
     )
@@ -426,7 +419,7 @@ app.get("/contact", (req, res) => {
         ltcPrice: priceValues[3],
         bnbPrice: priceValues[0],
         solPrice: priceValues[4],
-        usdtPrice: priceValues[5],
+        
       });
     });
 });
@@ -496,7 +489,7 @@ app.post("/subscribe-form-footer", (req, res) => {
 app.get("/shop", (req, res) => {
   var priceValues = [];
   fetch(
-    "https://rest.coinapi.io/v1/exchangerate/USD?invert=true&filter_asset_id=bnb;btc;eth;ltc;sol;usdt",
+    "https://rest.coinapi.io/v1/exchangerate/USD?invert=true&filter_asset_id=bnb;btc;eth;ltc;sol",
     {
       headers: {
         "X-CoinAPI-Key": "D1F5B2A4-6DAF-4C46-BB24-08446E6C6BCE",
@@ -518,7 +511,6 @@ app.get("/shop", (req, res) => {
           "Unable To Fetch Currently",
           "Unable To Fetch Currently",
           "Unable To Fetch Currently",
-          "Unable To Fetch Currently",
         ])
       )
     )
@@ -533,7 +525,7 @@ app.get("/shop", (req, res) => {
           ltcPrice: priceValues[3],
           bnbPrice: priceValues[0],
           solPrice: priceValues[4],
-          usdtPrice: priceValues[5],
+          
         });
       });
     });
