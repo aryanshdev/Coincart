@@ -8,82 +8,42 @@
             <main class="login-bg">
 
                 <div class="register-form-area">
-<form method="post" action="/register">
-    <div class="register-form text-center">
+                    <form method="post" action="/register">
+                        <div class="register-form text-center">
 
-        <div class="register-heading">
-            <span>Sign Up</span>
-            <p>Create your account to get full access</p>
-        </div>
+                            <div class="register-heading">
+                                <span>Sign Up</span>
+                                <p>Create your account to get full access</p>
+                            </div>
 
-        <div class="input-box">
-            <div class="single-input-fields">
-                <label>Full name *</label>
-                <input required name="name" type="text" placeholder="Enter full name">
-            </div>
-            <div class="single-input-fields">
-                <label>Email Address *</label>
-                <input required name="email"  type="email" placeholder="Enter email address">
-            </div>
-            <div class="single-input-fields">
-                <label>Password *</label>
-                <input minlength="6" maxlength="16" name="password" required  type="password" placeholder="Enter Password">
-            </div>
-            <div class="single-input-fields">
-                <label>Confirm Password *</label>
-                <input minlength="6" maxlength="16" name="password_con"  type="password" placeholder="Confirm Password">
-            </div>
-        </div>
+                            <div class="input-box">
+                                <div class="single-input-fields">
+                                    <label>Full name *</label>
+                                    <input required name="name" type="text" placeholder="Enter full name">
+                                </div>
+                                <div class="single-input-fields">
+                                    <label>Email Address *</label>
+                                    <input required name="email" type="email" placeholder="Enter email address">
+                                </div>
+                                <div class="single-input-fields">
+                                    <label>Password *</label>
+                                    <input minlength="6" maxlength="16" name="password" required type="password"
+                                        placeholder="Enter Password">
+                                </div>
+                                <div class="single-input-fields">
+                                    <label>Confirm Password *</label>
+                                    <input minlength="6" maxlength="16" name="password_con" type="password"
+                                        placeholder="Confirm Password">
+                                </div>
+                            </div>
 
-        <div class="register-footer">
-            <p> Already have an account? <a href="/login"> Login</a> here</p>
-            <button type="submit" class="submit-btn3">Sign Up</button>
-        </div>
-    </div>
-</form>
+                            <div class="register-footer">
+                                <p> Already have an account? <a href="/login"> Login</a> here</p>
+                                <button type="submit" class="submit-btn3">Sign Up</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
 
             </main>
-
-
-            <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
-            <script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
-            <script src="./assets/js/popper.min.js"></script>
-            <script src="./assets/js/bootstrap.min.js"></script>
-
-            <script src="./assets/js/owl.carousel.min.js"></script>
-            <script src="./assets/js/slick.min.js"></script>
-            <script src="./assets/js/jquery.slicknav.min.js"></script>
-
-            <script src="./assets/js/wow.min.js"></script>
-            <script src="./assets/js/jquery.magnific-popup.js"></script>
-            <script src="./assets/js/jquery.nice-select.min.js"></script>
-            <script src="./assets/js/jquery.counterup.min.js"></script>
-            <script src="./assets/js/waypoints.min.js"></script>
-            <script src="./assets/js/price_rangs.js"></script>
-
-            <script src="./assets/js/contact.js"></script>
-            <script src="./assets/js/jquery.form.js"></script>
-            <script src="./assets/js/jquery.validate.min.js"></script>
-            <script src="./assets/js/mail-script.js"></script>
-            <script src="./assets/js/jquery.ajaxchimp.min.js"></script>
-
-            <script src="./assets/js/plugins.js"></script>
-            <script src="./assets/js/main.js"></script>
-
-            <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
-            <script>
-                window.dataLayer = window.dataLayer || [];
-                function gtag() { dataLayer.push(arguments); }
-                gtag('js', new Date());
-
-                gtag('config', 'UA-23581568-13');
-            </script>
-            <script defer
-                src="https://static.cloudflareinsights.com/beacon.min.js/v8b253dfea2ab4077af8c6f58422dfbfd1689876627854"
-                integrity="sha512-bjgnUKX4azu3dLTVtie9u6TKqgx29RBwfj3QXYt5EKfWM/9hPSAI/4qcV5NACjwAo8UtTeWefx6Zq5PHcMm7Tg=="
-                data-cf-beacon='{"rayId":"800d65b84cae3a27","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2023.8.0","si":100}'
-                crossorigin="anonymous"></script>
-    </body>
-
-    </html>
+<%- include("ejs/footer.ejs") %>

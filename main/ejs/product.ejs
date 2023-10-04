@@ -1,5 +1,5 @@
 <%- include("header.ejs") -%>
-<body>
+
 
     <%- include("navbar.ejs") -%>
     <main>
@@ -15,7 +15,7 @@
                                     <nav aria-label="breadcrumb">
                                         <ol class="breadcrumb justify-content-center">
                                             <li class="breadcrumb-item"><a href="/">Home</a></li>
-                                            <li class="breadcrumb-item"><a href="#">Product Details</a></li>
+                                            <li class="breadcrumb-item"><a href="#description">Product Details</a></li>
                                         </ol>
                                     </nav>
                                 </div>
@@ -36,13 +36,13 @@
 
                                 <div class="single-services d-flex align-items-center mb-0">
                                     <div class="features-img">
-                                        <img src="assets/img/gallery/latest7.jpg" alt>
+                                        <img src=<%= productImage %> alt>
                                     </div>
                                     <div class="features-caption">
-                                        <h3>The Rage of Dragons</h3>
-                                        <p>By Evan Winter</p>
+                                        <h3><%= productName %></h3>
+                                        <p><%= category %></p>
                                         <div class="price">
-                                            <span>$50.00</span>
+                                            <span><%= productPrice %></span>
                                         </div>
                                         <div class="review">
                                             <div class="rating">
@@ -54,7 +54,7 @@
                                             </div>
                                             <p>(120 Review)</p>
                                         </div>
-                                        <a href="#" class="white-btn mr-10">Add to Cart</a>
+                                        <a href=<%= "/add-"+ code %> style="border:white" class="white-btn mr-10">Add to Cart</a>
                                         <a href="#"  style="padding: 0%;" class="border-btn share-btn"><i class="fas fa-share-alt"></i></a>
                                     </div>
                                 </div>
@@ -67,6 +67,7 @@
 
 
         <section class="our-client section-padding best-selling">
+            <a name="description"></a>
             <div class="container">
                 <div class="row">
                     <div class="offset-xl-1 col-xl-10">
@@ -77,11 +78,9 @@
                                     <a class="nav-link active" id="nav-one-tab" data-bs-toggle="tab" href="#nav-one"
                                         role="tab" aria-controls="nav-one" aria-selected="true">Description</a>
                                     <a class="nav-link" id="nav-two-tab" data-bs-toggle="tab" href="#nav-two" role="tab"
-                                        aria-controls="nav-two" aria-selected="false">Author</a>
+                                        aria-controls="nav-two" aria-selected="false">Details</a>
                                     <a class="nav-link" id="nav-three-tab" data-bs-toggle="tab" href="#nav-three"
-                                        role="tab" aria-controls="nav-three" aria-selected="false">Comments</a>
-                                    <a class="nav-link" id="nav-four-tab" data-bs-toggle="tab" href="#nav-four"
-                                        role="tab" aria-controls="nav-four" aria-selected="false">Review</a>
+                                        role="tab" aria-controls="nav-three" aria-selected="false">Reviews</a>
                                 </div>
                             </nav>
 
@@ -93,114 +92,30 @@
 
                 <div class="tab-content" id="nav-tabContent">
                     <div class="tab-pane fade show active" id="nav-one" role="tabpanel" aria-labelledby="nav-one-tab">
-
                         <div class="row">
                             <div class="offset-xl-1 col-lg-9">
-                                <p>Beryl Cook is one of Britain’s most talented and amusing artists .Beryl’s pictures
-                                    feature women of all shapes and sizes enjoying themselves .Born between the two
-                                    world wars, Beryl Cook eventually left Kendrick School in Reading at the age of 15,
-                                    where she went to secretarial school and then into an insurance office. After moving
-                                    to London and then Hampton, she eventually married her next door neighbour from
-                                    Reading, John Cook. He was an officer in the Merchant Navy and after he left the sea
-                                    in 1956, they bought a pub for a year before John took a job in Southern Rhodesia
-                                    with a motor company. Beryl bought their young son a box of watercolours, and when
-                                    showing him how to use it, she decided that she herself quite enjoyed painting. John
-                                    subsequently bought her a child’s painting set for her birthday and it was with this
-                                    that she produced her first significant work, a half-length portrait of a
-                                    dark-skinned lady with a vacant expression and large drooping breasts. It was aptly
-                                    named ‘Hangover’ by Beryl’s husband and</p>
-                                <p>It is often frustrating to attempt to plan meals that are designed for one. Despite
-                                    this fact, we are seeing more and more recipe books and Internet websites that are
-                                    dedicated to the act of cooking for one. Divorce and the death of spouses or grown
-                                    children leaving for college are all reasons that someone accustomed to cooking for
-                                    more than one would suddenly need to learn how to adjust all the cooking practices
-                                    utilized before into a streamlined plan of cooking that is more efficient for one
-                                    person creating less.</p>
+                                <p><%- description %>
                             </div>
                         </div>
                     </div>
                     <div class="tab-pane fade" id="nav-two" role="tabpanel" aria-labelledby="nav-two-tab">
 
-                        <div class="row">
+                        <div class="row">   
                             <div class="offset-xl-1 col-lg-9">
-                                <p>Beryl Cook is one of Britain’s most talented and amusing artists .Beryl’s pictures
-                                    feature women of all shapes and sizes enjoying themselves .Born between the two
-                                    world wars, Beryl Cook eventually left Kendrick School in Reading at the age of 15,
-                                    where she went to secretarial school and then into an insurance office. After moving
-                                    to London and then Hampton, she eventually married her next door neighbour from
-                                    Reading, John Cook. He was an officer in the Merchant Navy and after he left the sea
-                                    in 1956, they bought a pub for a year before John took a job in Southern Rhodesia
-                                    with a motor company. Beryl bought their young son a box of watercolours, and when
-                                    showing him how to use it, she decided that she herself quite enjoyed painting. John
-                                    subsequently bought her a child’s painting set for her birthday and it was with this
-                                    that she produced her first significant work, a half-length portrait of a
-                                    dark-skinned lady with a vacant expression and large drooping breasts. It was aptly
-                                    named ‘Hangover’ by Beryl’s husband and</p>
-                                <p>It is often frustrating to attempt to plan meals that are designed for one. Despite
-                                    this fact, we are seeing more and more recipe books and Internet websites that are
-                                    dedicated to the act of cooking for one. Divorce and the death of spouses or grown
-                                    children leaving for college are all reasons that someone accustomed to cooking for
-                                    more than one would suddenly need to learn how to adjust all the cooking practices
-                                    utilized before into a streamlined plan of cooking that is more efficient for one
-                                    person creating less.</p>
+                                
+                                <table>
+                                    <% for (var i in productDetails) { %>
+                                        <tr> 
+                                            <td> <%=  i %> </td> 
+                                            <td> <%= productDetails[i] %></td>
+                                        </tr>
+                                        <% } %>
+                                </table>
+                            
                             </div>
                         </div>
                     </div>
                     <div class="tab-pane fade" id="nav-three" role="tabpanel" aria-labelledby="nav-three-tab">
-
-                        <div class="row">
-                            <div class="offset-xl-1 col-lg-9">
-                                <p>Beryl Cook is one of Britain’s most talented and amusing artists .Beryl’s pictures
-                                    feature women of all shapes and sizes enjoying themselves .Born between the two
-                                    world wars, Beryl Cook eventually left Kendrick School in Reading at the age of 15,
-                                    where she went to secretarial school and then into an insurance office. After moving
-                                    to London and then Hampton, she eventually married her next door neighbour from
-                                    Reading, John Cook. He was an officer in the Merchant Navy and after he left the sea
-                                    in 1956, they bought a pub for a year before John took a job in Southern Rhodesia
-                                    with a motor company. Beryl bought their young son a box of watercolours, and when
-                                    showing him how to use it, she decided that she herself quite enjoyed painting. John
-                                    subsequently bought her a child’s painting set for her birthday and it was with this
-                                    that she produced her first significant work, a half-length portrait of a
-                                    dark-skinned lady with a vacant expression and large drooping breasts. It was aptly
-                                    named ‘Hangover’ by Beryl’s husband and</p>
-                                <p>It is often frustrating to attempt to plan meals that are designed for one. Despite
-                                    this fact, we are seeing more and more recipe books and Internet websites that are
-                                    dedicated to the act of cooking for one. Divorce and the death of spouses or grown
-                                    children leaving for college are all reasons that someone accustomed to cooking for
-                                    more than one would suddenly need to learn how to adjust all the cooking practices
-                                    utilized before into a streamlined plan of cooking that is more efficient for one
-                                    person creating less.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="nav-four" role="tabpanel" aria-labelledby="nav-four-tab">
-
-                        <div class="row">
-                            <div class="offset-xl-1 col-lg-9">
-                                <p>Beryl Cook is one of Britain’s most talented and amusing artists .Beryl’s pictures
-                                    feature women of all shapes and sizes enjoying themselves .Born between the two
-                                    world wars, Beryl Cook eventually left Kendrick School in Reading at the age of 15,
-                                    where she went to secretarial school and then into an insurance office. After moving
-                                    to London and then Hampton, she eventually married her next door neighbour from
-                                    Reading, John Cook. He was an officer in the Merchant Navy and after he left the sea
-                                    in 1956, they bought a pub for a year before John took a job in Southern Rhodesia
-                                    with a motor company. Beryl bought their young son a box of watercolours, and when
-                                    showing him how to use it, she decided that she herself quite enjoyed painting. John
-                                    subsequently bought her a child’s painting set for her birthday and it was with this
-                                    that she produced her first significant work, a half-length portrait of a
-                                    dark-skinned lady with a vacant expression and large drooping breasts. It was aptly
-                                    named ‘Hangover’ by Beryl’s husband and</p>
-                                <p>It is often frustrating to attempt to plan meals that are designed for one. Despite
-                                    this fact, we are seeing more and more recipe books and Internet websites that are
-                                    dedicated to the act of cooking for one. Divorce and the death of spouses or grown
-                                    children leaving for college are all reasons that someone accustomed to cooking for
-                                    more than one would suddenly need to learn how to adjust all the cooking practices
-                                    utilized before into a streamlined plan of cooking that is more efficient for one
-                                    person creating less.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="nav-five" role="tabpanel" aria-labelledby="nav-five-tab">
 
                         <div class="row">
                             <div class="offset-xl-1 col-lg-9">
@@ -232,132 +147,7 @@
         </section>
 
     </main>
-    <footer>
-        <div class="footer-wrapper gray-bg">
-            <div class="footer-area footer-padding">
-
-                <section class="subscribe-area">
-                    <div class="container">
-                        <div class="row justify-content-between subscribe-padding">
-                            <div class="col-xxl-3 col-xl-3 col-lg-4">
-                                <div class="subscribe-caption">
-                                    <h3>Subscribe Newsletter</h3>
-                                    <p>Subscribe newsletter to get 5% on all products.</p>
-                                </div>
-                            </div>
-                            <div class="col-xxl-5 col-xl-6 col-lg-7 col-md-9">
-                                <div class="subscribe-caption">
-                                    <form action="#">
-                                        <input type="text" placeholder="Enter your email">
-                                        <button class="subscribe-btn">Subscribe</button>
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="col-xxl-2 col-xl-2 col-lg-4">
-
-                                <div class="footer-social">
-                                    <a href="https://bit.ly/sai4ull"><i class="fab fa-facebook"></i></a>
-                                    <a href="#"><i class="fab fa-instagram"></i></a>
-                                    <a href="#"><i class="fab fa-youtube"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <div class="container">
-                    <div class="row justify-content-between">
-                        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-8">
-                            <div class="single-footer-caption mb-50">
-                                <div class="single-footer-caption mb-20">
-
-                                    <div class="footer-logo mb-35">
-                                        <a href="/"><img src="assets/img/logo/logo2_footer.png" alt></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-lg-2 col-md-4 col-sm-6">
-                            <div class="single-footer-caption mb-50">
-                                <div class="footer-tittle">
-                                    <h4>Shop Men</h4>
-                                    <ul>
-                                        <li><a href="#">Clothing Fashion</a></li>
-                                        <li><a href="#">Winter</a></li>
-                                        <li><a href="#">Summer</a></li>
-                                        <li><a href="#">Formal</a></li>
-                                        <li><a href="#">Casual</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-lg-2 col-md-4 col-sm-6">
-                            <div class="single-footer-caption mb-50">
-                                <div class="footer-tittle">
-                                    <h4>Shop Women</h4>
-                                    <ul>
-                                        <li><a href="#">Clothing Fashion</a></li>
-                                        <li><a href="#">Winter</a></li>
-                                        <li><a href="#">Summer</a></li>
-                                        <li><a href="#">Formal</a></li>
-                                        <li><a href="#">Casual</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-lg-2 col-md-4 col-sm-6">
-                            <div class="single-footer-caption mb-50">
-                                <div class="footer-tittle">
-                                    <h4>Baby Collection</h4>
-                                    <ul>
-                                        <li><a href="#">Clothing Fashion</a></li>
-                                        <li><a href="#">Winter</a></li>
-                                        <li><a href="#">Summer</a></li>
-                                        <li><a href="#">Formal</a></li>
-                                        <li><a href="#">Casual</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-lg-2 col-md-4 col-sm-6">
-                            <div class="single-footer-caption mb-50">
-                                <div class="footer-tittle">
-                                    <h4>Quick Links</h4>
-                                    <ul>
-                                        <li><a href="#">Track Your Order</a></li>
-                                        <li><a href="#">Support</a></li>
-                                        <li><a href="#">FAQ</a></li>
-                                        <li><a href="#">Carrier</a></li>
-                                        <li><a href="#">About</a></li>
-                                        <li><a href="#">Contact Us</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="footer-bottom-area">
-                <div class="container">
-                    <div class="footer-border">
-                        <div class="row">
-                            <div class="col-xl-12 ">
-                                <div class="footer-copy-right text-center">
-                                    <p>Copyright &copy;
-                                        <script>document.write(new Date().getFullYear());</script> All rights reserved |
-                                        This template is made with <i class="fa fa-heart color-danger"
-                                            aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank"
-                                            rel="nofollow noopener">Colorlib</a>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
+<%- include("footer.ejs") %>
 
     <div id="back-top">
         <a class="wrapper" title="Go to Top" href="#">

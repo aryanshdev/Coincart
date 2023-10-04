@@ -909,12 +909,12 @@ hr {
 }
 
 .white-btn {
-  background: #fff;
+  background: #ff7f00;
   padding: 25px 36px;
   font-size: 14px;
   font-weight: 500;
   text-transform: capitalize;
-  color: #222222;
+  color: #fff;
   border-radius: 25px;
   cursor: pointer;
   display: inline-block;
@@ -953,7 +953,7 @@ hr {
 }
 
 .white-btn:hover {
-  color: #fff !important;
+  color: #ff7f00 !important;
   box-shadow: 0px 3px 31px 2px rgba(207, 207, 207, 0.7);
 }
 
@@ -2952,6 +2952,55 @@ hr {
   width: 9px;
   margin-top: -6px;
   right: 29px;
+}
+
+.sub-dropdown-list{  
+  width: auto;
+  float: left;
+  overflow: hidden;
+}
+.sub-dropdown-list .dropdown-content {
+  display: none;
+  position:absolute;
+  background-color: #ff7f00;
+  width: auto;
+  z-index: 1;
+}
+
+.dropdown-content li {
+  float: none;
+  color: white;
+  text-overflow: clip;
+  white-space: normal;
+  padding: 7.5%;
+  width: fit-content;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-parent:hover  .dropdown-content {
+  display: block;
+}
+
+.tab-content table {
+  border: 2px solid #000000;
+  width: 80%;
+  text-align: left;
+  font-size: 16px;
+  border-collapse: collapse;
+}
+.tab-content table td {
+  border: 1px solid #000;
+  padding: 1%;
+}
+.tab-content table td:nth-child(1) {
+  width: 50%;
+  font-weight: 600;
+  background: #CFCFCF;
+}
+.tab-content table td:nth-child(2) {
+  width: 50%;
 }
 
 .category-listing .single-listing .select-job-items2 .nice-select:focus {
