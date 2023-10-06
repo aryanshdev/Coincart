@@ -1,3 +1,5 @@
+# Created by https://www.toptal.com/developers/gitignore/api/node
+# Edit at https://www.toptal.com/developers/gitignore?templates=node
 
 ### Node ###
 # Logs
@@ -44,6 +46,7 @@ build/Release
 node_modules/
 main/node_modules/
 jspm_packages/
+main/node_modules/
 
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/
@@ -139,3 +142,5 @@ dist
 
 # SvelteKit build / generate output
 .svelte-kit
+
+# End of https://www.toptal.com/developers/gitignore/api/node

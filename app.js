@@ -1,7 +1,11 @@
 const express = require("express");
 const pg = require("pg-promise")();
 const parser = require("body-parser");
+<<<<<<< HEAD:main/app.js
 const fetchAPI = require("node-fetch").fetch;
+=======
+const fetch = require("node-fetch");
+>>>>>>> main:app.js
 const app = express();
 
 
