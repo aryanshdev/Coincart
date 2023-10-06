@@ -1,7 +1,6 @@
 const express = require("express");
 const pg = require("pg-promise")();
 const parser = require("body-parser");
-const fetch = require("node-fetch");
 const app = express();
 
 app.use(parser.urlencoded({ extended: false }));
