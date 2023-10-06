@@ -1,7 +1,11 @@
 const express = require("express");
 const pg = require("pg-promise")();
 const parser = require("body-parser");
+const fetchAPI = require("node-fetch").fetch;
 const app = express();
+
+
+
 
 app.use(parser.urlencoded({ extended: false }));
 app.set("view engine", "ejs");
