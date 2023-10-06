@@ -1,0 +1,36 @@
+<tr>
+  <td>
+    <div class="media">
+      <div class="d-flex">
+        <img src=<%= primg %> alt />
+      </div>
+      <div class="media-body">
+        <p><%= productName %></p>
+        
+      </div>
+    </div>
+  </td>
+  <td>
+    <h5><%= productPrice %></h5>
+  </td>
+  <td>
+    <select id="count" class="qt-selector" onchange='updateCount(this, <%= index %>, <%= productPrice %>)'>
+      <% for (let i = 1; i <= 10; i++) { %>
+        <option value="<%= i %>" <%= i == quantity ? 'selected' : '' %>><%= i %></option>
+      <% } %>
+      
+    </select>
+  </td>
+  <td>
+    <% console.log(index) %>
+    <% totalPrice = quantity*productPrice %>
+    <h5 id=<%= index %>><%= totalPrice  %></h5>
+  </td>
+</tr>
+<script>
+  function updateCount(selectElement, index, productPrice) {
+    const newQuantity = parseInt(selectElement.value);
+    const totalElement = document.getElementById(index);
+    totalElement.textContent = newQuantity * productPrice;
+  }
+</script>
