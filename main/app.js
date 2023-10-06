@@ -1,11 +1,7 @@
 const express = require("express");
 const pg = require("pg-promise")();
 const parser = require("body-parser");
-(async () => {
-  const fetch = await import('node-fetch');
-})();
-
-
+const fetch = require("node-fetch");
 const app = express();
 
 app.use(parser.urlencoded({ extended: false }));
