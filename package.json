@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "ejs": "^3.1.9"
+    "ejs": "^3.1.9",
+    "node-fetch": "^3.3.2"
   }
 }
