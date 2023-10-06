@@ -86,20 +86,25 @@
         </div>
 
         <div class="search_input" id="search_input_box">
-          <form class="search-inner d-flex justify-content-between">
+          <form class="search-inner d-flex justify-content-between" action="/search" method="post">
             <input
               type="text"
               class="form-control"
               id="search_input"
+              name="search_inp"
               placeholder="Search Here"
             />
-            <button type="submit" class="btn"></button>
+           <button type="submit" class="btn">
+            Search
+           </button>
             <span
               class="ti-close"
               id="close_search"
               title="Close Search"
             ></span>
+
           </form>
+
         </div>
 
         <div class="col-12">

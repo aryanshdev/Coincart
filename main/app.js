@@ -53,7 +53,6 @@ app.get("/", (req, res) => {
         ltcPrice: priceValues[3],
         bnbPrice: priceValues[0],
         solPrice: priceValues[4],
-        
       });
     });
 });
@@ -96,7 +95,6 @@ app.get("/login", (req, res) => {
           ltcPrice: priceValues[3],
           bnbPrice: priceValues[0],
           solPrice: priceValues[4],
-          
         });
       } else {
         res.redirect("/account");
@@ -140,7 +138,6 @@ app.get("/account", (req, res) => {
         ltcPrice: priceValues[3],
         bnbPrice: priceValues[0],
         solPrice: priceValues[4],
-        
       });
     });
 });
@@ -182,7 +179,6 @@ app.get("/register", (req, res) => {
         ltcPrice: priceValues[3],
         bnbPrice: priceValues[0],
         solPrice: priceValues[4],
-        
       });
     });
 });
@@ -236,7 +232,6 @@ app.get("/product-:id", (req, res) => {
             ltcPrice: priceValues[3],
             bnbPrice: priceValues[0],
             solPrice: priceValues[4],
-            
           });
         })
         .catch((error) => {
@@ -323,7 +318,6 @@ app.get("/cart", (req, res) => {
                   ltcPrice: priceValues[3],
                   bnbPrice: priceValues[0],
                   solPrice: priceValues[4],
-                  
                 });
               });
             } else {
@@ -337,7 +331,6 @@ app.get("/cart", (req, res) => {
                 ltcPrice: priceValues[3],
                 bnbPrice: priceValues[0],
                 solPrice: priceValues[4],
-                
               });
             }
           })
@@ -350,13 +343,11 @@ app.get("/cart", (req, res) => {
           title: "Cart",
           productsInCart: [],
           name: "",
-
           btcPrice: priceValues[1],
           ethPrice: priceValues[2],
           ltcPrice: priceValues[3],
           bnbPrice: priceValues[0],
           solPrice: priceValues[4],
-          
         });
       }
     });
@@ -419,7 +410,6 @@ app.get("/contact", (req, res) => {
         ltcPrice: priceValues[3],
         bnbPrice: priceValues[0],
         solPrice: priceValues[4],
-        
       });
     });
 });
@@ -517,16 +507,65 @@ app.get("/shop", (req, res) => {
     .then(() => {
       database.query("SELECT * FROM products;").then((result) => {
         res.render(__dirname + "/ejs/shop.ejs", {
-          title: "Contact | CoinCart",
+          title: "Shop | CoinCart",
           products: result,
-
+          pageName : "Shop",
+          pageName : req.body.search_inp,
           btcPrice: priceValues[1],
           ethPrice: priceValues[2],
           ltcPrice: priceValues[3],
           bnbPrice: priceValues[0],
           solPrice: priceValues[4],
-          
         });
       });
     });
 });
+
+app.post("/search", (req, res) => {
+  res.redirect("/search&q=" +req.body.search_inp);
+});
+
+app.get("/search&q=:product", (req, res) =>{
+  var priceValues = [];
+  fetch(
+    "https://rest.coinapi.io/v1/exchangerate/USD?invert=true&filter_asset_id=bnb;btc;eth;ltc;sol",
+    {
+      headers: {
+        "X-CoinAPI-Key": "D1F5B2A4-6DAF-4C46-BB24-08446E6C6BCE",
+      },
+    }
+  )
+    .then((response) => response.json())
+    .then((response) => {
+      response.rates.forEach((element) => {
+        priceValues.push(Math.round(element.rate).toString() + " USD");
+      });
+    })
+    .catch(
+      (error) => (
+        console.log(error),
+        (priceValues = [
+          "Unable To Fetch Currently",
+          "Unable To Fetch Currently",
+          "Unable To Fetch Currently",
+          "Unable To Fetch Currently",
+          "Unable To Fetch Currently",
+        ])
+      )
+    )
+    .then(() => {
+      database.query("SELECT * FROM products WHERE product_name ILIKE '%"+req.params['product']+"%' OR product_category ILIKE '%"+req.params['product']+"%'; ").then((result) => {
+        res.render(__dirname + "/ejs/shop.ejs", {
+          title: "Your Searched For " + req.params["product"],
+          products: result,
+          pageName : req.params['product'],
+          btcPrice: priceValues[1],
+          ethPrice: priceValues[2],
+          ltcPrice: priceValues[3],
+          bnbPrice: priceValues[0],
+          solPrice: priceValues[4],
+        
+        });
+      });
+    });
+})

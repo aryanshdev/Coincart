@@ -30,6 +30,10 @@
 	    content: url("https://img.icons8.com/ios/ff7f00/30/search--v1.png");
 	}
 
+	.flaticon-search-white:before {		
+	    content: url("https://img.icons8.com/ios-filled/ffffff/25/search--v1.png");
+	}
+
 	.flaticon-shopping-cart:before {
 content: url("https://img.icons8.com/sf-regular-filled/ff7f00/30/shopping-cart.png");
 	}
