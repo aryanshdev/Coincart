@@ -42,6 +42,7 @@
                             </thead>
                             <tbody>
                                 <% let subTotal = 0 %>
+                                <% let productLen  = productsInCart.lenght %>
                                 <% if (item_in_cart > 0) { %>
                                     <!-- Cart is not empty -->
                                     <% for (let i = 0; i < item_in_cart; i++) { %>

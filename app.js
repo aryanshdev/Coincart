@@ -58,7 +58,7 @@ app.get("/", (req, res) => {
     });
 });
 
-app.get("/login", (req, res) => {
+app.get("/login-?:redirect?", (req, res) => {
   app.locals.item_in_cart = item_in_cart;
   var priceValues = [];
   fetch(
@@ -89,8 +89,10 @@ app.get("/login", (req, res) => {
     )
     .then(() => {
       if (!username) {
+        console.log( req.params.redirect);
         res.render(__dirname + "/login.ejs", {
           title: "Login | CoinCart",
+          redirect : req.params.redirect || undefined,
           btcPrice: priceValues[1],
           ethPrice: priceValues[2],
           ltcPrice: priceValues[3],
@@ -362,12 +364,16 @@ app.post("/login", (req, res) => {
         username = req.body.username;
         fullname = result[0].name;
         if (result[0].cart !== null) {
-          app.locals.item_in_cart = result[0].cart
+          app.locals.item_in_cart =  item_in_cart = result[0].cart
             .slice(0, -1)
             .split(";").length;
-          item_in_cart = app.locals.item_in_cart;
         }
-        res.redirect("/");
+        
+        console.log( req.body.redirect);
+        if( req.body.redirect !== 'undefined'){
+          res.redirect("/"+req.body.redirect);
+        }
+        else {res.redirect("/")};
       }
     })
     .catch((error) => {
@@ -447,8 +453,8 @@ app.post("/register", (req, res) => {
 });
 
 app.get("/add-:id", (req, res) => {
-  var priceValues = [];
 
+ if(username){
   database
     .query(
       "UPDATE users SET cart = concat(cart , '" +
@@ -462,6 +468,10 @@ app.get("/add-:id", (req, res) => {
       res.redirect("/product-" + req.params["id"]);
     })
     .catch((error) => res.send(error));
+  }
+    else{
+      res.redirect("/login-product-"+req.params.id);
+    }
 });
 
 app.post("/subscribe-form-footer", (req, res) => {

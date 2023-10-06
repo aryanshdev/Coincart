@@ -9,7 +9,7 @@
         <div class="login-form-area">
             <div class="login-form">
 
-<form action="/login" method="post">
+<form action="/login" method="post" >
     <div class="login-heading">
         <span>Login</span>
         <p>Enter Login details to get access</p>
@@ -29,6 +29,7 @@
             <label for="fruit1">Keep me logged in</label>
             <a href="#" class="f-right">Forgot Password?</a>
         </div>
+        <input type="hidden" name="redirect" style="display: none;" value=<%= redirect %>>
     </div>
 
     <div class="login-footer">
