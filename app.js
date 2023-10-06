@@ -1,6 +1,14 @@
 const express = require("express");
 const pg = require("pg-promise")();
 const parser = require("body-parser");
+<<<<<<< HEAD:main/app.js
+=======
+<<<<<<< HEAD:main/app.js
+const fetchAPI = require("node-fetch").fetch;
+=======
+const fetch = require("node-fetch");
+>>>>>>> main:app.js
+>>>>>>> KardeBhadwe:app.js
 const app = express();
 
 app.use(parser.urlencoded({ extended: false }));
