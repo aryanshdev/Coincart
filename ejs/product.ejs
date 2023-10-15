@@ -42,7 +42,7 @@
                                         <h3><%= productName %></h3>
                                         <p><%= category %></p>
                                         <div class="price">
-                                            <span><%= productPrice %></span>
+                                            <span><%= productPrice %> USD</span>
                                         </div>
                                         <div class="review">
                                             <div class="rating">
@@ -52,7 +52,7 @@
                                                 <i class="fas fa-star"></i>
                                                 <i class="fas fa-star-half-alt"></i>
                                             </div>
-                                            <p>(120 Review)</p>
+                                            <p>(<%= totalReviews %> Review)</p>
                                         </div>
                                         <a href=<%= "/add-"+ code %> style="border:white" class="white-btn mr-10">Add to Cart</a>
                                         <a href="#"  style="padding: 0%;" class="border-btn share-btn"><i class="fas fa-share-alt"></i></a>
@@ -116,89 +116,79 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="nav-three" role="tabpanel" aria-labelledby="nav-three-tab">
-
-                        <div class="row">
+                        <div class="row">   
                             <div class="offset-xl-1 col-lg-9">
-                                <p>Beryl Cook is one of Britain’s most talented and amusing artists .Beryl’s pictures
-                                    feature women of all shapes and sizes enjoying themselves .Born between the two
-                                    world wars, Beryl Cook eventually left Kendrick School in Reading at the age of 15,
-                                    where she went to secretarial school and then into an insurance office. After moving
-                                    to London and then Hampton, she eventually married her next door neighbour from
-                                    Reading, John Cook. He was an officer in the Merchant Navy and after he left the sea
-                                    in 1956, they bought a pub for a year before John took a job in Southern Rhodesia
-                                    with a motor company. Beryl bought their young son a box of watercolours, and when
-                                    showing him how to use it, she decided that she herself quite enjoyed painting. John
-                                    subsequently bought her a child’s painting set for her birthday and it was with this
-                                    that she produced her first significant work, a half-length portrait of a
-                                    dark-skinned lady with a vacant expression and large drooping breasts. It was aptly
-                                    named ‘Hangover’ by Beryl’s husband and</p>
-                                <p>It is often frustrating to attempt to plan meals that are designed for one. Despite
-                                    this fact, we are seeing more and more recipe books and Internet websites that are
-                                    dedicated to the act of cooking for one. Divorce and the death of spouses or grown
-                                    children leaving for college are all reasons that someone accustomed to cooking for
-                                    more than one would suddenly need to learn how to adjust all the cooking practices
-                                    utilized before into a streamlined plan of cooking that is more efficient for one
-                                    person creating less.</p>
+                            <form method="post" action="/review:<%= code %>">
+                                    <div class="row" id="form" style="position: relative;">
+                                        
+                                <div id="overlay" class="overlay"> <h1 style="
+                                    padding-top: 4%;color: white; font-weight: 700;">Login To Review</h1> </div>
+                                        <div class="star-selection">
+                                            <span class="star " onclick="selectUnselect(1)"></span>
+                                            <span class="star " onclick="selectUnselect(2)"></span>
+                                            <span class="star " onclick="selectUnselect(3)"></span>
+                                            <span class="star" onclick="selectUnselect(4)"></span>
+                                            <span class="star" onclick="selectUnselect(5)"></span>
+                                        </div>
+                                        <div class="col-12 col-md-12 col-lg-9">
+                                            <input type="number" name="star" id="starvalue" value="0" hidden required>
+                                            <input required type="text" class="form-control valid" style="display: inline; margin-bottom: 2.5%;" placeholder="Write Your Review" name="review_msg">
+                                        </div>
+                                        
+                                        <div class="col-12 col-md-12 col-lg-3">
+                                            <button type="submit" style="display: inline; " class="btn">Submit</button>
+                                        </div>
+                                    </div>   
+                               </form>
+                               
+                                
+                               
                             </div>
+                            <hr style="border-top: dotted 4px; width: 50%; margin-left: 25%; margin-top: 2%; margin-bottom: 2%; background-color: white;">
+                        
+                            <div class="offset-xl-1 col-lg-9">
+                                <%  try { %>
+                                 <%-   include("user_review.ejs" ,{deleteButton:"showDeleteButton", stars_given : reviews[username][1], userName : username, date : new Date(reviews[username][0]).toLocaleString() , message: reviews[username][2] }) %>
+                                <% }  catch(error) { } %>
+                                <% let num = 0 %>
+                                <% for (var i in reviews) { %>
+                                    <% if (num < 5){ if ( i !== username) { %>
+                                   <% num +=1  %>
+                                    <%- include("user_review.ejs" ,{deleteButton:"noDeleteButton", stars_given : reviews[i][1], userName : i, date : new Date(reviews[i][0]).toLocaleString() , message: reviews[i][2] }) %>
+                                    <% }}  else { break;} }%>
+                       
+                            </div>
+                        
                         </div>
+
+
                     </div>
                 </div>
             </div>
         </section>
 
     </main>
-<%- include("footer.ejs") %>
-
-    <div id="back-top">
-        <a class="wrapper" title="Go to Top" href="#">
-            <div class="arrows-container">
-                <div class="arrow arrow-one">
-                </div>
-                <div class="arrow arrow-two">
-                </div>
-            </div>
-        </a>
-    </div>
-
-
-    <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
-    <script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
-    <script src="./assets/js/popper.min.js"></script>
-    <script src="./assets/js/bootstrap.min.js"></script>
-
-    <script src="./assets/js/owl.carousel.min.js"></script>
-    <script src="./assets/js/slick.min.js"></script>
-    <script src="./assets/js/jquery.slicknav.min.js"></script>
-
-    <script src="./assets/js/wow.min.js"></script>
-    <script src="./assets/js/jquery.magnific-popup.js"></script>
-    <script src="./assets/js/jquery.nice-select.min.js"></script>
-    <script src="./assets/js/jquery.counterup.min.js"></script>
-    <script src="./assets/js/waypoints.min.js"></script>
-    <script src="./assets/js/price_rangs.js"></script>
-
-    <script src="./assets/js/contact.js"></script>
-    <script src="./assets/js/jquery.form.js"></script>
-    <script src="./assets/js/jquery.validate.min.js"></script>
-    <script src="./assets/js/mail-script.js"></script>
-    <script src="./assets/js/jquery.ajaxchimp.min.js"></script>
-
-    <script src="./assets/js/plugins.js"></script>
-    <script src="./assets/js/main.js"></script>
-
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
 
-        gtag('config', 'UA-23581568-13');
+        let overlay = document.querySelector("#overlay");
+        if ( "<%= username  %>"  ){
+            overlay.style.display = "none";
+        }
+
+        if (<%=  reviews ? (reviews[username] ? 1: 0) : 0 %>){
+            overlay.firstElementChild.textContent = "Already Reviewed"
+            overlay.style.display = "";
+        }
+
+       function selectUnselect( num){
+        document.getElementById('starvalue').value = num;
+            var stars = document.getElementsByClassName('star');
+            for (let i = 0; i < 5; i++) {
+                if (i <= num-1){
+                    stars[i].classList.add("selected")
+                }
+                else stars[i].classList.remove("selected");
+            }
+       }
     </script>
-    <script defer
-        src="https://static.cloudflareinsights.com/beacon.min.js/v8b253dfea2ab4077af8c6f58422dfbfd1689876627854"
-        integrity="sha512-bjgnUKX4azu3dLTVtie9u6TKqgx29RBwfj3QXYt5EKfWM/9hPSAI/4qcV5NACjwAo8UtTeWefx6Zq5PHcMm7Tg=="
-        data-cf-beacon='{"rayId":"800edd5819bff2ae","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2023.8.0","si":100}'
-        crossorigin="anonymous"></script>
-</body>
-
-</html>
+<%- include("footer.ejs") %>

@@ -1,0 +1,41 @@
+<div class="review">
+  <h4><%= userName %></h4>
+  <span> <%= date %></span>
+  <div>
+    <span class="star <%= userName %>" style="margin: -1%; scale: 0.5"></span>
+    <span class="star <%= userName %>" style="margin: -1%; scale: 0.5"></span>
+    <span class="star <%= userName %>" style="margin: -1%; scale: 0.5"></span>
+    <span class="star <%= userName %>" style="margin: -1%; scale: 0.5"></span>
+    <span class="star <%= userName %>" style="margin: -1%; scale: 0.5"></span>
+  </div>
+  <p><%= message %></p>
+  <button class="<%= deleteButton %>"></button>
+</div>
+
+<style>
+  .review {
+    margin-bottom: 2.5%;
+  }
+  .review h4 {
+    font-weight: 600;
+    margin-bottom: -0.25%;
+  }
+  .review span {
+    color: grey;
+    font-size: 0.9rem;
+  }
+  .review p {
+    padding-top: 0.75%;
+    line-height: 1;
+  }
+</style>
+<script>
+  var stars = document.querySelectorAll( ".star.<%=userName %>");
+    for (let i = 0; i < 5; i++) {
+                  if ( i <= <%=  stars_given -1 %> ){
+                      stars[i].classList.add("selected")
+                  }
+                  else {
+     stars[i].classList.remove("selected")};
+         }
+</script>

@@ -298,6 +298,71 @@ hr {
   margin: 0 auto;
 }
 
+.alert {
+  padding: 20px;
+  background-color: #f44336;
+  color: white;
+  display: none;
+}
+.alert.on {
+  display: block;
+}
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: black;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 110%;
+  font-weight: 800;
+  border-radius: 10px;
+  text-align: center;
+  height: 105%;
+  background-color: rgb(
+    255 127 0 / 70%
+  ); /* Semi-transparent background color */
+  z-index: 999; /* Ensure it appears on top of other elements */
+}
+
+.star-selection {
+  text-align: center;
+}
+.star-selection .star {
+  text-align: center;
+  scale: 0.75;
+  margin: 0% 2.5% 1%;
+}
+
+.showDeleteButton {
+  display: inline;
+  content: url("https://img.icons8.com/ios-filled/48/waste.png");
+  border: none;
+}
+.noDeleteButton {
+  display: none;
+}
+
+
+.star {
+  content: url("https://img.icons8.com/color/48/star--v1.png");
+}
+
+.star.selected {
+  content: url("https://img.icons8.com/fluency/48/star--v1.png");
+}
 .preloader .preloader-circle {
   width: 100px;
   height: 100px;
@@ -2954,14 +3019,14 @@ hr {
   right: 29px;
 }
 
-.sub-dropdown-list{  
+.sub-dropdown-list {
   width: auto;
   float: left;
   overflow: hidden;
 }
 .sub-dropdown-list .dropdown-content {
   display: none;
-  position:absolute;
+  position: absolute;
   background-color: #ff7f00;
   width: auto;
   z-index: 1;
@@ -2979,7 +3044,7 @@ hr {
   text-align: left;
 }
 
-.dropdown-parent:hover  .dropdown-content {
+.dropdown-parent:hover .dropdown-content {
   display: block;
 }
 
@@ -2997,7 +3062,7 @@ hr {
 .tab-content table td:nth-child(1) {
   width: 50%;
   font-weight: 600;
-  background: #CFCFCF;
+  background: #cfcfcf;
 }
 .tab-content table td:nth-child(2) {
   width: 50%;
@@ -3311,9 +3376,9 @@ hr {
   padding-right: 30px;
 }
 
-.qt-selector{
-width: 60%;
-margin: 0;
+.qt-selector {
+  width: 60%;
+  margin: 0;
 }
 
 .cart_inner .table tbody tr td .media .d-flex img {
@@ -4096,9 +4161,9 @@ margin: 0;
 }
 
 @media only screen and (min-width: 576px) and (max-width: 767px) {
-  .qt-selector{
+  .qt-selector {
     width: 100%;
-    }
+  }
 
   .login-form-area .login-form {
     padding: 40px 20px 20px 26px;

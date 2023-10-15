@@ -37,8 +37,12 @@
         <button type="submit" class="submit-btn3">Login</button>
     </div>
 </form>
-            </div>
+    <div id="alert-panel" class="alert" style="margin-top: 5%; display: block;">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        User Not Found. Check Your Username/E-Mail And Retry
+      </div>
+     </div>
         </div>
-
+        
     </main>
 <%- include("ejs/footer.ejs") %>

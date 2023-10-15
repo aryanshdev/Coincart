@@ -14,11 +14,11 @@
         </div>
         <div class="properties-caption properties-caption2">
           <h3>
-            <a href=<%= "/product-"+ productCode %>><%= productName %></a>
+            <a href=<%= "/product-"+ productCode %>><%= productName.slice(0,50) + (productName.length > 50 ? "..."  : "") %></a>
           </h3>
           <div class="properties-footer">
             <div class="price">
-              <span> <%= productPrice %> <span> <%= productMRP %> </span></span>
+              <span>   <%=  productPrice %> USD <span> <%=  (productMRP ? productMRP +" USD" : "") %> </span></span>
             </div>
           </div>
         </div>
