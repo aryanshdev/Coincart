@@ -2,7 +2,7 @@
   <h4><%= userName %></h4>
   <span> <%= date %></span>
   <div>
-    <span class="star <%= userName %>" style="margin: -1%; scale: 0.5"></span>
+    <span class="star <%= userName.replaceAll(' ','') %>" style="margin: -1%; scale: 0.5"></span>
     <span class="star <%= userName %>" style="margin: -1%; scale: 0.5"></span>
     <span class="star <%= userName %>" style="margin: -1%; scale: 0.5"></span>
     <span class="star <%= userName %>" style="margin: -1%; scale: 0.5"></span>
@@ -30,7 +30,7 @@
   }
 </style>
 <script>
-  var stars = document.querySelectorAll( ".star.<%=userName %>");
+  var stars = document.querySelectorAll( ".star.<%=userName.replaceAll(' ','') %>");
     for (let i = 0; i < 5; i++) {
                   if ( i <= <%=  stars_given -1 %> ){
                       stars[i].classList.add("selected")

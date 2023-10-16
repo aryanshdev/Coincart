@@ -461,25 +461,25 @@ app.post("/review::id", (req, res) => {
         ", 1);"
     ).catch((error) => {
       if (error.code === "23505") {
-        database.query(
-          "UPDATE reviews SET reviews = jsonb_set(reviews::jsonb, '{\"" +
-            username +
-            "\"}', '[\"" +
-            new Date().toISOString() +
-            '" , ' +  req.body.star  +
-            ' , "' +
-            req.body.review_msg +
-            " \"]') , " +
-            "rating_sum = (SELECT rating_sum FROM reviews WHERE ID = " +
-            req.params.id +
-            ") + " + req.body.star+ ", " +
-            " reviews_made = (SELECT reviews_made FROM reviews WHERE ID = " +
-            req.params.id +
-            ") + 1" +
-            ", rating = (SELECT rating_sum/reviews_made FROM reviews WHERE ID = " +
-            req.params.id +
-            ");"
-        )
+        console.log(          )
+        database.query("UPDATE reviews SET reviews = jsonb_set(reviews::jsonb, '{\"" +
+        username +
+        "\"}', '[\"" +
+        new Date().toISOString() +
+        '" , ' +  req.body.star  +
+        ' , "' +
+        req.body.review_msg +
+        " \"]') , " +
+        "rating_sum = (SELECT rating_sum FROM reviews WHERE ID = " +
+        req.params.id +
+        ") + " + req.body.star+ ", " +
+        " reviews_made = (SELECT reviews_made FROM reviews WHERE ID = " +
+        req.params.id +
+        ") + 1" +
+        ", rating = (SELECT CAST(rating_sum AS DECIMAL) / CAST(reviews_made AS DECIMAL) FROM reviews WHERE ID = " +
+        req.params.id +
+        ") WHERE ID = " +
+        req.params.id+";")
       }
     }).finally(
       res.redirect("/product-"+req.params.id)
