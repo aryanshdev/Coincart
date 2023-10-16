@@ -34,7 +34,7 @@ app.get("/", (req, res) => {
     .then((response) => response.json())
     .then((response) => {
       response.rates.forEach((element) => {
-        priceValues.push(Math.round(element.rate).toString() + " INR");
+        priceValues.push(Math.round(element.rate).toString() + " USD");
       });
     })
     .catch(
@@ -70,7 +70,7 @@ app.get("/login-?:redirect?", (req, res) => {
     .then((response) => response.json())
     .then((response) => {
       response.rates.forEach((element) => {
-        priceValues.push(Math.round(element.rate).toString() + " INR");
+        priceValues.push(Math.round(element.rate).toString() + " USD");
       });
     })
     .catch(
@@ -110,7 +110,7 @@ app.get("/account", (req, res) => {
     .then((response) => response.json())
     .then((response) => {
       response.rates.forEach((element) => {
-        priceValues.push(Math.round(element.rate).toString() + " INR");
+        priceValues.push(Math.round(element.rate).toString() + " USD");
       });
     })
     .catch(
@@ -145,7 +145,7 @@ app.get("/register", (req, res) => {
     .then((response) => response.json())
     .then((response) => {
       response.rates.forEach((element) => {
-        priceValues.push(Math.round(element.rate).toString() + " INR");
+        priceValues.push(Math.round(element.rate).toString() + " USD");
       });
     })
     .catch(
@@ -181,7 +181,7 @@ app.get("/product-:id", (req, res) => {
     .then((response) => response.json())
     .then((response) => {
       response.rates.forEach((element) => {
-        priceValues.push(Math.round(element.rate).toString() + " INR");
+        priceValues.push(Math.round(element.rate).toString() + " USD");
       });
     })
     .catch(
@@ -249,7 +249,7 @@ app.get("/cart", (req, res) => {
     .then((response) => response.json())
     .then((response) => {
       response.rates.forEach((element) => {
-        priceValues.push(Math.round(element.rate).toString() + " INR");
+        priceValues.push(Math.round(element.rate).toString() + " USD");
       });
     })
     .catch(
@@ -386,7 +386,7 @@ app.get("/contact", (req, res) => {
     .then((response) => response.json())
     .then((response) => {
       response.rates.forEach((element) => {
-        priceValues.push(Math.round(element.rate).toString() + " INR");
+        priceValues.push(Math.round(element.rate).toString() + " USD");
       });
     })
     .catch(
@@ -529,7 +529,7 @@ app.get("/shop", (req, res) => {
     .then((response) => response.json())
     .then((response) => {
       response.rates.forEach((element) => {
-        priceValues.push(Math.round(element.rate).toString() + " INR");
+        priceValues.push(Math.round(element.rate).toString() + " USD");
       });
     })
     .catch(
@@ -584,7 +584,7 @@ app.get("/search&q=:product", (req, res) => {
     .then((response) => response.json())
     .then((response) => {
       response.rates.forEach((element) => {
-        priceValues.push(Math.round(element.rate).toString() + " INR");
+        priceValues.push(Math.round(element.rate).toString() + " USD");
       });
     })
     .catch(
