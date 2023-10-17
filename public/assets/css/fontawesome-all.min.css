@@ -89,16 +89,19 @@
     content: "\f072"
 }
 
-.fa-share-alt:before {
+.fa-share-alt {
     content: url("https://img.icons8.com/ios-filled/ffffff/20/share-3.png")
 }
 
-.fa-star:before {
-    content: "\f005"
+.fa-star {
+    content: url("https://img.icons8.com/ios-glyphs/15/ffffff/star--v1.png")
 }
 
-.fa-star-half-alt:before {
-    content: "\f5c0"
+.fa-star-half-alt {
+    content: url("https://img.icons8.com/ios-filled/15/ffffff/star-half-empty.png")
+}
+.fa-star-no {
+    content: url("https://img.icons8.com/ios/15/ffffff/star--v1.png")
 }
 
 .fa-twitter:before {

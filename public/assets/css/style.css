@@ -974,12 +974,12 @@ hr {
 }
 
 .white-btn {
-  background: #ff7f00;
+  background: white;
   padding: 25px 36px;
   font-size: 14px;
   font-weight: 500;
   text-transform: capitalize;
-  color: #fff;
+  color: #f09359;
   border-radius: 25px;
   cursor: pointer;
   display: inline-block;
@@ -1006,7 +1006,7 @@ hr {
   top: 0;
   width: 101%;
   height: 101%;
-  background: #ff7f00;
+  background: #ee7700;
   z-index: 1;
   border-radius: 5px;
   transition: transform 0.5s;
@@ -1018,7 +1018,7 @@ hr {
 }
 
 .white-btn:hover {
-  color: #ff7f00 !important;
+  color: white !important;
   box-shadow: 0px 3px 31px 2px rgba(207, 207, 207, 0.7);
 }
 

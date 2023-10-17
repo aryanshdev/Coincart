@@ -3,9 +3,19 @@ const pg = require("pg-promise")();
 const parser = require("body-parser");
 const fetch = require("node-fetch");
 const app = express();
+const session = require('express-session');
 
 app.use(parser.urlencoded({ extended: false }));
 app.set("view engine", "ejs");
+
+app.use(
+  session({
+    secret: 'ARYANSHDEV_PE', // Change this to a secure secret key
+    resave: false,
+    saveUninitialized: true,
+  })
+);
+
 
 // COIN API URL : ADD  BACK WHEN COMMITING
 
@@ -208,6 +218,7 @@ app.get("/product-:id", (req, res) => {
             productPrice: result.product_price,
             code: result.id,
             username : username,
+            productRating : result.rating,
             reviews: result.reviews ,
             totalReviews : result.reviews_made,
             description: result.product_description,
@@ -369,7 +380,7 @@ app.post("/login", (req, res) => {
             "<br><h6><a style='color:#ff7f00 'href='/'> Click Here To Return To HomePage </a> </h6>",
         });
       } else if (error instanceof TypeError) {
-        res.send(474);
+       console.log(error)
       } else {
         res.sendStatus(203);
       }
@@ -451,7 +462,7 @@ app.post("/review::id", (req, res) => {
         username +
         '":["' +
         new Date().toISOString() +
-        '" , ' +  req.body.star  +
+        '" , "' +  fullname   + '" , ' +  req.body.star  +
         ' , "' +
         req.body.review_msg +
         "\"]}' ," +
@@ -463,10 +474,10 @@ app.post("/review::id", (req, res) => {
       if (error.code === "23505") {
         console.log(          )
         database.query("UPDATE reviews SET reviews = jsonb_set(reviews::jsonb, '{\"" +
-        username +
+        fullname +
         "\"}', '[\"" +
         new Date().toISOString() +
-        '" , ' +  req.body.star  +
+        '" , "' +  fullname   + '" , ' +  req.body.star  +
         ' , "' +
         req.body.review_msg +
         " \"]') , " +

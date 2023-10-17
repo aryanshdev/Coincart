@@ -46,11 +46,17 @@
                                         </div>
                                         <div class="review">
                                             <div class="rating">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star-half-alt"></i>
+                                                <% for (var i = 0; i < productRating; i++) { %>
+                                                    <i class="fas fa-star"></i>
+                                                <% } %>
+                                                
+                                                <% if (productRating > i) { %>
+                                                    <i class="fas fa-star-half-alt"></i>
+                                                <% } %>
+                                                
+                                                <% for (; i < 5; i++) { %>
+                                                    <i class="fas fa-star-no"></i>
+                                                <% } %>
                                             </div>
                                             <p>(<%= totalReviews %> Review)</p>
                                         </div>
@@ -79,7 +85,7 @@
                                         role="tab" aria-controls="nav-one" aria-selected="true">Description</a>
                                     <a class="nav-link" id="nav-two-tab" data-bs-toggle="tab" href="#nav-two" role="tab"
                                         aria-controls="nav-two" aria-selected="false">Details</a>
-                                    <a class="nav-link" id="nav-three-tab" data-bs-toggle="tab" href="#nav-three"
+                                    <a class="nav-link" id="nav-three-tab" data-bs-toggle="tab" name='#nav-three' href="#nav-three"
                                         role="tab" aria-controls="nav-three" aria-selected="false">Reviews</a>
                                 </div>
                             </nav>
@@ -148,13 +154,13 @@
                         
                             <div class="offset-xl-1 col-lg-9">
                                 <%  try { %>
-                                 <%-   include("user_review.ejs" ,{deleteButton:"showDeleteButton", stars_given : reviews[username][1], userName : username, date : new Date(reviews[username][0]).toLocaleString() , message: reviews[username][2] }) %>
+                                 <%-   include("user_review.ejs" ,{deleteButton:"showDeleteButton", stars_given : reviews[username][2], userName : username, userFullName :  reviews[username][1], date : new Date(reviews[username][0]).toLocaleString() , message: reviews[username][3] }) %>
                                 <% }  catch(error) { } %>
                                 <% let num = 0 %>
                                 <% for (var i in reviews) { %>
                                     <% if (num < 5){ if ( i !== username) { %>
                                    <% num +=1  %>
-                                    <%- include("user_review.ejs" ,{deleteButton:"noDeleteButton", stars_given : reviews[i][1], userName : i, date : new Date(reviews[i][0]).toLocaleString() , message: reviews[i][2] }) %>
+                                    <%- include("user_review.ejs" ,{deleteButton:"noDeleteButton", stars_given : reviews[i][2], userName : i, userFullName :  reviews[i][1], date : new Date(reviews[i][0]).toLocaleString() , message: reviews[i][3] }) %>
                                     <% }}  else { break;} }%>
                        
                             </div>
