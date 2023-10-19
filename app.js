@@ -8,14 +8,6 @@ const session = require('express-session');
 app.use(parser.urlencoded({ extended: false }));
 app.set("view engine", "ejs");
 
-app.use(
-  session({
-    secret: 'ARYANSHDEV_PE', // Change this to a secure secret key
-    resave: false,
-    saveUninitialized: true,
-  })
-);
-
 
 // COIN API URL : ADD  BACK WHEN COMMITING
 
@@ -69,7 +61,7 @@ app.get("/", (req, res) => {
     });
 });
 
-app.get("/login-?:redirect?", (req, res) => {
+app.get(/^\/login(?:-([\w-]+))?(?:&F=([\w-]+)_([\w-]+))?$/, (req, res) => {
   app.locals.item_in_cart = item_in_cart;
   var priceValues = [];
   fetch("", {
@@ -95,9 +87,14 @@ app.get("/login-?:redirect?", (req, res) => {
     )
     .then(() => {
       if (!username) {
+        console.log(req.params)
+        var noUser = "User Not Found, Please Check Your Email/Username Again and Retry";
+        var wrongPass = "Wrong Password, Please Check Your Password and Retry";
         res.render(__dirname + "/login.ejs", {
           title: "Login | CoinCart",
-          redirect: req.params.redirect || undefined,
+          redirect: req.params['0'] || undefined,
+          alertMessage : req.params['1'] ? (req.params['1'] === "U" ? noUser : (req.params['1'] === "P" ? wrongPass : "") ) : null,
+          displayProp : req.params['2'] ?  "block" : "none",
           btcPrice: priceValues[1],
           ethPrice: priceValues[2],
           ltcPrice: priceValues[3],
@@ -134,14 +131,21 @@ app.get("/account", (req, res) => {
         ])
     )
     .then(() => {
+      if(username !== null){
+      app.locals.item_in_cart = item_in_cart;
       res.render(__dirname + "/account.ejs", {
         title: "Your Account | CoinCart",
+        fullName : fullname,
+        userName_EMail : username,
         btcPrice: priceValues[1],
         ethPrice: priceValues[2],
         ltcPrice: priceValues[3],
         bnbPrice: priceValues[0],
         solPrice: priceValues[4],
-      });
+      });}
+      else{
+        res.redirect('/login');
+      }
     });
 });
 
@@ -345,10 +349,10 @@ app.get("/cart", (req, res) => {
 
 app.post("/login", (req, res) => {
   database
-    .query("SELECT * FROM users WHERE username = '" + req.body.username + "';")
+    .query("SELECT * FROM users WHERE username = '" + req.body.username.toLowerCase() + "';")
     .then((result) => {
       if (result[0].password == req.body.password) {
-        username = req.body.username;
+        username = req.body.username.toLowerCase();
         fullname = result[0].name;
         if (result[0].cart !== null) {
           app.locals.item_in_cart = item_in_cart = result[0].cart
@@ -361,6 +365,11 @@ app.post("/login", (req, res) => {
         } else {
           res.redirect("/");
         }
+      }
+      else{
+        if (req.body.redirect !== "undefined") {
+          res.redirect("/login-" + req.body.redirect + "&F=P_B");
+        } else res.redirect("/login&F=P_B")
       }
     })
     .catch((error) => {
@@ -380,9 +389,11 @@ app.post("/login", (req, res) => {
             "<br><h6><a style='color:#ff7f00 'href='/'> Click Here To Return To HomePage </a> </h6>",
         });
       } else if (error instanceof TypeError) {
-       console.log(error)
+        if (req.body.redirect !== "undefined") {
+          res.redirect("/login-" + req.body.redirect + "&F=U_B");
+        } else res.redirect("/login&F=U_B")
       } else {
-        res.sendStatus(203);
+        console.log(error)
       }
     });
 });
@@ -430,7 +441,7 @@ app.post("/register", (req, res) => {
     database
       .query(
         "INSERT INTO users (username,name,password,cart) VALUES ('" +
-          req.body.email +
+          req.body.email.toLowerCase() +
           "','" +
           req.body.name +
           "','" +
@@ -560,7 +571,7 @@ app.get("/shop", (req, res) => {
           res.render(__dirname + "/ejs/shop.ejs", {
             title: "Shop | CoinCart",
             products: result,
-            pageName: req.body.search_inp,
+            pageName: "Shop",
             btcPrice: priceValues[1],
             ethPrice: priceValues[2],
             ltcPrice: priceValues[3],
@@ -619,9 +630,9 @@ app.get("/search&q=:product", (req, res) => {
         )
         .then((result) => {
           res.render(__dirname + "/ejs/shop.ejs", {
-            title: "Your Searched For " + req.params["product"],
+            title: "Your Searched For " + req.params.product,
             products: result,
-            pageName: req.params["product"],
+            pageName: req.params.product,
             btcPrice: priceValues[1],
             ethPrice: priceValues[2],
             ltcPrice: priceValues[3],
@@ -640,4 +651,12 @@ app.get("/search&q=:product", (req, res) => {
           }
         });
     });
+});
+
+app.post("/logout", (req,res) => {
+    fullname = null;
+    username = null;
+    item_in_cart = 0;
+    app.locals.item_in_cart = 0;
+    res.redirect("/login");
 });

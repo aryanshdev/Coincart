@@ -8,13 +8,16 @@
 
         <div class="login-form-area">
             <div class="login-form">
-
+ 
 <form action="/login" method="post" >
     <div class="login-heading">
         <span>Login</span>
         <p>Enter Login details to get access</p>
     </div>
-
+    <div id="alert-panel" class="alert" style="margin-top: 5%; display: <%=displayProp %>;">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        <%= alertMessage %>
+      </div>
     <div class="input-box">
         <div class="single-input-fields">
             <label>Username or Email Address</label>
@@ -37,10 +40,7 @@
         <button type="submit" class="submit-btn3">Login</button>
     </div>
 </form>
-    <div id="alert-panel" class="alert" style="margin-top: 5%; display: block;">
-        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-        User Not Found. Check Your Username/E-Mail And Retry
-      </div>
+
      </div>
         </div>
         

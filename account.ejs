@@ -1,5 +1,106 @@
 <%- include("ejs/header.ejs") %> <%- include("ejs/navbar.ejs") %>
 <main>
-    
+  <div class="hero-area section-bg2">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-12">
+          <div class="slider-area">
+            <div
+              class="slider-height2 slider-bg4 d-flex align-items-center justify-content-center"
+            >
+              <div class="hero-caption hero-caption2">
+                <h2>Your Account</h2>
+                <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb justify-content-center">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                  </ol>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container pb-50 pt-50">
+    <div class="row">
+      <div class="col-lg-3 col-md-4 col-sm-12">
+        <div class="text-center card-box">
+          <div class="member-card">
+            <div class="thumb-xl member-thumb m-b-10 center-block">
+              <img
+                src="https://img.icons8.com/ios-filled/100/user-male-circle.png"
+                alt="user-circle"
+                class="img-circle img-thumbnail"
+                alt="profile-image"
+              />
+            </div>
+            <div class>
+              <h4 class="m-b-5"><%= fullName %></h4>
+              <p class="username"><%= userName_EMail %></p>
+            </div>
+            <form action="/logout" method="post">
+              <button type="submit" class="btn">Logout</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-9 col-md-4 col-sm-12">
+        <div class="container">
+          <div class="offset-xl-1 col-xl-10">
+            <div class="nav-button f-left">
+              <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                  <a
+                    class="nav-link active"
+                    id="nav-one-tab"
+                    data-bs-toggle="tab"
+                    href="#nav-one"
+                    role="tab"
+                    aria-controls="nav-one"
+                    aria-selected="true"
+                    >Orders</a
+                  >
+                  <a
+                    class="nav-link"
+                    id="nav-two-tab"
+                    data-bs-toggle="tab"
+                    href="#nav-two"
+                    role="tab"
+                    aria-controls="nav-two"
+                    aria-selected="false"
+                    >Details</a
+                  >
+                  <a
+                    class="nav-link"
+                    id="nav-three-tab"
+                    data-bs-toggle="tab"
+                    name="#nav-three"
+                    href="#nav-three"
+                    role="tab"
+                    aria-controls="nav-three"
+                    aria-selected="false"
+                    >Reviews</a
+                  >
+                  <a
+                    class="nav-link"
+                    id="nav-three-tab"
+                    data-bs-toggle="tab"
+                    name="#nav-three"
+                    href="#nav-three"
+                    role="tab"
+                    aria-controls="nav-three"
+                    aria-selected="false"
+                    >Account actions</a
+                  >
+                </div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </main>
 <%- include("ejs/footer.ejs") %>
