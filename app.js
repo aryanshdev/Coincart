@@ -87,7 +87,6 @@ app.get(/^\/login(?:-([\w-]+))?(?:&F=([\w-]+)_([\w-]+))?$/, (req, res) => {
     )
     .then(() => {
       if (!username) {
-        console.log(req.params)
         var noUser = "User Not Found, Please Check Your Email/Username Again and Retry";
         var wrongPass = "Wrong Password, Please Check Your Password and Retry";
         res.render(__dirname + "/login.ejs", {
@@ -483,7 +482,6 @@ app.post("/review::id", (req, res) => {
         ", 1);"
     ).catch((error) => {
       if (error.code === "23505") {
-        console.log(          )
         database.query("UPDATE reviews SET reviews = jsonb_set(reviews::jsonb, '{\"" +
         fullname +
         "\"}', '[\"" +

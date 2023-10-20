@@ -401,9 +401,7 @@ progress {
 }
 
 @media (min-width:576px) {
-    .container {
-        max-width: 540px
-    }
+    
 }
 
 @media (min-width:768px) {
@@ -412,9 +410,14 @@ progress {
     }
 }
 
+@media screen and (min-width: 990px) and (max-width: 1025px) {
+.d-lg-block {
+    min-width: 45%;
+}
+}
 @media (min-width:992px) {
     .container {
-        max-width: 960px
+        max-width: 100%;
     }
 }
 
