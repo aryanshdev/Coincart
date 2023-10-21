@@ -185,6 +185,7 @@ app.get("/register", (req, res) => {
 });
 
 app.get("/product-:id", (req, res) => {
+  app.locals.item_in_cart = item_in_cart;
   var priceValues = [];
   fetch("https://rest.coinapi.io/v1/exchangerate/USD?invert=true&filter_asset_id=bnb;btc;eth;ltc;sol", {
     headers: {
@@ -254,6 +255,7 @@ app.get("/product-:id", (req, res) => {
 });
 
 app.get("/cart", (req, res) => {
+  app.locals.item_in_cart = item_in_cart;
   var priceValues = [];
   fetch("https://rest.coinapi.io/v1/exchangerate/USD?invert=true&filter_asset_id=bnb;btc;eth;ltc;sol", {
     headers: {
@@ -398,6 +400,7 @@ app.post("/login", (req, res) => {
 });
 
 app.get("/contact", (req, res) => {
+  app.locals.item_in_cart = item_in_cart;
   var priceValues = [];
   fetch("https://rest.coinapi.io/v1/exchangerate/USD?invert=true&filter_asset_id=bnb;btc;eth;ltc;sol", {
     headers: {
@@ -540,6 +543,8 @@ app.post("/subscribe-form-footer", (req, res) => {
     .catch((error) => res.send(error));
 });
 app.get("/shop", (req, res) => {
+  
+  app.locals.item_in_cart = item_in_cart;
   var priceValues = [];
   fetch("https://rest.coinapi.io/v1/exchangerate/USD?invert=true&filter_asset_id=bnb;btc;eth;ltc;sol", {
     headers: {
