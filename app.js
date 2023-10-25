@@ -499,9 +499,9 @@ app.post("/review::id", (req, res) => {
         " reviews_made = (SELECT reviews_made FROM reviews WHERE ID = " +
         req.params.id +
         ") + 1" +
-        ", rating = (SELECT CAST(rating_sum AS DECIMAL) / CAST(reviews_made AS DECIMAL) FROM reviews WHERE ID = " +
+        ", rating = CAST((SELECT (CAST(rating_sum AS DECIMAL) + "+req.body.star+")/ (CAST(reviews_made AS DECIMAL) +1) FROM reviews WHERE ID = " +
         req.params.id +
-        ") WHERE ID = " +
+        ") AS DECIMAL) WHERE ID = " +
         req.params.id+";")
       }
     }).finally(
