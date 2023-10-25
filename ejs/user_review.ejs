@@ -2,11 +2,11 @@
   <h4><%= userFullName %></h4>
   <span> <%= date %></span>
   <div>
-    <span class="star <%= userName.replaceAll('.','_').replace('@','_') %>" style="margin: -1%; scale: 0.5"></span>
-    <span class="star <%= userName.replaceAll('.','_').replace('@','_') %>" style="margin: -1%; scale: 0.5"></span>
-    <span class="star <%= userName.replaceAll('.','_').replace('@','_') %>" style="margin: -1%; scale: 0.5"></span>
-    <span class="star <%= userName.replaceAll('.','_').replace('@','_') %>" style="margin: -1%; scale: 0.5"></span>
-    <span class="star <%= userName.replaceAll('.','_').replace('@','_') %>" style="margin: -1%; scale: 0.5"></span>
+    <span class="star <%= userName.toString().replaceAll('.','_').replace('@','_') %>" style="margin: -1%; scale: 0.5"></span>
+    <span class="star <%= userName.toString().replaceAll('.','_').replace('@','_') %>" style="margin: -1%; scale: 0.5"></span>
+    <span class="star <%= userName.toString().replaceAll('.','_').replace('@','_') %>" style="margin: -1%; scale: 0.5"></span>
+    <span class="star <%= userName.toString().replaceAll('.','_').replace('@','_') %>" style="margin: -1%; scale: 0.5"></span>
+    <span class="star <%= userName.toString().replaceAll('.','_').replace('@','_') %>" style="margin: -1%; scale: 0.5"></span>
   </div>
   <p><%= message %></p>
   <button class="<%= deleteButton %>"></button>
