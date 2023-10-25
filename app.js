@@ -486,7 +486,7 @@ app.post("/review::id", (req, res) => {
     ).catch((error) => {
       if (error.code === "23505") {
         database.query("UPDATE reviews SET reviews = jsonb_set(reviews::jsonb, '{\"" +
-        fullname +
+        username +
         "\"}', '[\"" +
         new Date().toISOString() +
         '" , "' +  fullname   + '" , ' +  req.body.star  +
