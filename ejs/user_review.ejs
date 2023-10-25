@@ -2,11 +2,11 @@
   <h4><%= userFullName %></h4>
   <span> <%= date %></span>
   <div>
-    <span class="star <%= userName.toString().replaceAll('.','_').replace('@','_') %>" style="margin: -1%; scale: 0.5"></span>
-    <span class="star <%= userName.toString().replaceAll('.','_').replace('@','_') %>" style="margin: -1%; scale: 0.5"></span>
-    <span class="star <%= userName.toString().replaceAll('.','_').replace('@','_') %>" style="margin: -1%; scale: 0.5"></span>
-    <span class="star <%= userName.toString().replaceAll('.','_').replace('@','_') %>" style="margin: -1%; scale: 0.5"></span>
-    <span class="star <%= userName.toString().replaceAll('.','_').replace('@','_') %>" style="margin: -1%; scale: 0.5"></span>
+    <span class="star <%= userName.replace(/\./g,'_').replace('@','_') %>" style="margin: -1%; scale: 0.5"></span>
+    <span class="star <%= userName.replace(/\./g,'_').replace('@','_') %>" style="margin: -1%; scale: 0.5"></span>
+    <span class="star <%= userName.replace(/\./g,'_').replace('@','_') %>" style="margin: -1%; scale: 0.5"></span>
+    <span class="star <%= userName.replace(/\./g,'_').replace('@','_') %>" style="margin: -1%; scale: 0.5"></span>
+    <span class="star <%= userName.replace(/\./g,'_').replace('@','_') %>" style="margin: -1%; scale: 0.5"></span>
   </div>
   <p><%= message %></p>
   <button class="<%= deleteButton %>"></button>
@@ -30,7 +30,7 @@
   }
 </style>
 <script>
-  var stars = document.querySelectorAll( ".star.<%=userName.toString().replaceAll('.','_').replace('@','_') %>");
+  var stars = document.querySelectorAll( ".star.<%=userName.replace(/\./g,'_').replace('@','_') %>");
     for (let i = 0; i < 5; i++) {
                   if ( i <= <%=  stars_given -1 %> ){
                       stars[i].classList.add("selected")
