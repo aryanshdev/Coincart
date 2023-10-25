@@ -46,11 +46,11 @@
                                         </div>
                                         <div class="review">
                                             <div class="rating">
-                                                <% for (var i = 0; i < productRating; i++) { %>
+                                                <% for (var i = 0; i < parseInt(productRating); i++) { %>
                                                     <i class="fas fa-star"></i>
                                                 <% } %>
                                                 
-                                                <% if (productRating > i) { %>
+                                                <% if (productRating > i) { i++ %>
                                                     <i class="fas fa-star-half-alt"></i>
                                                 <% } %>
                                                 
