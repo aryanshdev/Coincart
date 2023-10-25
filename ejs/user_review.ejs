@@ -30,7 +30,7 @@
   }
 </style>
 <script>
-  var stars = document.querySelectorAll( ".star.<%=userName.replaceAll('.','_').replace('@','_') %>");
+  var stars = document.querySelectorAll( ".star.<%=userName.toString().replaceAll('.','_').replace('@','_') %>");
     for (let i = 0; i < 5; i++) {
                   if ( i <= <%=  stars_given -1 %> ){
                       stars[i].classList.add("selected")
