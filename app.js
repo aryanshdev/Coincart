@@ -3,15 +3,14 @@ const pg = require("pg-promise")();
 const parser = require("body-parser");
 const fetch = require("node-fetch");
 const app = express();
-const session = require('express-session');
+const session = require("express-session");
 
 app.use(parser.urlencoded({ extended: false }));
 app.set("view engine", "ejs");
 
+// COIN MARKET API URL : ADD  BACK WHEN COMMITING
 
-// COIN API URL : ADD  BACK WHEN COMMITING
-
-// https://rest.coinapi.io/v1/exchangerate/USD?invert=true&filter_asset_id=bnb;btc;eth;ltc;sol
+// https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=bnb,btc,eth,ltc,sol
 
 // URL END
 
@@ -28,16 +27,22 @@ app.listen(3001);
 app.get("/", (req, res) => {
   app.locals.item_in_cart = item_in_cart;
   var priceValues = [];
-  fetch("https://rest.coinapi.io/v1/exchangerate/USD?invert=true&filter_asset_id=bnb;btc;eth;ltc;sol", {
-    headers: {
-      "X-CoinAPI-Key": "D1F5B2A4-6DAF-4C46-BB24-08446E6C6BCE",
-    },
-  })
+  fetch(
+    "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=bnb,btc,eth,ltc,sol",
+    {
+      headers: {
+        "X-CMC_PRO_API_KEY": "41d0ca3c-84de-424b-8965-8be6465e9ca7",
+      },
+    }
+  )
     .then((response) => response.json())
     .then((response) => {
-      response.rates.forEach((element) => {
-        priceValues.push(Math.round(element.rate).toString() + " USD");
-      });
+      for (var asset in response.data) {
+        priceValues.push(
+          Math.round(response.data[asset][0].quote.USD.price).toString() +
+            " USD"
+        );
+      }
     })
     .catch(
       (error) =>
@@ -64,16 +69,22 @@ app.get("/", (req, res) => {
 app.get(/^\/login(?:-([\w-]+))?(?:&F=([\w-]+)_([\w-]+))?$/, (req, res) => {
   app.locals.item_in_cart = item_in_cart;
   var priceValues = [];
-  fetch("", {
-    headers: {
-      "X-CoinAPI-Key": "D1F5B2A4-6DAF-4C46-BB24-08446E6C6BCE",
-    },
-  })
+  fetch(
+    "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=bnb,btc,eth,ltc,sol",
+    {
+      headers: {
+        "X-CMC_PRO_API_KEY": "41d0ca3c-84de-424b-8965-8be6465e9ca7",
+      },
+    }
+  )
     .then((response) => response.json())
     .then((response) => {
-      response.rates.forEach((element) => {
-        priceValues.push(Math.round(element.rate).toString() + " USD");
-      });
+      for (var asset in response.data) {
+        priceValues.push(
+          Math.round(response.data[asset][0].quote.USD.price).toString() +
+            " USD"
+        );
+      }
     })
     .catch(
       (error) =>
@@ -87,13 +98,20 @@ app.get(/^\/login(?:-([\w-]+))?(?:&F=([\w-]+)_([\w-]+))?$/, (req, res) => {
     )
     .then(() => {
       if (!username) {
-        var noUser = "User Not Found, Please Check Your Email/Username Again and Retry";
+        var noUser =
+          "User Not Found, Please Check Your Email/Username Again and Retry";
         var wrongPass = "Wrong Password, Please Check Your Password and Retry";
         res.render(__dirname + "/login.ejs", {
           title: "Login | CoinCart",
-          redirect: req.params['0'] || undefined,
-          alertMessage : req.params['1'] ? (req.params['1'] === "U" ? noUser : (req.params['1'] === "P" ? wrongPass : "") ) : null,
-          displayProp : req.params['2'] ?  "block" : "none",
+          redirect: req.params["0"] || undefined,
+          alertMessage: req.params["1"]
+            ? req.params["1"] === "U"
+              ? noUser
+              : req.params["1"] === "P"
+              ? wrongPass
+              : ""
+            : null,
+          displayProp: req.params["2"] ? "block" : "none",
           btcPrice: priceValues[1],
           ethPrice: priceValues[2],
           ltcPrice: priceValues[3],
@@ -108,16 +126,22 @@ app.get(/^\/login(?:-([\w-]+))?(?:&F=([\w-]+)_([\w-]+))?$/, (req, res) => {
 
 app.get("/account", (req, res) => {
   var priceValues = [];
-  fetch("https://rest.coinapi.io/v1/exchangerate/USD?invert=true&filter_asset_id=bnb;btc;eth;ltc;sol", {
-    headers: {
-      "X-CoinAPI-Key": "D1F5B2A4-6DAF-4C46-BB24-08446E6C6BCE",
-    },
-  })
+  fetch(
+    "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=bnb,btc,eth,ltc,sol",
+    {
+      headers: {
+        "X-CMC_PRO_API_KEY": "41d0ca3c-84de-424b-8965-8be6465e9ca7",
+      },
+    }
+  )
     .then((response) => response.json())
     .then((response) => {
-      response.rates.forEach((element) => {
-        priceValues.push(Math.round(element.rate).toString() + " USD");
-      });
+      for (var asset in response.data) {
+        priceValues.push(
+          Math.round(response.data[asset][0].quote.USD.price).toString() +
+            " USD"
+        );
+      }
     })
     .catch(
       (error) =>
@@ -130,36 +154,42 @@ app.get("/account", (req, res) => {
         ])
     )
     .then(() => {
-      if(username !== null){
-      app.locals.item_in_cart = item_in_cart;
-      res.render(__dirname + "/account.ejs", {
-        title: "Your Account | CoinCart",
-        fullName : fullname,
-        userName_EMail : username,
-        btcPrice: priceValues[1],
-        ethPrice: priceValues[2],
-        ltcPrice: priceValues[3],
-        bnbPrice: priceValues[0],
-        solPrice: priceValues[4],
-      });}
-      else{
-        res.redirect('/login');
+      if (username !== null) {
+        app.locals.item_in_cart = item_in_cart;
+        res.render(__dirname + "/account.ejs", {
+          title: "Your Account | CoinCart",
+          fullName: fullname,
+          userName_EMail: username,
+          btcPrice: priceValues[1],
+          ethPrice: priceValues[2],
+          ltcPrice: priceValues[3],
+          bnbPrice: priceValues[0],
+          solPrice: priceValues[4],
+        });
+      } else {
+        res.redirect("/login");
       }
     });
 });
 
 app.get("/register", (req, res) => {
   var priceValues = [];
-  fetch("https://rest.coinapi.io/v1/exchangerate/USD?invert=true&filter_asset_id=bnb;btc;eth;ltc;sol", {
-    headers: {
-      "X-CoinAPI-Key": "D1F5B2A4-6DAF-4C46-BB24-08446E6C6BCE",
-    },
-  })
+  fetch(
+    "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=bnb,btc,eth,ltc,sol",
+    {
+      headers: {
+        "X-CMC_PRO_API_KEY": "41d0ca3c-84de-424b-8965-8be6465e9ca7",
+      },
+    }
+  )
     .then((response) => response.json())
     .then((response) => {
-      response.rates.forEach((element) => {
-        priceValues.push(Math.round(element.rate).toString() + " USD");
-      });
+      for (var asset in response.data) {
+        priceValues.push(
+          Math.round(response.data[asset][0].quote.USD.price).toString() +
+            " USD"
+        );
+      }
     })
     .catch(
       (error) =>
@@ -187,16 +217,22 @@ app.get("/register", (req, res) => {
 app.get("/product-:id", (req, res) => {
   app.locals.item_in_cart = item_in_cart;
   var priceValues = [];
-  fetch("https://rest.coinapi.io/v1/exchangerate/USD?invert=true&filter_asset_id=bnb;btc;eth;ltc;sol", {
-    headers: {
-      "X-CoinAPI-Key": "D1F5B2A4-6DAF-4C46-BB24-08446E6C6BCE",
-    },
-  })
+  fetch(
+    "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=bnb,btc,eth,ltc,sol",
+    {
+      headers: {
+        "X-CMC_PRO_API_KEY": "41d0ca3c-84de-424b-8965-8be6465e9ca7",
+      },
+    }
+  )
     .then((response) => response.json())
     .then((response) => {
-      response.rates.forEach((element) => {
-        priceValues.push(Math.round(element.rate).toString() + " USD");
-      });
+      for (var asset in response.data) {
+        priceValues.push(
+          Math.round(response.data[asset][0].quote.USD.price).toString() +
+            " USD"
+        );
+      }
     })
     .catch(
       (error) =>
@@ -211,7 +247,11 @@ app.get("/product-:id", (req, res) => {
     .then(() => {
       app.locals.item_in_cart = item_in_cart;
       database
-        .query("SELECT * FROM products LEFT JOIN reviews ON products.id = reviews.id WHERE products.id = " + req.params["id"] + ";")
+        .query(
+          "SELECT * FROM products LEFT JOIN reviews ON products.id = reviews.id WHERE products.id = " +
+            req.params["id"] +
+            ";"
+        )
         .then((result) => {
           result = result[0];
           res.render(__dirname + "/ejs/product.ejs", {
@@ -221,10 +261,10 @@ app.get("/product-:id", (req, res) => {
             category: result.product_category,
             productPrice: result.product_price,
             code: result.id,
-            username : username,
-            productRating : result.rating,
-            reviews: result.reviews ,
-            totalReviews : result.reviews_made,
+            username: username,
+            productRating: result.rating,
+            reviews: result.reviews,
+            totalReviews: result.reviews_made,
             description: result.product_description,
             productDetails: result.details_tbl,
             btcPrice: priceValues[1],
@@ -257,16 +297,22 @@ app.get("/product-:id", (req, res) => {
 app.get("/cart", (req, res) => {
   app.locals.item_in_cart = item_in_cart;
   var priceValues = [];
-  fetch("https://rest.coinapi.io/v1/exchangerate/USD?invert=true&filter_asset_id=bnb;btc;eth;ltc;sol", {
-    headers: {
-      "X-CoinAPI-Key": "D1F5B2A4-6DAF-4C46-BB24-08446E6C6BCE",
-    },
-  })
+  fetch(
+    "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=bnb,btc,eth,ltc,sol",
+    {
+      headers: {
+        "X-CMC_PRO_API_KEY": "41d0ca3c-84de-424b-8965-8be6465e9ca7",
+      },
+    }
+  )
     .then((response) => response.json())
     .then((response) => {
-      response.rates.forEach((element) => {
-        priceValues.push(Math.round(element.rate).toString() + " USD");
-      });
+      for (var asset in response.data) {
+        priceValues.push(
+          Math.round(response.data[asset][0].quote.USD.price).toString() +
+            " USD"
+        );
+      }
     })
     .catch(
       (error) =>
@@ -350,7 +396,11 @@ app.get("/cart", (req, res) => {
 
 app.post("/login", (req, res) => {
   database
-    .query("SELECT * FROM users WHERE username = '" + req.body.username.toLowerCase() + "';")
+    .query(
+      "SELECT * FROM users WHERE username = '" +
+        req.body.username.toLowerCase() +
+        "';"
+    )
     .then((result) => {
       if (result[0].password == req.body.password) {
         username = req.body.username.toLowerCase();
@@ -361,16 +411,18 @@ app.post("/login", (req, res) => {
             .split(";").length;
         }
 
-        if (req.body.redirect !== "undefined") {
+        if (req.body.redirect !== "" ) {
           res.redirect("/" + req.body.redirect);
         } else {
           res.redirect("/");
         }
-      }
-      else{
-        if (req.body.redirect !== "undefined") {
+      } else {
+        if (req.body.redirect !== "") {
+          
+          console.log(req.body.redirect)
+          console.log(typeof req.body.redirect)
           res.redirect("/login-" + req.body.redirect + "&F=P_B");
-        } else res.redirect("/login&F=P_B")
+        } else res.redirect("/login&F=P_B");
       }
     })
     .catch((error) => {
@@ -390,11 +442,12 @@ app.post("/login", (req, res) => {
             "<br><h6><a style='color:#ff7f00 'href='/'> Click Here To Return To HomePage </a> </h6>",
         });
       } else if (error instanceof TypeError) {
-        if (req.body.redirect !== "undefined") {
+        if (req.body.redirect !== "" ) {
+          console.log(4545-4545)
           res.redirect("/login-" + req.body.redirect + "&F=U_B");
-        } else res.redirect("/login&F=U_B")
+        } else res.redirect("/login&F=U_B");
       } else {
-        console.log(error)
+        console.log(error);
       }
     });
 });
@@ -402,16 +455,22 @@ app.post("/login", (req, res) => {
 app.get("/contact", (req, res) => {
   app.locals.item_in_cart = item_in_cart;
   var priceValues = [];
-  fetch("https://rest.coinapi.io/v1/exchangerate/USD?invert=true&filter_asset_id=bnb;btc;eth;ltc;sol", {
-    headers: {
-      "X-CoinAPI-Key": "D1F5B2A4-6DAF-4C46-BB24-08446E6C6BCE",
-    },
-  })
+  fetch(
+    "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=bnb,btc,eth,ltc,sol",
+    {
+      headers: {
+        "X-CMC_PRO_API_KEY": "41d0ca3c-84de-424b-8965-8be6465e9ca7",
+      },
+    }
+  )
     .then((response) => response.json())
     .then((response) => {
-      response.rates.forEach((element) => {
-        priceValues.push(Math.round(element.rate).toString() + " USD");
-      });
+      for (var asset in response.data) {
+        priceValues.push(
+          Math.round(response.data[asset][0].quote.USD.price).toString() +
+            " USD"
+        );
+      }
     })
     .catch(
       (error) =>
@@ -475,7 +534,10 @@ app.post("/review::id", (req, res) => {
         username +
         '":["' +
         new Date().toISOString() +
-        '" , "' +  fullname   + '" , ' +  req.body.star  +
+        '" , "' +
+        fullname +
+        '" , ' +
+        req.body.star +
         ' , "' +
         req.body.review_msg +
         "\"]}' ," +
@@ -483,30 +545,40 @@ app.post("/review::id", (req, res) => {
         ", " +
         req.body.star +
         ", 1);"
-    ).catch((error) => {
+    )
+    .catch((error) => {
       if (error.code === "23505") {
-        database.query("UPDATE reviews SET reviews = jsonb_set(reviews::jsonb, '{\"" +
-        username +
-        "\"}', '[\"" +
-        new Date().toISOString() +
-        '" , "' +  fullname   + '" , ' +  req.body.star  +
-        ' , "' +
-        req.body.review_msg +
-        " \"]') , " +
-        "rating_sum = (SELECT rating_sum FROM reviews WHERE ID = " +
-        req.params.id +
-        ") + " + req.body.star+ ", " +
-        " reviews_made = (SELECT reviews_made FROM reviews WHERE ID = " +
-        req.params.id +
-        ") + 1" +
-        ", rating = CAST((SELECT (CAST(rating_sum AS DECIMAL) + "+req.body.star+")/ (CAST(reviews_made AS DECIMAL) +1) FROM reviews WHERE ID = " +
-        req.params.id +
-        ") AS DECIMAL) WHERE ID = " +
-        req.params.id+";")
+        database.query(
+          "UPDATE reviews SET reviews = jsonb_set(reviews::jsonb, '{\"" +
+            username +
+            "\"}', '[\"" +
+            new Date().toISOString() +
+            '" , "' +
+            fullname +
+            '" , ' +
+            req.body.star +
+            ' , "' +
+            req.body.review_msg +
+            " \"]') , " +
+            "rating_sum = (SELECT rating_sum FROM reviews WHERE ID = " +
+            req.params.id +
+            ") + " +
+            req.body.star +
+            ", " +
+            " reviews_made = (SELECT reviews_made FROM reviews WHERE ID = " +
+            req.params.id +
+            ") + 1" +
+            ", rating = CAST((SELECT (CAST(rating_sum AS DECIMAL) + " +
+            req.body.star +
+            ")/ (CAST(reviews_made AS DECIMAL) +1) FROM reviews WHERE ID = " +
+            req.params.id +
+            ") AS DECIMAL) WHERE ID = " +
+            req.params.id +
+            ";"
+        );
       }
-    }).finally(
-      res.redirect("/product-"+req.params.id)
-    );
+    })
+    .finally(res.redirect("/product-" + req.params.id));
 });
 
 app.get("/add-:id", (req, res) => {
@@ -543,19 +615,24 @@ app.post("/subscribe-form-footer", (req, res) => {
     .catch((error) => res.send(error));
 });
 app.get("/shop", (req, res) => {
-  
   app.locals.item_in_cart = item_in_cart;
   var priceValues = [];
-  fetch("https://rest.coinapi.io/v1/exchangerate/USD?invert=true&filter_asset_id=bnb;btc;eth;ltc;sol", {
-    headers: {
-      "X-CoinAPI-Key": "D1F5B2A4-6DAF-4C46-BB24-08446E6C6BCE",
-    },
-  })
+  fetch(
+    "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=bnb,btc,eth,ltc,sol",
+    {
+      headers: {
+        "X-CMC_PRO_API_KEY": "41d0ca3c-84de-424b-8965-8be6465e9ca7",
+      },
+    }
+  )
     .then((response) => response.json())
     .then((response) => {
-      response.rates.forEach((element) => {
-        priceValues.push(Math.round(element.rate).toString() + " USD");
-      });
+      for (var asset in response.data) {
+        priceValues.push(
+          Math.round(response.data[asset][0].quote.USD.price).toString() +
+            " USD"
+        );
+      }
     })
     .catch(
       (error) =>
@@ -601,16 +678,22 @@ app.post("/search", (req, res) => {
 
 app.get("/search&q=:product", (req, res) => {
   var priceValues = [];
-  fetch("https://rest.coinapi.io/v1/exchangerate/USD?invert=true&filter_asset_id=bnb;btc;eth;ltc;sol", {
-    headers: {
-      "X-CoinAPI-Key": "D1F5B2A4-6DAF-4C46-BB24-08446E6C6BCE",
-    },
-  })
+  fetch(
+    "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=bnb,btc,eth,ltc,sol",
+    {
+      headers: {
+        "X-CMC_PRO_API_KEY": "41d0ca3c-84de-424b-8965-8be6465e9ca7",
+      },
+    }
+  )
     .then((response) => response.json())
     .then((response) => {
-      response.rates.forEach((element) => {
-        priceValues.push(Math.round(element.rate).toString() + " USD");
-      });
+      for (var asset in response.data) {
+        priceValues.push(
+          Math.round(response.data[asset][0].quote.USD.price).toString() +
+            " USD"
+        );
+      }
     })
     .catch(
       (error) =>
@@ -656,10 +739,10 @@ app.get("/search&q=:product", (req, res) => {
     });
 });
 
-app.post("/logout", (req,res) => {
-    fullname = null;
-    username = null;
-    item_in_cart = 0;
-    app.locals.item_in_cart = 0;
-    res.redirect("/login");
+app.post("/logout", (req, res) => {
+  fullname = null;
+  username = null;
+  item_in_cart = 0;
+  app.locals.item_in_cart = 0;
+  res.redirect("/login");
 });
