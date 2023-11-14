@@ -1615,6 +1615,106 @@ background-color: white;
   background-size: cover;
 }
 
+
+/* START TOOLTIP STYLES */
+[tooltip] {
+  position: relative; /* opinion 1 */
+}
+
+/* Applies to all tooltips */
+[tooltip]::before,
+[tooltip]::after {
+  text-transform: none; /* opinion 2 */
+  font-size: .9em; /* opinion 3 */
+  line-height: 1;
+  user-select: none;
+  pointer-events: none;
+  position: absolute;
+  display: none;
+  opacity: 0;
+}
+[tooltip]::before {
+  content: '';
+  border: 10px solid transparent; /* opinion 4 */
+  z-index: 1001; /* absurdity 1 */
+}
+[tooltip]::after {
+  content: attr(tooltip); /* Set the tooltip content */
+  width: 200px;
+  text-align: left !important;
+  text-wrap: balance;
+  /* Rest of the styling */
+  font-family: Helvetica, sans-serif;
+  text-align: center;
+  min-width: 3em;
+  max-width: 21em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 1ch 1ch;
+  border-radius: .3ch;
+  border: #ee7700;
+  line-height: 1.5;
+  background: white;
+  font-size: 1rem;
+  color: #ff7f00;
+  z-index: 1000;
+}
+
+
+/* Make the tooltips respond to hover */
+[tooltip]:hover::before,
+[tooltip]:hover::after {
+  display: block;
+}
+
+/* don't show empty tooltips */
+[tooltip='']::before,
+[tooltip='']::after {
+  display: none !important;
+}
+
+
+
+/* FLOW: RIGHT */
+[tooltip]::before {
+  top: 50%;
+  border-left-width: 0;
+  border-right-color: white;
+  right: calc(0em - 10px);
+  transform: translate(.5em, -50%);
+}
+[tooltip]::after {
+  top: 50%;
+  left: calc(100% + 10px);
+  transform: translate(.5em, -50%);
+}
+
+/* KEYFRAMES */
+@keyframes tooltips-vert {
+  to {
+    opacity: .9;
+    transform: translate(-50%, 0);
+  }
+}
+
+@keyframes tooltips-horz {
+  to {
+    opacity: .9;
+    transform: translate(0, -50%);
+  }
+}
+
+/* FX All The Things */ 
+[tooltip]:hover::before,
+[tooltip]:hover::after{
+  animation: tooltips-horz 300ms ease-out forwards;
+}
+
+
+
+
+
+
 @media only screen and (min-width: 576px) and (max-width: 767px) {
   .slider-height2 {
     min-height: 200px;
@@ -1626,6 +1726,7 @@ background-color: white;
     min-height: 200px;
   }
 }
+
 
 .slider-bg1 {
   background-image: url(../img/hero/h1_hero.png);
@@ -2228,14 +2329,41 @@ background-color: white;
   }
 }
 
-@media (max-width: 575px) {
+@media (max-width: 685px) {
   .services-area2 .single-services img {
     width: 100%;
   }
 }
 
+ /* Toltip Responsive */
+@media (max-width: 685px){
+  [tooltip]::before {
+    content: '';
+    border: 10px solid transparent; /* opinion 4 */
+    z-index: 1001; /* absurdity 1 */
+  }
+  [tooltip]::before {
+    top: 100%;
+    border-top-width: 0;
+    border-bottom-color: white;
+  }
+  [tooltip]::after {
+    top: calc(100% + 10px);
+  }
+  [tooltip]::before,
+  [tooltip]::after {
+    left: 50%;
+    transform: translate(-50%, .5em);
+  }
+  [tooltip]:hover::before,
+[tooltip]:hover::after {
+  animation: tooltips-vert 300ms ease-out forwards;
+}
+}
+
 .services-area2 .single-services .features-caption {
   margin-left: 50px;
+  width: 100%;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -2335,6 +2463,7 @@ background-color: white;
 .services-area2 .single-services .features-caption .price span {
   font-weight: 500;
   color: #fff;
+  width: 100%;
   font-size: 32px;
   margin-bottom: 9px;
   display: block;

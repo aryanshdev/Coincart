@@ -40,9 +40,16 @@
                                     </div>
                                     <div class="features-caption">
                                         <h3><%= productName %></h3>
-                                        <p><%= category %></p>
+                                        <a href="/search&q=<%= category %>" ><p><%= category %></p></a>
                                         <div class="price">
-                                            <span><%= productPrice %> USD</span>
+                                            <span><%= productPrice %> USD <span style="display: inline;" tooltip="In BTC : <%= ((1/parseInt(btcPrice))*productPrice).toFixed(7) %> BTC 
+                                                In ETH : <%= ((1/parseInt(ethPrice))*productPrice).toFixed(7) %> ETH 
+                                                In LTC : <%= ((1/parseInt(ltcPrice))*productPrice).toFixed(7) %> LTC 
+                                                In BNB : <%= ((1/parseInt(bnbPrice))*productPrice).toFixed(7) %> BNB 
+                                                In SOL : <%= ((1/parseInt(solPrice))*productPrice).toFixed(7) %> SOL " class="price-exchange"> 
+                                                <img style="margin: auto; width: auto;" src='https://img.icons8.com/ios-filled/ffffff/30/change.png' alt="">
+                                            </span>
+                                        </span>
                                         </div>
                                         <div class="review">
                                             <div class="rating">
@@ -58,7 +65,7 @@
                                                     <i class="fas fa-star-no"></i>
                                                 <% } %>
                                             </div>
-                                            <p>(<%= totalReviews %> Review)</p>
+                                            <p>(<%= totalReviews ? totalReviews : 0 %> Reviews)</p>
                                         </div>
                                         <a href=<%= "/add-"+ code %> style="border:white" class="white-btn mr-10">Add to Cart</a>
                                         <a href="#"  style="padding: 0%;" class="border-btn share-btn"><i class="fas fa-share-alt"></i></a>
