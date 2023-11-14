@@ -68,7 +68,7 @@
                                             <p>(<%= totalReviews ? totalReviews : 0 %> Reviews)</p>
                                         </div>
                                         <a href=<%= "/add-"+ code %> style="border:white" class="white-btn mr-10">Add to Cart</a>
-                                        <a href="#"  style="padding: 0%;" class="border-btn share-btn"><i class="fas fa-share-alt"></i></a>
+                                        <a href="#" id="shareButton" style="vertical-align: super;width: 36px;height: 36px;" class="border-btn share-btn"><i class="fas fa-share-alt"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -203,5 +203,25 @@
                 else stars[i].classList.remove("selected");
             }
        }
+
+
+
+       const shareButton = document.getElementById('shareButton');
+       shareButton.addEventListener('click', function() {
+    if (navigator.share) {
+      // Web Share API is supported
+      navigator.share({
+        title: 'Come Have A Look At This Amazing Product',
+        text: "<%= productName %>",
+        url: window.location.href,
+      })
+      .then(() => console.log('Shared successfully'))
+      .catch((error) => console.error('Error sharing:', error));
+    } else {
+      // Fallback: Show custom share modal
+      shareModal.style.display = 'block';
+    }
+});
+
     </script>
 <%- include("footer.ejs") %>

@@ -1654,7 +1654,7 @@ background-color: white;
   border-radius: .3ch;
   border: #ee7700;
   line-height: 1.5;
-  background: white;
+  background: rgba(255, 255, 255, 1);
   font-size: 1rem;
   color: #ff7f00;
   z-index: 1000;
@@ -2336,7 +2336,7 @@ background-color: white;
 }
 
  /* Toltip Responsive */
-@media (max-width: 685px){
+@media (max-width: 425px){
   [tooltip]::before {
     content: '';
     border: 10px solid transparent; /* opinion 4 */
