@@ -411,16 +411,15 @@ app.post("/login", (req, res) => {
             .split(";").length;
         }
 
-        if (req.body.redirect !== "" ) {
+        if (req.body.redirect !== "") {
           res.redirect("/" + req.body.redirect);
         } else {
           res.redirect("/");
         }
       } else {
         if (req.body.redirect !== "") {
-          
-          console.log(req.body.redirect)
-          console.log(typeof req.body.redirect)
+          console.log(req.body.redirect);
+          console.log(typeof req.body.redirect);
           res.redirect("/login-" + req.body.redirect + "&F=P_B");
         } else res.redirect("/login&F=P_B");
       }
@@ -442,8 +441,8 @@ app.post("/login", (req, res) => {
             "<br><h6><a style='color:#ff7f00 'href='/'> Click Here To Return To HomePage </a> </h6>",
         });
       } else if (error instanceof TypeError) {
-        if (req.body.redirect !== "" ) {
-          console.log(4545-4545)
+        if (req.body.redirect !== "") {
+          console.log(4545 - 4545);
           res.redirect("/login-" + req.body.redirect + "&F=U_B");
         } else res.redirect("/login&F=U_B");
       } else {
@@ -745,4 +744,29 @@ app.post("/logout", (req, res) => {
   item_in_cart = 0;
   app.locals.item_in_cart = 0;
   res.redirect("/login");
+});
+
+app.post("/delrev::id-:star", (req, res) => {
+  database.query(
+    "UPDATE reviews SET reviews = reviews::JSONB - '" +
+      username +
+      "', "+
+     " rating_sum = (SELECT rating_sum FROM reviews WHERE ID = " +
+            req.body.procode +
+            ") - " +
+            req.body.stars +
+            ", " +
+            " reviews_made = (SELECT reviews_made FROM reviews WHERE ID = " +
+            req.body.procode +
+            ") - 1" +
+            ", rating = CAST((SELECT (CAST(rating_sum AS DECIMAL) - " +
+            req.body.stars +
+            ")/ (CAST(reviews_made AS DECIMAL) - 1) FROM reviews WHERE ID = " +
+            req.body.procode +
+            ") AS DECIMAL) WHERE ID = " +
+            req.body.procode +
+            ";"
+            +" WHERE id = " +
+      req.body.procode
+  );
 });

@@ -346,10 +346,13 @@ hr {
   margin: 0% 2.5% 1%;
 }
 
-.showDeleteButton {
-  display: inline;
-  content: url("https://img.icons8.com/ios-filled/48/waste.png");
+.showDeleteButton{
   border: none;
+  background-color: white;
+}
+.showDeleteButton span {
+  content: url("https://img.icons8.com/ios-filled/22/ff7f00/waste.png");
+  display: block;
 }
 .noDeleteButton {
   display: none;
@@ -1095,8 +1098,9 @@ background-color: white;
   padding: 12px 17px !important;
 }
 
-.share-btn i {
-  margin: 0;
+.share-btn img {
+  margin-top: -5px;
+  margin-left:-10px;
 }
 
 .header-area .header-top {

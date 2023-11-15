@@ -68,7 +68,7 @@
                                             <p>(<%= totalReviews ? totalReviews : 0 %> Reviews)</p>
                                         </div>
                                         <a href=<%= "/add-"+ code %> style="border:white" class="white-btn mr-10">Add to Cart</a>
-                                        <a href="#" id="shareButton" style="vertical-align: super;width: 36px;height: 36px;" class="border-btn share-btn"><i class="fas fa-share-alt"></i></a>
+                                        <a href="#" id="shareButton" style="width: 50px;height: 50px;" class="border-btn share-btn"><img src="https://img.icons8.com/fluency-systems-regular/35/ffffff/share-3.png"></a>
                                     </div>
                                 </div>
                             </div>
@@ -157,17 +157,17 @@
                                 
                                
                             </div>
-                            <hr style="border-top: dotted 4px; width: 50%; margin-left: 25%; margin-top: 2%; margin-bottom: 2%; background-color: white;">
+                            <hr style="border-top: dotted 4px; width: 50%; margin-left: 25%; margin-top: 5%; margin-bottom: 5%; background-color: white;">
                         
-                            <div class="offset-xl-1 col-lg-9">
+                            <div class="offset-xl-1 col-lg-9" style="height: auto; max-height: 350px; overflow-y: scroll;">
                                 <%  try { %>
-                                 <%-   include("user_review.ejs" ,{deleteButton:"showDeleteButton", stars_given : reviews[username][2], userName : username, userFullName :  reviews[username][1], date : new Date(reviews[username][0]).toLocaleString() , message: reviews[username][3] }) %>
+                                 <%-   include("user_review.ejs" ,{deleteButton:"showDeleteButton",proCode: code, stars_given : reviews[username][2], userName : username, userFullName :  reviews[username][1], date : new Date(reviews[username][0]).toLocaleString() , message: reviews[username][3] }) %>
                                 <% }  catch(error) { } %>
                                 <% let num = 0 %>
                                 <% for (var i in reviews) { %>
                                     <% if (num < 5){ if ( i !== username) { %>
                                    <% num +=1  %>
-                                    <%- include("user_review.ejs" ,{deleteButton:"noDeleteButton", stars_given : reviews[i][2], userName : i, userFullName :  reviews[i][1], date : new Date(reviews[i][0]).toLocaleString() , message: reviews[i][3] }) %>
+                                    <%- include("user_review.ejs" ,{deleteButton:"noDeleteButton",proCode: code, stars_given : reviews[i][2], userName : i, userFullName :  reviews[i][1], date : new Date(reviews[i][0]).toLocaleString() , message: reviews[i][3] }) %>
                                     <% }}  else { break;} }%>
                        
                             </div>
@@ -181,6 +181,26 @@
         </section>
 
     </main>
+    <style>
+        .review {
+          margin-bottom: 4%;
+          margin-left: 2%;
+        }
+        .review h4 {
+          font-weight: 600;
+          margin-bottom: -0.25%;
+        }
+        .review span {
+          color: grey;
+          font-size: 0.9rem;
+        }
+        .review p {
+          padding-top: 0.75%;
+          line-height: 1;
+        }
+      </style>
+
+      
     <script>
 
         let overlay = document.querySelector("#overlay");

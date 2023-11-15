@@ -9,26 +9,10 @@
     <span class="star <%= userName.replace(/\./g,'_').replace('@','_') %>" style="margin: -1%; scale: 0.5"></span>
   </div>
   <p><%= message %></p>
-  <button class="<%= deleteButton %>"></button>
+  <form method="post" action="/delrev" ><input name="stars" value="stars_given"><input name="procode" value="<%= proCode %>"><button type="submit" class="<%= deleteButton %>"><span></span></button></form>
+  <hr style="border-top: dotted 4px; width: 25%; margin-left: 37.5%; margin-top: 1.5%; margin-bottom: 3%; background-color: white;">
 </div>
 
-<style>
-  .review {
-    margin-bottom: 2.5%;
-  }
-  .review h4 {
-    font-weight: 600;
-    margin-bottom: -0.25%;
-  }
-  .review span {
-    color: grey;
-    font-size: 0.9rem;
-  }
-  .review p {
-    padding-top: 0.75%;
-    line-height: 1;
-  }
-</style>
 <script>
   var stars = document.querySelectorAll( ".star.<%=userName.replace(/\./g,'_').replace('@','_') %>");
     for (let i = 0; i < 5; i++) {
