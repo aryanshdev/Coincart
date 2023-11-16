@@ -9,7 +9,7 @@
     <span class="star <%= userName.replace(/\./g,'_').replace('@','_') %>" style="margin: -1%; scale: 0.5"></span>
   </div>
   <p><%= message %></p>
-  <form method="post" action="/delrev" ><input name="stars" value="stars_given"><input name="procode" value="<%= proCode %>"><button type="submit" class="<%= deleteButton %>"><span></span></button></form>
+  <form method="post" action="/delrev" ><input hidden name="stars" value="<%= stars_given %>"><input hidden name="procode" value="<%= proCode %>"><button type="submit" class="<%= deleteButton %>"><span></span></button></form>
   <hr style="border-top: dotted 4px; width: 25%; margin-left: 37.5%; margin-top: 1.5%; margin-bottom: 3%; background-color: white;">
 </div>
 

@@ -517,7 +517,14 @@ app.post("/register", (req, res) => {
         });
       })
       .catch((error) => {
-        res.send(error);
+        if (error.code == 23505) {
+          res.render(__dirname + "/ejs/info-pg.ejs", {
+            title: "Registeration Success",
+            pageTitle: "Account Already Exists",
+            message:
+              "<br><br><h6><a style='color:#ff7f00 'href='/login'> Click Here </a> To Conitnue To Login or <a style='color:#ff7f00 'href='/register'> Click Here </a> To Create New Account </h6>",
+          });  
+        }
       });
   } else {
     res.sendStatus(400);
@@ -746,27 +753,27 @@ app.post("/logout", (req, res) => {
   res.redirect("/login");
 });
 
-app.post("/delrev::id-:star", (req, res) => {
-  database.query(
-    "UPDATE reviews SET reviews = reviews::JSONB - '" +
-      username +
-      "', "+
-     " rating_sum = (SELECT rating_sum FROM reviews WHERE ID = " +
-            req.body.procode +
-            ") - " +
-            req.body.stars +
-            ", " +
-            " reviews_made = (SELECT reviews_made FROM reviews WHERE ID = " +
-            req.body.procode +
-            ") - 1" +
-            ", rating = CAST((SELECT (CAST(rating_sum AS DECIMAL) - " +
-            req.body.stars +
-            ")/ (CAST(reviews_made AS DECIMAL) - 1) FROM reviews WHERE ID = " +
-            req.body.procode +
-            ") AS DECIMAL) WHERE ID = " +
-            req.body.procode +
-            ";"
-            +" WHERE id = " +
-      req.body.procode
-  );
+app.post("/delrev", (req, res) => {
+  database
+    .query(
+      "UPDATE reviews SET reviews = reviews::JSONB - '" +
+        username +
+        "', " +
+        " rating_sum = (SELECT rating_sum FROM reviews WHERE ID = " +
+        req.body.procode +
+        ") - " +
+        req.body.stars +
+        ", " +
+        " reviews_made = (SELECT reviews_made FROM reviews WHERE ID = " +
+        req.body.procode +
+        ") - 1" +
+        ", rating =  CASE WHEN reviews_made > 1 THEN CAST((SELECT (CAST(rating_sum AS DECIMAL) - " +
+        req.body.stars +
+        ")/ (CAST(reviews_made AS DECIMAL) - 1) FROM reviews WHERE ID = " +
+        req.body.procode +
+        ") AS DECIMAL) ELSE 0 END WHERE ID = " +
+        req.body.procode +
+        ";"
+    )
+    .then(res.redirect("/product-" + req.body.procode));
 });
