@@ -2645,9 +2645,11 @@ background-color: white;
   left: 0;
   right: 0;
   margin: 0 auto;
+  width: 75%;
+  max-width:  200px;
   opacity: 0;
   visibility: hidden;
-  bottom: 20px;
+  bottom: 10px;
   text-align: center;
 }
 
@@ -2656,6 +2658,7 @@ background-color: white;
   -moz-transition: all 0.5s ease-out 0s;
   -ms-transition: all 0.5s ease-out 0s;
   -o-transition: all 0.5s ease-out 0s;
+  width: 50% !important;
   transition: all 0.5s ease-out 0s;
   background: #fff;
   color: #292621;
@@ -2671,6 +2674,18 @@ background-color: white;
 .latest-items .properties .properties-card .properties-img .socal_icon a:hover {
   background: #ff7f00;
   color: #fff;
+}
+
+.latest-items .properties .properties-card .properties-img .socal_icon a svg {
+  fill: #ff7f00;
+  width: 70%;
+  height: 75%;
+  transition: all 0.3s ease-out 0s;
+  vertical-align: sub;
+}
+
+.latest-items .properties .properties-card .properties-img .socal_icon a:hover svg{
+  fill: #fff;
 }
 
 .latest-items .properties .properties-card .properties-caption {
