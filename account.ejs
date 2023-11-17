@@ -116,7 +116,7 @@
 
 <% var addLen = Object.keys(addresses).length; if (addLen == 0) {  %>
     <p>No addresses added.</p>
-    <button class="btn">Add Address</button>
+    <button class="btn" onclick="addAddressForm()" id="address_input_btn" style="margin: 0;">Add Address</button>
 <% } else { %>
     <table class="addTable">
         <% for (var i in addresses) { %>

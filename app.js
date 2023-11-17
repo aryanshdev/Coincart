@@ -843,9 +843,9 @@ app.post("/addNewAddress", (req, res) => {
   database.query(
     "UPDATE users SET addresses = jsonb_set(addresses::jsonb,'{" +
       req.body.addressName +
-      "}','" +
+      "}', '\"" +
       value +
-      "') WHERE username = '" +
+      "\"', true) WHERE username = '" +
       req.session.userName +
       "';"
   ).then(res.redirect("/account"));
