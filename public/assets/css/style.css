@@ -3193,26 +3193,46 @@ background-color: white;
   display: block;
 }
 
-.tab-content table {
+.tab-content table.desctable {
   border: 2px solid #000000;
   width: 80%;
   text-align: left;
   font-size: 16px;
   border-collapse: collapse;
 }
-.tab-content table td {
+.tab-content table.desctable td {
   border: 1px solid #000;
   padding: 1%;
 }
-.tab-content table td:nth-child(1) {
+.tab-content table.desctable td:nth-child(1) {
   width: 50%;
   font-weight: 600;
   background: #cfcfcf;
 }
-.tab-content table td:nth-child(2) {
+.tab-content table.desctable td:nth-child(2) {
   width: 50%;
 }
 
+table.addTable{
+  border: 2px solid #000000;
+width: 100%
+}
+.tab-content table.addTable td {
+border: 1px solid #000;
+padding: 1%;
+}
+.tab-content table.addTable td:nth-child(1) {
+width: 25%;
+font-weight: 600;
+background: #cfcfcf;
+}
+.tab-content table.addTable td:nth-child(2) {
+width: 70%;
+}
+.tab-content table.addTable td:nth-child(3) {
+  padding: 0;
+  }
+  
 .category-listing .single-listing .select-job-items2 .nice-select:focus {
   border-color: #eee1e0;
 }

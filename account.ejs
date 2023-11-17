@@ -22,9 +22,10 @@
       </div>
     </div>
   </div>
+
   <div class="container pb-50 pt-50">
     <div class="row">
-      <div class="col-lg-3 col-md-4 col-sm-12">
+      <div class="col-lg-3 col-md-3 col-sm-12">
         <div class="text-center card-box">
           <div class="member-card">
             <div class="thumb-xl member-thumb m-b-10 center-block">
@@ -45,62 +46,228 @@
           </div>
         </div>
       </div>
-
-      <div class="col-lg-9 col-md-4 col-sm-12">
-        <div class="container">
-          <div class="offset-xl-1 col-xl-10">
-            <div class="nav-button f-left">
-              <nav>
-                <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                  <a
-                    class="nav-link active"
-                    id="nav-one-tab"
-                    data-bs-toggle="tab"
-                    href="#nav-one"
-                    role="tab"
-                    aria-controls="nav-one"
-                    aria-selected="true"
-                    >Details</a
-                  >
-                  <a
-                    class="nav-link"
-                    id="nav-two-tab"
-                    data-bs-toggle="tab"
-                    href="#nav-two"
-                    role="tab"
-                    aria-controls="nav-two"
-                    aria-selected="false"
-                    >Details</a
-                  >
-                  <a
-                    class="nav-link"
-                    id="nav-three-tab"
-                    data-bs-toggle="tab"
-                    name="#nav-three"
-                    href="#nav-three"
-                    role="tab"
-                    aria-controls="nav-three"
-                    aria-selected="false"
-                    >Reviews</a
-                  >
-                  <a
-                    class="nav-link"
-                    id="nav-three-tab"
-                    data-bs-toggle="tab"
-                    name="#nav-three"
-                    href="#nav-three"
-                    role="tab"
-                    aria-controls="nav-three"
-                    aria-selected="false"
-                    >Account actions</a
-                  >
+      <div class="col-lg-9 col-md-9 col-sm-12">
+          <section class="row">
+            <div class="container col-lg-12 col-md-12 col-sm-12">
+              <div class="offset-xl-1 col-xl-10">
+                <div class="nav-button f-left col-12">
+                  <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                      <a
+                        class="nav-link active"
+                        id="nav-one-tab"
+                        data-bs-toggle="tab"
+                        href="#nav-one"
+                        role="tab"
+                        aria-controls="nav-one"
+                        aria-selected="true"
+                        >Details</a
+                      >
+                      <a
+                        class="nav-link"
+                        id="nav-two-tab"
+                        data-bs-toggle="tab"
+                        href="#nav-two"
+                        role="tab"
+                        aria-controls="nav-two"
+                        aria-selected="false"
+                        >Orders</a
+                      >
+                      <a
+                        class="nav-link"
+                        id="nav-three-tab"
+                        data-bs-toggle="tab"
+                        name="#nav-three"
+                        href="#nav-three"
+                        role="tab"
+                        aria-controls="nav-three"
+                        aria-selected="false"
+                        >TEST</a
+                      >
+                      <a
+                        class="nav-link"
+                        id="nav-three-tab"
+                        data-bs-toggle="tab"
+                        name="#nav-three"
+                        href="#nav-four"
+                        role="tab"
+                        aria-controls="nav-four"
+                        aria-selected="false"
+                        >Account actions</a
+                      >
+                    </div>
+                  </nav>
                 </div>
-              </nav>
+              </div>
             </div>
-          </div>
-        </div>
+            <div class="container col-12">
+              <div class="tab-content" id="nav-tabContent">
+                <div
+                  class="tab-pane fade show active"
+                  id="nav-one"
+                  role="tabpanel"
+                  aria-labelledby="nav-one-tab"
+                >
+                  <div class="row">
+                    <div class="offset-xl-1 col-10">
+                      <p>
+                        
+                        <h4>Saved Addresses</h4>
+
+<% var addLen = Object.keys(addresses).length; if (addLen == 0) {  %>
+    <p>No addresses added.</p>
+    <button class="btn">Add Address</button>
+<% } else { %>
+    <table class="addTable">
+        <% for (var i in addresses) { %>
+            <tr>
+                <td><%= i %></td>
+                <td><%= addresses[i] %></td>
+                <td>
+                    <form method="post" action="/delAdd<%= i %>">
+                        <button type="submit" class="showDeleteButton"><span></span></button>
+                    </form>
+                </td>
+            </tr>
+        <% } %>
+    </table>
+
+    <% if (addLen < 5) { %>
+        <button class="btn" onclick="addAddressForm()" id="address_input_btn">Add Another</button>
+    <% } %>
+<% } %>
+
+<div>
+  <form action="/addNewAddress" method="post" class="pt-30" id="address_input_form">
+    <h5>Add New Address</h5>
+    <div class="row">
+      <div class="col-12 col-md-6 col-lg-6">
+        <input class="form-control valid" style="display: inline; margin-bottom: 2.5%;" type="text" name="fullName" placeholder="Full Name" required>
+      </div>
+      <div class="col-12 col-md-6 col-lg-6">
+        <input class="form-control valid" style="display: inline; margin-bottom: 2.5%;" type="tel" name="phoneNum" placeholder="Phone Number" required>
+      </div>
+
+      <div class="col-12 col-md-4 col-lg-4">
+        <input class="form-control valid" style="display: inline; margin-bottom: 2.5%;" type="text" onblur="checkIn(this)" name="addressName" placeholder="Address For (eg. Home)" required>
+      </div>
+    <div class="col-12 col-md-8 col-lg-8">
+      <input class="form-control valid" style="display: inline; margin-bottom: 2.5%;" type="text" name="address" placeholder="Your Address" required>
+    </div>
+    
+    <div class="col-12 col-md-4 col-lg-4">
+      <input class="form-control valid" style="display: inline; margin-bottom: 2.5%;" type="text" name="state" placeholder="Your State" required>
+    </div>
+    <div class="col-12 col-md-4 col-lg-4">
+      <input class="form-control valid" style="display: inline; margin-bottom: 2.5%;" type="text" name="country" placeholder="Your Country" required>
+    </div>
+    <div class="col-12 col-md-4 col-lg-4">
+      <input class="form-control valid" style="display: inline; margin-bottom: 2.5%;" type="text" name="pin" placeholder="ZIP/PIN Code" required>
+    </div>
+  </div>
+  <button type="submit" class="btn">Save Address</button>
+  </form>
+</div>
+
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="tab-pane fade"
+                  id="nav-two"
+                  role="tabpanel"
+                  aria-labelledby="nav-two-tab"
+                >
+                  <div class="row">
+                    <div class="offset-xl-1 col-lg-9">
+                      <table>
+                        rghfgh
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="tab-pane fade"
+                  id="nav-three"
+                  role="tabpanel"
+                  aria-labelledby="nav-three-tab"
+                >
+                  <div class="row">
+                    <div class="offset-xl-1 col-lg-9"></div>
+                    <hr
+                      style="
+                        border-top: dotted 4px;
+                        width: 50%;
+                        margin-left: 25%;
+                        margin-top: 5%;
+                        margin-bottom: 5%;
+                        background-color: white;
+                      "
+                    />
+    
+                    <div
+                      class="offset-xl-1 col-lg-9"
+                      style="height: auto; max-height: 350px; overflow-y: scroll"
+                    >
+                      dfgdfgdfgdf
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="tab-pane fade"
+                  id="nav-four"
+                  role="tabpanel"
+                  aria-labelledby="nav-four-tab"
+                >
+                  <div class="row">
+                    <div class="offset-xl-1 col-lg-9"></div>
+                    <hr
+                      style="
+                        border-top: dotted 4px;
+                        width: 50%;
+                        margin-left: 25%;
+                        margin-top: 5%;
+                        margin-bottom: 5%;
+                        background-color: white;
+                      "
+                    />
+    
+                    <div
+                      class="offset-xl-1 col-lg-9"
+                      style="height: auto; max-height: 350px; overflow-y: scroll"
+                    >
+                      dfgd4564564565fgdfgdf
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </section>
       </div>
     </div>
   </div>
 </main>
+
+<script>
+  function addAddressForm() {
+    document.getElementById("address_input_btn").setAttribute("disabled", "true");
+    document.getElementById("address_input_form").style.display = 'block';    
+  }
+  function checkIn(field) {
+    if ( Object.keys(JSON.parse('<%- unescape(JSON.stringify(addresses)) %>')).includes(field.value)){
+          field.value = "";
+          field.placeholder = "Should Be Unique For An Address"
+        }
+  }
+</script>
+<style>
+  #address_input_form{
+    display: none;
+  }
+  #address_input_btn{
+    margin: 15px;
+  }
+</style>
 <%- include("ejs/footer.ejs") %>

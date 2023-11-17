@@ -7,10 +7,10 @@ const app = express();
 
 app.use(
   session({
-    secret: "COINCART_TEST",
+    secret: "CoinCart_Encryption_Key",
     resave: false,
     saveUninitialized: true,
-    cookie:{maxAge: 600000}
+    cookie: { maxAge: 600000 },
   })
 );
 
@@ -164,17 +164,27 @@ app.get("/account", (req, res) => {
     )
     .then(() => {
       if (req.session.userName) {
-        res.render(__dirname + "/account.ejs", {
-          title: "Your Account | CoinCart",
-          item_in_cart: req.session.itemInCart ? req.session.itemInCart : 0,
-          fullName: req.session.fullName,
-          userName_EMail: req.session.userName,
-          btcPrice: priceValues[1],
-          ethPrice: priceValues[2],
-          ltcPrice: priceValues[3],
-          bnbPrice: priceValues[0],
-          solPrice: priceValues[4],
-        });
+        database
+          .query(
+            "SELECT * FROM users WHERE username = '" +
+              req.session.userName +
+              "';"
+          )
+          .then((result) => {
+            result = result[0];
+            res.render(__dirname + "/account.ejs", {
+              title: "Your Account | CoinCart",
+              item_in_cart: req.session.itemInCart ? req.session.itemInCart : 0,
+              fullName: req.session.fullName,
+              userName_EMail: req.session.userName,
+              addresses: result.addresses,
+              btcPrice: priceValues[1],
+              ethPrice: priceValues[2],
+              ltcPrice: priceValues[3],
+              bnbPrice: priceValues[0],
+              solPrice: priceValues[4],
+            });
+          });
       } else {
         res.redirect("/login");
       }
@@ -799,4 +809,44 @@ app.post("/delrev", (req, res) => {
         ";"
     )
     .then(res.redirect("/product-" + req.body.procode));
+});
+
+app.post("/delAdd:adderKey", (req, res) => {
+  if (req.session.userName) {
+    database
+      .query(
+        "UPDATE users SET addresses = addresses::JSONB - '" +
+          req.params.adderKey +
+          "' WHERE username = '" +
+          req.session.userName +
+          "';"
+      )
+      .then(res.redirect("/account"));
+  } else {
+    res.redirect("/login");
+  }
+});
+
+app.post("/addNewAddress", (req, res) => {
+  var value =
+    req.body.fullName +
+    "|" +
+    req.body.phoneNum +
+    "|" +
+    req.body.address +
+    ", " +
+    req.body.state +
+    ", " +
+    req.body.country +
+    " - " +
+    req.body.pin;
+  database.query(
+    "UPDATE users SET addresses = jsonb_set(addresses::jsonb,'{" +
+      req.body.addressName +
+      "}','" +
+      value +
+      "') WHERE username = '" +
+      req.session.userName +
+      "';"
+  ).then(res.redirect("/account"));
 });
