@@ -163,7 +163,7 @@ app.get("/account", (req, res) => {
         ])
     )
     .then(() => {
-      if (!req.session.userName) {
+      if (req.session.userName) {
         res.render(__dirname + "/account.ejs", {
           title: "Your Account | CoinCart",
           item_in_cart: req.session.itemInCart ? req.session.itemInCart : 0,
