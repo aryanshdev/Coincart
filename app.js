@@ -5,11 +5,14 @@ const fetch = require("node-fetch");
 const session = require("express-session");
 const app = express();
 
-app.use(session({
-  secret: 'COINCART_TEST',
-  resave: false,
-  saveUninitialized: true,
-}));
+app.use(
+  session({
+    secret: "COINCART_TEST",
+    resave: false,
+    saveUninitialized: true,
+    cookie:{maxAge: 600000}
+  })
+);
 
 app.use(parser.urlencoded({ extended: false }));
 app.set("view engine", "ejs");
@@ -24,15 +27,13 @@ const connectionURL =
   "postgresql://retool:69xhVYmQuste@ep-morning-cherry-23207962.us-west-2.retooldb.com/retool?sslmode=require";
 const database = pg(connectionURL);
 
-let item_in_cart = 0;
-let username = null;
-let fullname = null;
+// let item_in_cart = 0;
+// let req.session.userName= null;
+// let req.session.fullName= null;
 app.use(express.static(__dirname + "/public"));
 app.listen(3001);
 
 app.get("/", (req, res) => {
-  console.log('User session:', req.session);
-  app.locals.item_in_cart = item_in_cart;
   var priceValues = [];
   fetch(
     "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=bnb,btc,eth,ltc,sol",
@@ -63,6 +64,7 @@ app.get("/", (req, res) => {
     )
     .then(() => {
       res.render(__dirname + "/index.ejs", {
+        item_in_cart: req.session.itemInCart ? req.session.itemInCart : 0,
         title: "CoinCart | Crypto Based Marketplace",
         btcPrice: priceValues[1],
         ethPrice: priceValues[2],
@@ -74,7 +76,6 @@ app.get("/", (req, res) => {
 });
 
 app.get(/^\/login(?:-([\w-]+))?(?:&F=([\w-]+)_([\w-]+))?$/, (req, res) => {
-  app.locals.item_in_cart = item_in_cart;
   var priceValues = [];
   fetch(
     "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=bnb,btc,eth,ltc,sol",
@@ -104,12 +105,13 @@ app.get(/^\/login(?:-([\w-]+))?(?:&F=([\w-]+)_([\w-]+))?$/, (req, res) => {
         ])
     )
     .then(() => {
-      if (!username) {
+      if (!req.session.userName) {
         var noUser =
           "User Not Found, Please Check Your Email/Username Again and Retry";
         var wrongPass = "Wrong Password, Please Check Your Password and Retry";
         res.render(__dirname + "/login.ejs", {
           title: "Login | CoinCart",
+          item_in_cart: req.session.itemInCart ? req.session.itemInCart : 0,
           redirect: req.params["0"] || undefined,
           alertMessage: req.params["1"]
             ? req.params["1"] === "U"
@@ -161,12 +163,12 @@ app.get("/account", (req, res) => {
         ])
     )
     .then(() => {
-      if (username !== null) {
-        app.locals.item_in_cart = item_in_cart;
+      if (!req.session.userName) {
         res.render(__dirname + "/account.ejs", {
           title: "Your Account | CoinCart",
-          fullName: fullname,
-          userName_EMail: username,
+          item_in_cart: req.session.itemInCart ? req.session.itemInCart : 0,
+          fullName: req.session.fullName,
+          userName_EMail: req.session.userName,
           btcPrice: priceValues[1],
           ethPrice: priceValues[2],
           ltcPrice: priceValues[3],
@@ -209,9 +211,10 @@ app.get("/register", (req, res) => {
         ])
     )
     .then(() => {
-      app.locals.item_in_cart = item_in_cart;
       res.render(__dirname + "/register.ejs", {
         title: "Register | CoinCart",
+
+        item_in_cart: req.session.itemInCart ? req.session.itemInCart : 0,
         btcPrice: priceValues[1],
         ethPrice: priceValues[2],
         ltcPrice: priceValues[3],
@@ -222,7 +225,6 @@ app.get("/register", (req, res) => {
 });
 
 app.get("/product-:id", (req, res) => {
-  app.locals.item_in_cart = item_in_cart;
   var priceValues = [];
   fetch(
     "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=bnb,btc,eth,ltc,sol",
@@ -252,7 +254,6 @@ app.get("/product-:id", (req, res) => {
         ])
     )
     .then(() => {
-      app.locals.item_in_cart = item_in_cart;
       database
         .query(
           "SELECT * FROM products LEFT JOIN reviews ON products.id = reviews.id WHERE products.id = " +
@@ -262,13 +263,14 @@ app.get("/product-:id", (req, res) => {
         .then((result) => {
           result = result[0];
           res.render(__dirname + "/ejs/product.ejs", {
+            item_in_cart: req.session.itemInCart ? req.session.itemInCart : 0,
             title: result.product_name,
             productName: result.product_name,
             productImage: result.product_img,
             category: result.product_category,
             productPrice: result.product_price,
             code: result.id,
-            username: username,
+            username: req.session.userName,
             productRating: result.rating,
             reviews: result.reviews,
             totalReviews: result.reviews_made,
@@ -302,7 +304,6 @@ app.get("/product-:id", (req, res) => {
 });
 
 app.get("/cart", (req, res) => {
-  app.locals.item_in_cart = item_in_cart;
   var priceValues = [];
   fetch(
     "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=bnb,btc,eth,ltc,sol",
@@ -332,11 +333,15 @@ app.get("/cart", (req, res) => {
         ])
     )
     .then(() => {
-      if (username != null) {
+      if (req.session.userName != null) {
         //User Logged-In
         var cartProducts = [];
         database
-          .query("SELECT cart FROM users WHERE username = '" + username + "';")
+          .query(
+            "SELECT cart FROM users WHERE req.session.userName= '" +
+              req.session.userName +
+              "';"
+          )
           .then((result) => {
             if (result[0].cart !== null) {
               //User Logged-In, Cart Not Empty
@@ -359,8 +364,12 @@ app.get("/cart", (req, res) => {
               return Promise.all(promises).then((cartProducts) => {
                 res.render(__dirname + "/cart.ejs", {
                   title: "Cart",
+
+                  item_in_cart: req.session.itemInCart
+                    ? req.session.itemInCart
+                    : 0,
                   productsInCart: cartProducts,
-                  name: fullname,
+                  name: req.session.fullName,
                   btcPrice: priceValues[1],
                   ethPrice: priceValues[2],
                   ltcPrice: priceValues[3],
@@ -372,8 +381,12 @@ app.get("/cart", (req, res) => {
               //User Logged-In, Cart Empty
               res.render(__dirname + "/cart.ejs", {
                 title: "Cart",
+
+                item_in_cart: req.session.itemInCart
+                  ? req.session.itemInCart
+                  : 0,
                 productsInCart: [],
-                name: fullname,
+                name: req.session.fullName,
                 btcPrice: priceValues[1],
                 ethPrice: priceValues[2],
                 ltcPrice: priceValues[3],
@@ -389,6 +402,8 @@ app.get("/cart", (req, res) => {
         //User Not Logged-In
         res.render(__dirname + "/cart.ejs", {
           title: "Cart",
+
+          item_in_cart: req.session.itemInCart ? req.session.itemInCart : 0,
           productsInCart: [],
           name: "",
           btcPrice: priceValues[1],
@@ -404,22 +419,21 @@ app.get("/cart", (req, res) => {
 app.post("/login", (req, res) => {
   database
     .query(
-      "SELECT * FROM users WHERE username = '" +
+      "SELECT * FROM users WHERE username= '" +
         req.body.username.toLowerCase() +
         "';"
     )
     .then((result) => {
       if (result[0].password == req.body.password) {
-        username = req.body.username.toLowerCase();
-        fullname = result[0].name;
-        req.session.username = username;
-        console.log('User session:', req.session);
+        req.session.userName = req.body.username.toLowerCase();
+        req.session.fullName = result[0].name;
+        console.log("User session:", req.session);
         if (result[0].cart !== null) {
-          app.locals.item_in_cart = item_in_cart = result[0].cart
+          req.session.itemInCart = result[0].cart
             .slice(0, -1)
             .split(";").length;
         }
-
+        req.session.save();
         if (req.body.redirect !== "") {
           res.redirect("/" + req.body.redirect);
         } else {
@@ -451,7 +465,6 @@ app.post("/login", (req, res) => {
         });
       } else if (error instanceof TypeError) {
         if (req.body.redirect !== "") {
-          console.log(4545 - 4545);
           res.redirect("/login-" + req.body.redirect + "&F=U_B");
         } else res.redirect("/login&F=U_B");
       } else {
@@ -461,7 +474,6 @@ app.post("/login", (req, res) => {
 });
 
 app.get("/contact", (req, res) => {
-  app.locals.item_in_cart = item_in_cart;
   var priceValues = [];
   fetch(
     "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=bnb,btc,eth,ltc,sol",
@@ -493,6 +505,8 @@ app.get("/contact", (req, res) => {
     .then(() => {
       res.render(__dirname + "/contact.ejs", {
         title: "Contact | CoinCart",
+
+        item_in_cart: req.session.itemInCart ? req.session.itemInCart : 0,
         btcPrice: priceValues[1],
         ethPrice: priceValues[2],
         ltcPrice: priceValues[3],
@@ -532,7 +546,7 @@ app.post("/register", (req, res) => {
             pageTitle: "Account Already Exists",
             message:
               "<br><br><h6><a style='color:#ff7f00 'href='/login'> Click Here </a> To Conitnue To Login or <a style='color:#ff7f00 'href='/register'> Click Here </a> To Create New Account </h6>",
-          });  
+          });
         }
       });
   } else {
@@ -546,11 +560,11 @@ app.post("/review::id", (req, res) => {
       "INSERT INTO reviews (id,reviews,rating_sum,rating,reviews_made) VALUES ('" +
         req.params.id +
         "','{\"" +
-        username +
+        req.session.userName +
         '":["' +
         new Date().toISOString() +
         '" , "' +
-        fullname +
+        req.session.fullName +
         '" , ' +
         req.body.star +
         ' , "' +
@@ -565,11 +579,11 @@ app.post("/review::id", (req, res) => {
       if (error.code === "23505") {
         database.query(
           "UPDATE reviews SET reviews = jsonb_set(reviews::jsonb, '{\"" +
-            username +
+            req.session.userName +
             "\"}', '[\"" +
             new Date().toISOString() +
             '" , "' +
-            fullname +
+            req.session.fullName +
             '" , ' +
             req.body.star +
             ' , "' +
@@ -597,17 +611,17 @@ app.post("/review::id", (req, res) => {
 });
 
 app.get("/add-:id", (req, res) => {
-  if (username) {
+  if (req.body.userName) {
     database
       .query(
         "UPDATE users SET cart = concat(cart , '" +
           req.params["id"] +
-          "', ',1;') WHERE username = '" +
-          username +
+          "', ',1;') WHERE req.session.userName= '" +
+          req.session.userName +
           "';"
       )
       .then(() => {
-        item_in_cart += 1;
+        req.session.itemInCart += 1;
         res.redirect("/product-" + req.params["id"]);
       })
       .catch((error) => res.send(error));
@@ -630,7 +644,6 @@ app.post("/subscribe-form-footer", (req, res) => {
     .catch((error) => res.send(error));
 });
 app.get("/shop", (req, res) => {
-  app.locals.item_in_cart = item_in_cart;
   var priceValues = [];
   fetch(
     "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=bnb,btc,eth,ltc,sol",
@@ -665,6 +678,8 @@ app.get("/shop", (req, res) => {
         .then((result) => {
           res.render(__dirname + "/ejs/shop.ejs", {
             title: "Shop | CoinCart",
+
+            item_in_cart: req.session.itemInCart ? req.session.itemInCart : 0,
             products: result,
             pageName: "Shop",
             btcPrice: priceValues[1],
@@ -732,6 +747,8 @@ app.get("/search&q=:product", (req, res) => {
         .then((result) => {
           res.render(__dirname + "/ejs/shop.ejs", {
             title: "Your Searched For " + req.params.product,
+
+            item_in_cart: req.session.itemInCart ? req.session.itemInCart : 0,
             products: result,
             pageName: req.params.product,
             btcPrice: priceValues[1],
@@ -755,10 +772,7 @@ app.get("/search&q=:product", (req, res) => {
 });
 
 app.post("/logout", (req, res) => {
-  fullname = null;
-  username = null;
-  item_in_cart = 0;
-  app.locals.item_in_cart = 0;
+  req.session.destroy();
   res.redirect("/login");
 });
 
@@ -766,7 +780,7 @@ app.post("/delrev", (req, res) => {
   database
     .query(
       "UPDATE reviews SET reviews = reviews::JSONB - '" +
-        username +
+        req.session.userName +
         "', " +
         " rating_sum = (SELECT rating_sum FROM reviews WHERE ID = " +
         req.body.procode +
