@@ -2,8 +2,14 @@ const express = require("express");
 const pg = require("pg-promise")();
 const parser = require("body-parser");
 const fetch = require("node-fetch");
-const app = express();
 const session = require("express-session");
+const app = express();
+
+app.use(session({
+  secret: 'COINCART_TEST',
+  resave: false,
+  saveUninitialized: true,
+}));
 
 app.use(parser.urlencoded({ extended: false }));
 app.set("view engine", "ejs");
@@ -25,6 +31,7 @@ app.use(express.static(__dirname + "/public"));
 app.listen(3001);
 
 app.get("/", (req, res) => {
+  console.log('User session:', req.session);
   app.locals.item_in_cart = item_in_cart;
   var priceValues = [];
   fetch(
@@ -405,6 +412,8 @@ app.post("/login", (req, res) => {
       if (result[0].password == req.body.password) {
         username = req.body.username.toLowerCase();
         fullname = result[0].name;
+        req.session.username = username;
+        console.log('User session:', req.session);
         if (result[0].cart !== null) {
           app.locals.item_in_cart = item_in_cart = result[0].cart
             .slice(0, -1)
