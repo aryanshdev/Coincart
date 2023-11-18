@@ -10,7 +10,7 @@ app.use(
     secret: "CoinCart_Encryption_Key",
     resave: false,
     saveUninitialized: true,
-    cookie: { maxAge: 600000 },
+    // cookie: { maxAge: 600000 },
   })
 );
 
@@ -348,7 +348,7 @@ app.get("/cart", (req, res) => {
         var cartProducts = [];
         database
           .query(
-            "SELECT cart FROM users WHERE req.session.userName= '" +
+            "SELECT cart FROM users WHERE username= '" +
               req.session.userName +
               "';"
           )
@@ -437,7 +437,6 @@ app.post("/login", (req, res) => {
       if (result[0].password == req.body.password) {
         req.session.userName = req.body.username.toLowerCase();
         req.session.fullName = result[0].name;
-        console.log("User session:", req.session);
         if (result[0].cart !== null) {
           req.session.itemInCart = result[0].cart
             .slice(0, -1)
@@ -621,12 +620,12 @@ app.post("/review::id", (req, res) => {
 });
 
 app.get("/add-:id", (req, res) => {
-  if (req.body.userName) {
+  if (req.session.userName) {
     database
       .query(
         "UPDATE users SET cart = concat(cart , '" +
           req.params["id"] +
-          "', ',1;') WHERE req.session.userName= '" +
+          "', ',1;') WHERE username = '" +
           req.session.userName +
           "';"
       )
@@ -850,3 +849,19 @@ app.post("/addNewAddress", (req, res) => {
       "';"
   ).then(res.redirect("/account"));
 });
+
+app.post("/changepass", (req,res)=>{
+  if(req.session.userName){
+    database.query("SELECT password FROM users WHERE username = '"+req.session.userName+"';").then((result)=>{
+      if(result[0].password == req.body.currentPass && req.body.conPass1 == req.body.conPass2){
+        database.query("UPDATE users SET password = '"+req.body.conPass1+"' WHERE username = '"+req.session.userName+"';").then(
+          req.session.destroy(),
+          res.redirect("/login")
+        ).catch()
+      }
+    }).catch()
+  }
+  else{
+    res.redirect("/login");
+  }
+})
