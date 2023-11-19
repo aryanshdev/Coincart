@@ -168,8 +168,21 @@
 }
 
 .slicknav_nav .slicknav_txtnode {
-    margin-left: 15px
+    margin-left: 12.5px
 }
+
+@media (max-width:450px) {
+    .slicknav_nav .slicknav_txtnode {
+        margin-left: 5px
+    }
+}
+
+@media (min-width:451px) and (max-width: 920px)  {
+    .slicknav_nav .slicknav_txtnode {
+        margin-left: 7.5px
+    }
+}
+
 
 .slicknav_nav .slicknav_item a,
 .slicknav_nav .slicknav_parent-link a {
