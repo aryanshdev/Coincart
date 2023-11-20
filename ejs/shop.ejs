@@ -39,9 +39,12 @@
             <div class="col-xl-12">
               <div class="latest-items latest-items2">
                 <div class="row">
-                    <% for (let i = 0; i < products.length; i++) { %>
-                      <%- include("product-listing.ejs", {productImg :products[i].product_img ,productCode: products[i].id, productName:products[i].product_name, productPrice:products[i].product_price, productMRP:products[i].product_mrp }) -%>
-                    <% } %>
+                  <% if (products.length) { %>
+                  <% for (let i = 0; i < products.length; i++) { %>
+                    <%- include("product-listing.ejs", {productImg :products[i].product_img ,productCode: products[i].id, productName:products[i].product_name, productPrice:products[i].product_price, productMRP:products[i].product_mrp }) -%>
+                  <% } } else { %>
+                   <%- '<h3> No Product Found Related To Your Search  :( </h3>' %>
+                  <% } %>
                 </div>
               </div>
             </div>
