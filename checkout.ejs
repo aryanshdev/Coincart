@@ -15,10 +15,10 @@
                     <nav aria-label="breadcrumb">
                       <ol class="breadcrumb justify-content-center">
                         <li class="breadcrumb-item">
-                          <a href="index.html">Home</a>
+                          <a href="/">Home</a>
                         </li>
                         <li class="breadcrumb-item">
-                          <a href="#">Checkout</a>
+                          <a href="/cart">Cart</a>
                         </li>
                       </ol>
                     </nav>
@@ -45,13 +45,8 @@
         <table class="addTable">
             <% for (var i in addresses) { var details = addresses[i].split("|") %>
                 <tr>
-                    <td><%= i %></td>
-                    <td><%- '<strong>'+ details[0]+' </strong> <br> '+ details[1]  +' <br> '+details[2]  %></td>
-                    <td>
-                        <form method="post" action="/delAdd<%= i %>">
-                            <button type="submit" class="showDeleteButton"><span></span></button>
-                        </form>
-                    </td>
+                    <td style="width: 3%;"><input type="radio" name="address" id="address-<%= i %>"></td>
+                    <td><%- '<h5>'+ i +' </h5> <strong>'+ details[0]+' </strong> <br> '+ details[1]  +' <br> '+details[2]  %></td>
                 </tr>
             <% } %>
         </table>
@@ -62,7 +57,7 @@
     <% } %>
     
     <div>
-      <form action="/addNewAddress" method="post" class="pt-30" id="address_input_form">
+      <form action="/addNewAddress/1" method="post" class="pt-30" id="address_input_form">
         <h5>Add New Address</h5>
         <div class="row">
           <div class="col-12 col-md-6 col-lg-6">
@@ -95,79 +90,51 @@
             </div>
               <div class="col-lg-4">
                 <div class="order_box">
-                  <h2>Your Order</h2>
-                  <ul class="list">
-                    <li>
-                      <a href="#">Product<span>Total</span> </a>
-                    </li>
-                    <li>
-                      <a href="#"
-                        >Fresh Blackberry
-                        <span class="middle">x 02</span>
-                        <span class="last">$720.00</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#"
-                        >Fresh Tomatoes
-                        <span class="middle">x 02</span>
-                        <span class="last">$720.00</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#"
-                        >Fresh Brocoli
-                        <span class="middle">x 02</span>
-                        <span class="last">$720.00</span>
-                      </a>
-                    </li>
-                  </ul>
+                  <h4>Your Order</h4>
+                  <table class="order_table">
+                      <thead>
+                        <tr>
+                          <th style="width: 65%;">
+                            Product
+                          </th>
+                          <th style="width: 15%; text-align: center;">
+                            Quantity
+                          </th>
+                          <th style="width: 20%; text-align: right;">
+                            Total
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody style="margin-bottom: 3%;">
+                        <% let subTotal = 0 %>
+                        <% products = JSON.parse(products); %>
+                        <% let productLen  = products.length; %>
+                            <% for (var i = 0; i < productLen; i++) {  %>
+                                <% subTotal +=  products[i].quantity*products[i].product_price %>
+                                <tr>
+                                  <td><%= products[i].product_name.slice(0, 50) + (products[i].product_name.length > 50 ? "..." : "") %></td>
+                                  <td style="text-align: center;"><%= products[i].quantity %></td>
+                                  <td style="text-align: right;"><%= products[i].quantity * products[i].product_price %></td>
+                              </tr>
+                                <% } %>
+                        </tbody>
+                     </table>
                   <ul class="list list_2">
                     <li>
-                      <a href="#">Subtotal <span>$2160.00</span></a>
+                      <p>Subtotal </p> 
+                      <span><%= subTotal %> USD</span>
                     </li>
                     <li>
-                      <a href="#"
-                        >Shipping
-                        <span>Flat rate: $50.00</span>
-                      </a>
+                      <p>Shipping</p> <span>FREE</span>
                     </li>
                     <li>
-                      <a href="#">Total<span>$2210.00</span> </a>
+                      <p>Total </p> <span><%= subTotal %> USD</span> 
                     </li>
                   </ul>
-                  
-                  <div class="payment_item">
-                    <div class="radion_btn">
-                      <input type="radio" id="f-option5" name="selector" />
-                      <label for="f-option5">Check payments</label>
-                      <div class="check"></div>
-                    </div>
-                    <p>
-                      Please send a check to Store Name, Store Street, Store
-                      Town, Store State / County, Store Postcode.
-                    </p>
-                  </div>
-                  <div class="payment_item active">
-                    <div class="radion_btn">
-                      <input type="radio" id="f-option6" name="selector" />
-                      <label for="f-option6">Paypal </label>
-                      <img src="assets/img/gallery/card.jpg" alt />
-                      <div class="check"></div>
-                    </div>
-                    <p>
-                      Please send a check to Store Name, Store Street, Store
-                      Town, Store State / County, Store Postcode.
-                    </p>
-                  </div>
-                  <div class="creat_account checkout-cap">
-                    <input type="checkbox" id="f-option8" name="selector" />
-                    <label for="f-option8"
-                      >I’ve read and accept the
-                      <a href="#">terms & conditions*</a>
-                    </label>
-                  </div>
-                  <a class="btn w-100" href="#">Proceed to Paypal</a>
+                  <a class="btn w-100" onclick="fakePayment()">Proceed to Pay With Crypto</a>
+                  <h4 id="fake-payment-msg">
+                    FAKE PAYMENT SUCCESSFULL <br> REDIRECTING IN 5 SECONDS
+                  </h4>
                 </div>
               </div>
             </div>
@@ -187,8 +154,18 @@
                 field.placeholder = "Should Be Unique For An Address"
               }
         }
+        function fakePayment(){
+          document.getElementById("fake-payment-msg").style.display = "block";
+            setTimeout( () => {
+              window.location = "/account"
+            } ,5000);
+          
+        }
       </script>
       <style>
+        #fake-payment-msg{
+          display: none;
+        }
         #address_input_form{
           display: none;
         }

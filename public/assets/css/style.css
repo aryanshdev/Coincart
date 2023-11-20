@@ -3217,21 +3217,25 @@ table.addTable{
   border: 2px solid #000000;
 width: 100%
 }
-.tab-content table.addTable td {
+ table.addTable td {
 border: 1px solid #000;
 padding: 1%;
 }
-.tab-content table.addTable td:nth-child(1) {
+ table.addTable td:nth-child(1) {
 width: 25%;
 font-weight: 600;
 background: #cfcfcf;
 }
-.tab-content table.addTable td:nth-child(2) {
+table.addTable td:nth-child(2) {
 width: 70%;
 }
-.tab-content table.addTable td:nth-child(3) {
+table.addTable td:nth-child(3) {
   padding: 0;
-  }
+}
+
+.order_box .list a{
+
+}
   
 .category-listing .single-listing .select-job-items2 .nice-select:focus {
   border-color: #eee1e0;
@@ -4032,52 +4036,45 @@ width: 70%;
   padding: 30px;
 }
 
-.order_box h2 {
+.order_box h4 {
   border-bottom: 1px solid #dddddd;
-  font-size: 18px;
   font-weight: 500;
   color: #2a2a2a;
   padding-bottom: 15px;
 }
 
-.order_box .list li a {
-  font-size: 14px;
-  color: #797979;
-  font-weight: normal;
-  border-bottom: 1px solid #eeeeee;
-  display: block;
-  line-height: 42px;
+.order_table{
+  width: 100%;
+  margin-bottom: 3%;;
 }
 
-.order_box .list li a span {
-  float: right;
+.order_table th{
+  font-weight: 500;
 }
 
-.order_box .list li a .middle {
-  float: none;
-  width: 50px;
-  text-align: right;
-  display: inline-block;
-  margin-left: 30px;
-  color: #2a2a2a;
+.order_table td{
+  padding: 1.25%
+}
+.order_table tfoot{
+  font-size: large;
 }
 
-.order_box .list li:nth-child(4) a .middle {
-  margin-left: 48px;
+.order_box .list_2 li{
+  display: flex;
+  justify-content: space-between;
 }
-
-.order_box .list_2 li a {
+.order_box .list_2 li p{
   text-transform: uppercase;
   color: #2a2a2a;
   font-weight: 500;
 }
 
-.order_box .list_2 li a span {
+.order_box .list_2 li p span {
   color: #797979;
   text-transform: capitalize;
 }
 
-.order_box .list_2 li:last-child a span {
+.order_box .list_2 li:last-child p span {
   color: #2a2a2a;
 }
 

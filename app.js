@@ -825,7 +825,7 @@ app.post("/delAdd:adderKey", (req, res) => {
   }
 });
 
-app.post("/addNewAddress", (req, res) => {
+app.post("/addNewAddress/?:isCheckout?", (req, res) => {
   var value =
     req.body.fullName +
     "|" +
@@ -848,7 +848,14 @@ app.post("/addNewAddress", (req, res) => {
         req.session.userName +
         "';"
     )
-    .then(res.redirect("/account"));
+    .then( ()=>{
+      if(req.params.isCheckout){
+        res.redirect("/checkout");
+      }
+    else{
+      res.redirect("/account")
+    }}
+    );
 });
 
 app.post("/changepass", (req, res) => {
@@ -897,7 +904,7 @@ app.post("/empty-cart", (req, res) => {
   }
 });
 
-app.get("/checkout", (req, res) => {
+app.post("/checkout", (req, res) => {
   var priceValues = [];
   fetch(
     "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=bnb,btc,eth,ltc,sol",
@@ -927,6 +934,7 @@ app.get("/checkout", (req, res) => {
         ])
     )
     .then(() => {
+      
       database
         .query(
           "SELECT * FROM users WHERE username = '" + req.session.userName + "';"
@@ -937,6 +945,7 @@ app.get("/checkout", (req, res) => {
             item_in_cart: req.session.itemInCart ? req.session.itemInCart : 0,
             title: "CoinCart | Crypto Based Marketplace",
             addresses: result.addresses,
+            products : req.body.proInfo,
             btcPrice: priceValues[1],
             ethPrice: priceValues[2],
             ltcPrice: priceValues[3],
@@ -964,3 +973,16 @@ app.post("/update-cart", (req, res) => {
     .then(res.redirect("/cart"))
     .catch();
 });
+
+
+
+// AT LAST
+app.all('*', (req, res) => { 
+  res.status(404).render(__dirname + "/ejs/info-pg.ejs", {
+    title: "Lost ?",
+    pageTitle: "Sadly, Your Destination Is Unknow To Us",
+    message:
+      "<br><h6><a style='color:#ff7f00 'href='/'> Click Here To Return To HomePage </a> </h6>",
+  });
+}); 
+  

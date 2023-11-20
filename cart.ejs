@@ -40,7 +40,7 @@
                             </thead>
                             <tbody>
                                 <% let subTotal = 0 %>
-                                <% let productLen  = productsInCart.lenght %>
+                                <% let productLen  = productsInCart.lenght; %>
                                 <% if (item_in_cart > 0) { %>
                                     <!-- Cart is not empty -->
                                     <% for (let i = 0; i < item_in_cart; i++) { %>
@@ -54,8 +54,10 @@
                                   
                                 <tr class="bottom_button">
                                     <td >
-                                        <form style="display: inline-block; margin: 0 2.5% 2.5% 0;" method="post" action="/empty-cart"><button type="submit" class="btn">Empty Cart</button></form>
+                                        <% if (item_in_cart > 0) { %>
+                                        <form style="display: inline-block; margin: 0 2.5% 2.5% 0; width: fit-content;" method="post" action="/empty-cart"><button type="submit" class="btn">Empty Cart</button></form>
                                         <form style="display: inline-block; margin: 0 2.5% 2.5% 0;" method="post" action="/update-cart"><input hidden name="newCartString" value="" id="newCartStringContainer"> <button type="submit" class="btn">Update Cart</button> </form>
+                                        <% } %>
                                     </td>
                                     <td></td>
                                     <td>
@@ -81,8 +83,11 @@
                             </tbody>
                         </table>
                         <div class="checkout_btn_inner float-right">
-                            <a class="btn" href="/shop" style="margin-bottom: 2%;"> Continue Shopping</a>
-                            <a class="btn checkout_btn" style="margin-bottom: 2%;" href="/checkout">Proceed to checkout</a>
+                            <a class="btn" href="/shop"> Continue Shopping</a>
+                            <% if (item_in_cart > 0) { %>
+                            <form method="post" action="/checkout" style="display: inline-block; margin: 2% 0;""> <input hidden value="<%= JSON.stringify(productsInCart) %>" name="proInfo"> <button type="submit" class="btn checkout_btn">Proceed to checkout</button></form>
+                            <p>If You made changes to cart, select Update Cart above before proceeding to Checkout</p>
+                            <% } %>
                         </div>
                     </div>
                 </div>
