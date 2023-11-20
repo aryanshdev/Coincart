@@ -962,6 +962,57 @@ app.post("/empty-cart", (req, res) => {
   }
 });
 
+
+app.post("/update-cart", (req, res) => {
+  database
+    .query(
+      "UPDATE users SET cart = '" +
+        req.body.newCartString +
+        "' WHERE username = '" +
+        req.session.userName +
+        "';"
+    )
+    .then(res.redirect("/cart"))
+    .catch((error) => {
+      if (error.errno === -4039) {
+        res.render(__dirname + "/ejs/info-pg.ejs", {
+          title: "Connectivity Issue | CoinCart",
+          pageTitle: "There was a connection issue, please try again later",
+          message:
+            "<br><h6><a style='color:#ff7f00 'href='/'> Click Here To Return To HomePage </a> </h6>",
+        });
+      } }
+      );
+});
+
+
+
+app.post("/changename", (req, res) => {
+  if (req.session.userName) {
+    database
+      .query(
+        "UPDATE users SET name = '" +
+          req.body.newName +
+          "' WHERE username = '" +
+          req.session.userName +
+          "';"
+      )
+      .then(req.session.fullName = req.body.newName, res.redirect("/account"))
+      .catch((error) => {
+        if (error.errno === -4039) {
+          res.render(__dirname + "/ejs/info-pg.ejs", {
+            title: "Connectivity Issue | CoinCart",
+            pageTitle: "There was a connection issue, please try again later",
+            message:
+              "<br><h6><a style='color:#ff7f00 'href='/'> Click Here To Return To HomePage </a> </h6>",
+          });
+        } }
+        );
+  } else {
+    res.redirect("/login");
+  }
+});
+
 app.post("/checkout", (req, res) => {
   var priceValues = [];
   fetch(
@@ -1026,56 +1077,10 @@ app.post("/checkout", (req, res) => {
     });
 });
 
-app.post("/update-cart", (req, res) => {
-  database
-    .query(
-      "UPDATE users SET cart = '" +
-        req.body.newCartString +
-        "' WHERE username = '" +
-        req.session.userName +
-        "';"
-    )
-    .then(res.redirect("/cart"))
-    .catch((error) => {
-      if (error.errno === -4039) {
-        res.render(__dirname + "/ejs/info-pg.ejs", {
-          title: "Connectivity Issue | CoinCart",
-          pageTitle: "There was a connection issue, please try again later",
-          message:
-            "<br><h6><a style='color:#ff7f00 'href='/'> Click Here To Return To HomePage </a> </h6>",
-        });
-      } }
-      );
-});
 
-
-
-app.post("/changename", (req, res) => {
-  if (req.session.userName) {
-    database
-      .query(
-        "UPDATE users SET name = '" +
-          req.body.newName +
-          "' WHERE username = '" +
-          req.session.userName +
-          "';"
-      )
-      .then(req.session.fullName = req.body.newName, res.redirect("/account"))
-      .catch((error) => {
-        if (error.errno === -4039) {
-          res.render(__dirname + "/ejs/info-pg.ejs", {
-            title: "Connectivity Issue | CoinCart",
-            pageTitle: "There was a connection issue, please try again later",
-            message:
-              "<br><h6><a style='color:#ff7f00 'href='/'> Click Here To Return To HomePage </a> </h6>",
-          });
-        } }
-        );
-  } else {
-    res.redirect("/login");
-  }
-});
-
+app.get("/checkout",(req,res) =>{
+res.redirect("/cart")
+})
 
 // AT LAST
 app.all("*", (req, res) => {
@@ -1086,3 +1091,4 @@ app.all("*", (req, res) => {
       "<br><h6><a style='color:#ff7f00 'href='/'> Click Here To Return To HomePage </a> </h6>",
   });
 });
+
