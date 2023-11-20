@@ -1,7 +1,5 @@
 <%- include("ejs/header.ejs") -%>
 
-<body>
-
     <%- include("ejs/navbar.ejs") -%>
     <main>
         <div class="hero-area section-bg2">
@@ -47,7 +45,7 @@
                                     <!-- Cart is not empty -->
                                     <% for (let i = 0; i < item_in_cart; i++) { %>
                                         <% subTotal +=  productsInCart[i].quantity*productsInCart[i].product_price %>
-                                      <%- include("ejs/cart_item.ejs", {primg :productsInCart[i].product_img ,index: i, productName:productsInCart[i].product_name, productPrice:productsInCart[i].product_price, quantity:productsInCart[i].quantity}) -%>
+                                      <%- include("ejs/cart_item.ejs", {primg :productsInCart[i].product_img ,index: i, productName:productsInCart[i].product_name, productPrice:productsInCart[i].product_price, quantity:productsInCart[i].quantity, code : productsInCart[i].id}) -%>
                                     <% } %>
                                   <% } else { %>
                                     <!-- Cart is empty -->
@@ -55,10 +53,10 @@
                                   <% } %>
                                   
                                 <tr class="bottom_button">
-                                    <td>
-                                        <a class="btn" href="#">Update Cart</a>
+                                    <td >
+                                        <form style="display: inline-block; margin: 0 2.5% 2.5% 0;" method="post" action="/empty-cart"><a class="btn">Empty Cart</a></form>
+                                        <form style="display: inline-block; margin: 0 2.5% 2.5% 0;" method="post" action="/update-cart"><input hidden name="newCartString" value="" id="newCartStringContainer"> <button type="submit" class="btn">Update Cart</button> </form>
                                     </td>
-                                    <td></td>
                                     <td></td>
                                     <td>
                                     </td>
@@ -70,65 +68,21 @@
                                         <h5>Subtotal</h5>
                                     </td>
                                     <td>
-                                        <h5>
-                                            <%= subTotal %>
+                                        <h5 id="total-subtotal">
+                                            <%= subTotal %> USD
                                         </h5>
                                     </td>
                                 </tr>
                                 <tr class="shipping_area">
                                     <td></td>
                                     <td></td>
-                                    <td>
-                                        <h5>Shipping</h5>
-                                    </td>
-                                    <td>
-                                        <div class="shipping_box">
-                                            <ul class="list">
-                                                <li>
-                                                    Flat Rate: $5.00
-                                                    <input type="radio"
-                                                        aria-label="Radio button for following text input">
-                                                </li>
-                                                <li>
-                                                    Free Shipping
-                                                    <input type="radio"
-                                                        aria-label="Radio button for following text input">
-                                                </li>
-                                                <li>
-                                                    Flat Rate: $10.00
-                                                    <input type="radio"
-                                                        aria-label="Radio button for following text input">
-                                                </li>
-                                                <li class="active">
-                                                    Local Delivery: $2.00
-                                                    <input type="radio"
-                                                        aria-label="Radio button for following text input">
-                                                </li>
-                                            </ul>
-                                            <h6>
-                                                Calculate Shipping
-                                                <i class="fa fa-caret-down" aria-hidden="true"></i>
-                                            </h6>
-                                            <select class="shipping_select">
-                                                <option value="1">Bangladesh</option>
-                                                <option value="2">India</option>
-                                                <option value="4">Pakistan</option>
-                                            </select>
-                                            <select class="shipping_select section_bg">
-                                                <option value="1">Select a State</option>
-                                                <option value="2">Select a State</option>
-                                                <option value="4">Select a State</option>
-                                            </select>
-                                            <input class="post_code" type="text" placeholder="Postcode/Zipcode" />
-                                            <a class="btn" href="#">Update Details</a>
-                                        </div>
-                                    </td>
+                             
                                 </tr>
                             </tbody>
                         </table>
                         <div class="checkout_btn_inner float-right">
-                            <a class="btn" href="/">Continue Shopping</a>
-                            <a class="btn checkout_btn" href="https://paypal.me/aryanshdev">Proceed to checkout</a>
+                            <a class="btn" href="/shop" style="margin-bottom: 2%;"> Continue Shopping</a>
+                            <a class="btn checkout_btn" style="margin-bottom: 2%;" href="/checkout">Proceed to checkout</a>
                         </div>
                     </div>
                 </div>
@@ -136,4 +90,37 @@
         </section>
 
     </main>
+
+    <script>
+  function updateCart() {
+    var finalCartString = "";
+
+    <%
+    for (var index = 0; index < productsInCart.length; index++) {
+        var element = productsInCart[index];
+    %>
+        finalCartString += '<%= element.id %>' + ',' + document.querySelectorAll(".qt-selector .current")[<%= index %>].textContent + ';';
+    <%
+    }
+    %>
+    document.getElementById("newCartStringContainer").value = finalCartString;
+}
+
+    function updateCount(selectElement, index, productPrice) {
+    const newQuantity = parseInt(selectElement.value);
+    const totalElement = document.getElementById(index);
+    totalElement.textContent = newQuantity * productPrice;
+    updateCart();
+    updateSubTotal();
+  }
+  function updateSubTotal(){
+    var subtotal = 0;
+    for (let index = 0; index < <%= item_in_cart %>; index++) {
+        subtotal += parseInt(document.getElementById(index).textContent);
+    }
+    document.getElementById("total-subtotal").textContent = subtotal + " USD";
+  }
+
+    </script>
+    
     <%- include("ejs/footer.ejs") -%>

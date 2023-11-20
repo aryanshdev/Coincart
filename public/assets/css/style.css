@@ -3542,7 +3542,7 @@ width: 70%;
 }
 
 .qt-selector {
-  width: 60%;
+  width: fit-content;
   margin: 0;
 }
 

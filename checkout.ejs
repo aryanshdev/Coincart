@@ -1,0 +1,200 @@
+<%- include("ejs/header.ejs") -%>
+
+    <%- include("ejs/navbar.ejs") -%>
+    <main>
+      <div class="hero-area section-bg2">
+        <div class="container">
+          <div class="row">
+            <div class="col-xl-12">
+              <div class="slider-area">
+                <div
+                  class="slider-height2 slider-bg4 d-flex align-items-center justify-content-center"
+                >
+                  <div class="hero-caption hero-caption2">
+                    <h2>Checkout</h2>
+                    <nav aria-label="breadcrumb">
+                      <ol class="breadcrumb justify-content-center">
+                        <li class="breadcrumb-item">
+                          <a href="index.html">Home</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                          <a href="#">Checkout</a>
+                        </li>
+                      </ol>
+                    </nav>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section class="checkout_area">
+        <div class="container">
+          
+          <div class="billing_details">
+            <div class="row">
+              <div class="col-lg-8">
+                <h4>Billing Details</h4>
+                
+    <% var addLen = Object.keys(addresses).length; if (addLen == 0) {  %>
+        <p>No addresses added.</p>
+        <button class="btn" onclick="addAddressForm()" id="address_input_btn" style="margin: 0;">Add Address</button>
+        <% } else { %>
+        <table class="addTable">
+            <% for (var i in addresses) { var details = addresses[i].split("|") %>
+                <tr>
+                    <td><%= i %></td>
+                    <td><%- '<strong>'+ details[0]+' </strong> <br> '+ details[1]  +' <br> '+details[2]  %></td>
+                    <td>
+                        <form method="post" action="/delAdd<%= i %>">
+                            <button type="submit" class="showDeleteButton"><span></span></button>
+                        </form>
+                    </td>
+                </tr>
+            <% } %>
+        </table>
+    
+        <% if (addLen < 5) { %>
+            <button class="btn" onclick="addAddressForm()" id="address_input_btn">Add Another</button>
+        <% } %>
+    <% } %>
+    
+    <div>
+      <form action="/addNewAddress" method="post" class="pt-30" id="address_input_form">
+        <h5>Add New Address</h5>
+        <div class="row">
+          <div class="col-12 col-md-6 col-lg-6">
+            <input class="form-control valid" style="display: inline; margin-bottom: 2.5%;" type="text" name="fullName" placeholder="Full Name" required>
+          </div>
+          <div class="col-12 col-md-6 col-lg-6">
+            <input class="form-control valid" style="display: inline; margin-bottom: 2.5%;" type="tel" name="phoneNum" placeholder="Phone Number" required>
+          </div>
+    
+          <div class="col-12 col-md-4 col-lg-4">
+            <input class="form-control valid" style="display: inline; margin-bottom: 2.5%;" type="text" onblur="checkIn(this)" name="addressName" placeholder="Address For (eg. Home)" required>
+          </div>
+        <div class="col-12 col-md-8 col-lg-8">
+          <input class="form-control valid" style="display: inline; margin-bottom: 2.5%;" type="text" name="address" placeholder="Your Address" required>
+        </div>
+        
+        <div class="col-12 col-md-4 col-lg-4">
+          <input class="form-control valid" style="display: inline; margin-bottom: 2.5%;" type="text" name="state" placeholder="Your State" required>
+        </div>
+        <div class="col-12 col-md-4 col-lg-4">
+          <input class="form-control valid" style="display: inline; margin-bottom: 2.5%;" type="text" name="country" placeholder="Your Country" required>
+        </div>
+        <div class="col-12 col-md-4 col-lg-4">
+          <input class="form-control valid" style="display: inline; margin-bottom: 2.5%;" type="text" name="pin" placeholder="ZIP/PIN Code" required>
+        </div>
+      </div>
+      <button type="submit" class="btn">Save Address</button>
+      </form>
+    </div>
+            </div>
+              <div class="col-lg-4">
+                <div class="order_box">
+                  <h2>Your Order</h2>
+                  <ul class="list">
+                    <li>
+                      <a href="#">Product<span>Total</span> </a>
+                    </li>
+                    <li>
+                      <a href="#"
+                        >Fresh Blackberry
+                        <span class="middle">x 02</span>
+                        <span class="last">$720.00</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#"
+                        >Fresh Tomatoes
+                        <span class="middle">x 02</span>
+                        <span class="last">$720.00</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#"
+                        >Fresh Brocoli
+                        <span class="middle">x 02</span>
+                        <span class="last">$720.00</span>
+                      </a>
+                    </li>
+                  </ul>
+                  <ul class="list list_2">
+                    <li>
+                      <a href="#">Subtotal <span>$2160.00</span></a>
+                    </li>
+                    <li>
+                      <a href="#"
+                        >Shipping
+                        <span>Flat rate: $50.00</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">Total<span>$2210.00</span> </a>
+                    </li>
+                  </ul>
+                  
+                  <div class="payment_item">
+                    <div class="radion_btn">
+                      <input type="radio" id="f-option5" name="selector" />
+                      <label for="f-option5">Check payments</label>
+                      <div class="check"></div>
+                    </div>
+                    <p>
+                      Please send a check to Store Name, Store Street, Store
+                      Town, Store State / County, Store Postcode.
+                    </p>
+                  </div>
+                  <div class="payment_item active">
+                    <div class="radion_btn">
+                      <input type="radio" id="f-option6" name="selector" />
+                      <label for="f-option6">Paypal </label>
+                      <img src="assets/img/gallery/card.jpg" alt />
+                      <div class="check"></div>
+                    </div>
+                    <p>
+                      Please send a check to Store Name, Store Street, Store
+                      Town, Store State / County, Store Postcode.
+                    </p>
+                  </div>
+                  <div class="creat_account checkout-cap">
+                    <input type="checkbox" id="f-option8" name="selector" />
+                    <label for="f-option8"
+                      >I’ve read and accept the
+                      <a href="#">terms & conditions*</a>
+                    </label>
+                  </div>
+                  <a class="btn w-100" href="#">Proceed to Paypal</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+   
+    <script>
+        function addAddressForm() {
+          document.getElementById("address_input_btn").setAttribute("disabled", "true");
+          document.getElementById("address_input_form").style.display = 'block';    
+        }
+        function checkIn(field) {
+          if ( Object.keys(JSON.parse('<%- unescape(JSON.stringify(addresses)) %>')).includes(field.value)){
+                field.value = "";
+                field.placeholder = "Should Be Unique For An Address"
+              }
+        }
+      </script>
+      <style>
+        #address_input_form{
+          display: none;
+        }
+        #address_input_btn{
+          margin: 15px;
+        }
+      </style>
+
+    <%- include("ejs/footer.ejs") -%>

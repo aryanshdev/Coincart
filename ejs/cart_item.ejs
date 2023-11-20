@@ -2,10 +2,10 @@
   <td>
     <div class="media">
       <div class="d-flex">
-        <img src=<%= primg %> alt />
+        <a href="/product-<%= code %>" > <img src=<%= primg %> alt /> </a>
       </div>
       <div class="media-body">
-        <p><%= productName %></p>
+       <a href="/product-<%= code %>" > <p><%= productName %></p>
         
       </div>
     </div>
@@ -27,10 +27,4 @@
     <h5 id=<%= index %>><%= totalPrice  %></h5>
   </td>
 </tr>
-<script>
-  function updateCount(selectElement, index, productPrice) {
-    const newQuantity = parseInt(selectElement.value);
-    const totalElement = document.getElementById(index);
-    totalElement.textContent = newQuantity * productPrice;
-  }
-</script>
+

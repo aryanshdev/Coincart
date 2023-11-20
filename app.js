@@ -357,7 +357,6 @@ app.get("/cart", (req, res) => {
               //User Logged-In, Cart Not Empty
               const cartProductsCode = result[0].cart.slice(0, -1).split(";");
               const promises = [];
-
               cartProductsCode.forEach((code) => {
                 code = code.split(",");
                 const productQuery = database
@@ -839,29 +838,129 @@ app.post("/addNewAddress", (req, res) => {
     req.body.country +
     " - " +
     req.body.pin;
-  database.query(
-    "UPDATE users SET addresses = jsonb_set(addresses::jsonb,'{" +
-      req.body.addressName +
-      "}', '\"" +
-      value +
-      "\"', true) WHERE username = '" +
-      req.session.userName +
-      "';"
-  ).then(res.redirect("/account"));
+  database
+    .query(
+      "UPDATE users SET addresses = jsonb_set(addresses::jsonb,'{" +
+        req.body.addressName +
+        "}', '\"" +
+        value +
+        "\"', true) WHERE username = '" +
+        req.session.userName +
+        "';"
+    )
+    .then(res.redirect("/account"));
 });
 
-app.post("/changepass", (req,res)=>{
-  if(req.session.userName){
-    database.query("SELECT password FROM users WHERE username = '"+req.session.userName+"';").then((result)=>{
-      if(result[0].password == req.body.currentPass && req.body.conPass1 == req.body.conPass2){
-        database.query("UPDATE users SET password = '"+req.body.conPass1+"' WHERE username = '"+req.session.userName+"';").then(
-          req.session.destroy(),
-          res.redirect("/login")
-        ).catch()
-      }
-    }).catch()
-  }
-  else{
+app.post("/changepass", (req, res) => {
+  if (req.session.userName) {
+    database
+      .query(
+        "SELECT password FROM users WHERE username = '" +
+          req.session.userName +
+          "';"
+      )
+      .then((result) => {
+        if (
+          result[0].password == req.body.currentPass &&
+          req.body.conPass1 == req.body.conPass2
+        ) {
+          database
+            .query(
+              "UPDATE users SET password = '" +
+                req.body.conPass1 +
+                "' WHERE username = '" +
+                req.session.userName +
+                "';"
+            )
+            .then(req.session.destroy(), res.redirect("/login"))
+            .catch();
+        }
+      })
+      .catch();
+  } else {
     res.redirect("/login");
   }
-})
+});
+
+app.post("/empty-cart", (req, res) => {
+  if (req.session.userName) {
+    database
+      .query(
+        "UPDATE users SET cart = NULL WHERE username = '" +
+          req.session.userName +
+          "';"
+      )
+      .then((req.session.itemInCart = 0), res.redirect("/cart"))
+      .catch();
+  } else {
+    res.redirect("/login");
+  }
+});
+
+app.get("/checkout", (req, res) => {
+  var priceValues = [];
+  fetch(
+    "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=bnb,btc,eth,ltc,sol",
+    {
+      headers: {
+        "X-CMC_PRO_API_KEY": "41d0ca3c-84de-424b-8965-8be6465e9ca7",
+      },
+    }
+  )
+    .then((response) => response.json())
+    .then((response) => {
+      for (var asset in response.data) {
+        priceValues.push(
+          Math.round(response.data[asset][0].quote.USD.price).toString() +
+            " USD"
+        );
+      }
+    })
+    .catch(
+      (error) =>
+        (priceValues = [
+          "Unable To Fetch Currently",
+          "Unable To Fetch Currently",
+          "Unable To Fetch Currently",
+          "Unable To Fetch Currently",
+          "Unable To Fetch Currently",
+        ])
+    )
+    .then(() => {
+      database
+        .query(
+          "SELECT * FROM users WHERE username = '" + req.session.userName + "';"
+        )
+        .then((result) => {
+          result = result[0];
+          res.render(__dirname + "/checkout.ejs", {
+            item_in_cart: req.session.itemInCart ? req.session.itemInCart : 0,
+            title: "CoinCart | Crypto Based Marketplace",
+            addresses: result.addresses,
+            btcPrice: priceValues[1],
+            ethPrice: priceValues[2],
+            ltcPrice: priceValues[3],
+            bnbPrice: priceValues[0],
+            solPrice: priceValues[4],
+          });
+        })
+        .catch((error) => {
+          if (!req.session.userName) {
+            res.redirect("/login");
+          }
+        });
+    });
+});
+
+app.post("/update-cart", (req, res) => {
+  database
+    .query(
+      "UPDATE users SET cart = '" +
+        req.body.newCartString +
+        "' WHERE username = '" +
+        req.session.userName +
+        "';"
+    )
+    .then(res.redirect("/cart"))
+    .catch();
+});
