@@ -139,7 +139,7 @@
       </div>
 
       <div class="col-12 col-md-4 col-lg-4">
-        <input class="form-control valid" style="display: inline; margin-bottom: 2.5%;" type="text" onblur="checkIn(this)" name="addressName" placeholder="Address For (eg. Home)" required>
+        <input class="form-control valid" style="display: inline; margin-bottom: 2.5%;" type="text" oninput="checkSymbols(this)" onblur="checkIn(this)" name="addressName" placeholder="Address For (eg. Home)" required>
       </div>
     <div class="col-12 col-md-8 col-lg-8">
       <input class="form-control valid" style="display: inline; margin-bottom: 2.5%;" type="text" name="address" placeholder="Your Address" required>
@@ -155,7 +155,7 @@
       <input class="form-control valid" style="display: inline; margin-bottom: 2.5%;" type="text" name="pin" placeholder="ZIP/PIN Code" required>
     </div>
   </div>
-  <button type="submit" class="btn">Save Address</button>
+  <button type="submit" class="btn">Save Address</button>  <button type="button" onclick="closeAddressForm()" class="btn">Cancel</button>
   </form>
 </div>
 
@@ -171,8 +171,35 @@
                 >
                   <div class="row">
                     <div class="offset-xl-1 col-lg-9">
+                      
+                        <h4>Active Orders</h4>
+
+                        <table class="orderDetailTable active"> <tbody>
+                      <% if(!activeOrders) { %>
+                        <%-  '<tr><td><h6 style="margin: 0;">No Active Orders Found</h6></td><tr></tr>' %>
+                      <% } else {  activeOrders = activeOrders.split("#") %>
+                      <%  for (var i =0; i < activeOrders.length -1 ; i++) {%>
+                        <% var singleOrderData = JSON.parse(activeOrders[i]); console.log(singleOrderData) %>
+                          <% for(var j in singleOrderData) {  %>
+                          <%  var productsInOrder = singleOrderData[j].products  %>
+                          <%  for (var product in productsInOrder) {  %>
+                            <tr><td> <div>
+                               <h6> <%= productsInOrder[product].split(',')[0] %> </h6>
+                               
+                                <p>Quantity : <%= productsInOrder[product].split(',')[1] %> </p>
+                                <p>Order On : <%= new Date(j).toLocaleDateString() %> </p>
+                                <p>Ordered At : <%= singleOrderData[j].addSrt +' - ' + addresses[singleOrderData[j].addSrt].split("|")[2] %></p>
+                              
+                               </div>
+                              </td> </tr>   
+                            <%  }  %>
+                          <% } %>
+                               
+                            <% } }%>
+
+                          </tbody></table>
                       <table>
-                        <h4>No Orders Placed Till Now</h4>
+                        <h4>Past Orders</h4>
                       </table>
                     </div>
                   </div>
@@ -231,11 +258,18 @@
     document.getElementById("address_input_btn").setAttribute("disabled", "true");
     document.getElementById("address_input_form").style.display = 'block';    
   }
+  function closeAddressForm() {
+    document.getElementById("address_input_btn").removeAttribute("disabled");
+    document.getElementById("address_input_form").style.display = 'none';    
+  }
   function checkIn(field) {
     if ( Object.keys(JSON.parse('<%- unescape(JSON.stringify(addresses)) %>')).includes(field.value)){
           field.value = "";
           field.placeholder = "Should Be Unique For An Address"
         }
+  }
+  function checkSymbols(field){
+    field.value = field.value.replace(/[\/\\]/g, '-');
   }
 </script>
 <style>

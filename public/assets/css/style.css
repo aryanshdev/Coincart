@@ -4059,6 +4059,27 @@ table.addTable td:nth-child(3) {
   font-size: large;
 }
 
+.orderDetailTable{
+  width: 100%;
+  margin: 1% 0 2.5% 0;
+}
+
+.orderDetailTable tr div{
+  margin-top: 0.25% ;
+  padding: 1%;
+  height: fit-content;
+ border: 1px solid black;
+ border-radius: 5px;
+ background-color: #f0f2f2;
+}
+.orderDetailTable p{
+  margin: 0;
+}
+.orderDetailTable td{
+  padding: 1.5%;
+}
+
+
 .order_box .list_2 li{
   display: flex;
   justify-content: space-between;

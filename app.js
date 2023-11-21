@@ -10,7 +10,7 @@ app.use(
     secret: "CoinCart_Encryption_Key",
     resave: false,
     saveUninitialized: true,
-    // cookie: { maxAge: 600000 },
+    cookie: { maxAge: 600000 },
   })
 );
 
@@ -178,24 +178,27 @@ app.get("/account", (req, res) => {
               fullName: req.session.fullName,
               userName_EMail: req.session.userName,
               addresses: result.addresses,
+              activeOrders: result.active_orders,
               btcPrice: priceValues[1],
               ethPrice: priceValues[2],
               ltcPrice: priceValues[3],
               bnbPrice: priceValues[0],
               solPrice: priceValues[4],
             });
-          }).catch((error) => {
+          })
+          .catch((error) => {
             if (error.errno === -4039) {
               res.render(__dirname + "/ejs/info-pg.ejs", {
                 title: "Connectivity Issue | CoinCart",
-                pageTitle: "There was a connection issue, please try again later",
+                pageTitle:
+                  "There was a connection issue, please try again later",
                 message:
                   "<br><h6><a style='color:#ff7f00 'href='/'> Click Here To Return To HomePage </a> </h6>",
               });
-            } }
-            );
+            }
+          });
       } else {
-        res.redirect("/login");
+        res.redirect("/login-account");
       }
     });
 });
@@ -417,7 +420,8 @@ app.get("/cart", (req, res) => {
             if (error.errno === -4039) {
               res.render(__dirname + "/ejs/info-pg.ejs", {
                 title: "Connectivity Issue | CoinCart",
-                pageTitle: "There was a connection issue, please try again later",
+                pageTitle:
+                  "There was a connection issue, please try again later",
                 message:
                   "<br><h6><a style='color:#ff7f00 'href='/'> Click Here To Return To HomePage </a> </h6>",
               });
@@ -458,6 +462,9 @@ app.post("/login", (req, res) => {
             .slice(0, -1)
             .split(";").length;
         }
+        else{
+          req.session.itemInCart = 0;
+        }
         req.session.save();
         if (req.body.redirect !== "") {
           res.redirect("/" + req.body.redirect);
@@ -466,8 +473,6 @@ app.post("/login", (req, res) => {
         }
       } else {
         if (req.body.redirect !== "") {
-          console.log(req.body.redirect);
-          console.log(typeof req.body.redirect);
           res.redirect("/login-" + req.body.redirect + "&F=P_B");
         } else res.redirect("/login&F=P_B");
       }
@@ -572,7 +577,7 @@ app.post("/register", (req, res) => {
             message:
               "<br><br><h6><a style='color:#ff7f00 'href='/login'> Click Here </a> To Conitnue To Login or <a style='color:#ff7f00 'href='/register'> Click Here </a> To Create New Account </h6>",
           });
-        } 
+        }
         if (error.errno === -4039) {
           res.render(__dirname + "/ejs/info-pg.ejs", {
             title: "Connectivity Issue | CoinCart",
@@ -855,17 +860,17 @@ app.post("/delrev", (req, res) => {
         req.body.procode +
         ";"
     )
-    .then(res.redirect("/product-" + req.body.procode)).catch(
-      (error) => {
-        if (error.errno === -4039) {
-          res.render(__dirname + "/ejs/info-pg.ejs", {
-            title: "Connectivity Issue | CoinCart",
-            pageTitle: "There was a connection issue, please try again later",
-            message:
-              "<br><h6><a style='color:#ff7f00 'href='/'> Click Here To Return To HomePage </a> </h6>",
-          });
-        } }
-    );
+    .then(res.redirect("/product-" + req.body.procode))
+    .catch((error) => {
+      if (error.errno === -4039) {
+        res.render(__dirname + "/ejs/info-pg.ejs", {
+          title: "Connectivity Issue | CoinCart",
+          pageTitle: "There was a connection issue, please try again later",
+          message:
+            "<br><h6><a style='color:#ff7f00 'href='/'> Click Here To Return To HomePage </a> </h6>",
+        });
+      }
+    });
 });
 
 app.post("/delAdd:adderKey", (req, res) => {
@@ -962,7 +967,6 @@ app.post("/empty-cart", (req, res) => {
   }
 });
 
-
 app.post("/update-cart", (req, res) => {
   database
     .query(
@@ -981,11 +985,9 @@ app.post("/update-cart", (req, res) => {
           message:
             "<br><h6><a style='color:#ff7f00 'href='/'> Click Here To Return To HomePage </a> </h6>",
         });
-      } }
-      );
+      }
+    });
 });
-
-
 
 app.post("/changename", (req, res) => {
   if (req.session.userName) {
@@ -997,7 +999,7 @@ app.post("/changename", (req, res) => {
           req.session.userName +
           "';"
       )
-      .then(req.session.fullName = req.body.newName, res.redirect("/account"))
+      .then((req.session.fullName = req.body.newName), res.redirect("/account"))
       .catch((error) => {
         if (error.errno === -4039) {
           res.render(__dirname + "/ejs/info-pg.ejs", {
@@ -1006,8 +1008,8 @@ app.post("/changename", (req, res) => {
             message:
               "<br><h6><a style='color:#ff7f00 'href='/'> Click Here To Return To HomePage </a> </h6>",
           });
-        } }
-        );
+        }
+      });
   } else {
     res.redirect("/login");
   }
@@ -1063,7 +1065,7 @@ app.post("/checkout", (req, res) => {
         })
         .catch((error) => {
           if (!req.session.userName) {
-            res.redirect("/login");
+            res.redirect("/login-cart");
           }
           if (error.errno === -4039) {
             res.render(__dirname + "/ejs/info-pg.ejs", {
@@ -1077,18 +1079,41 @@ app.post("/checkout", (req, res) => {
     });
 });
 
+app.get("/checkout", (req, res) => {
+  res.redirect("/cart");
+});
 
-app.get("/checkout",(req,res) =>{
-res.redirect("/cart")
-})
+app.post("/payment", (req, res) => {
+ if (req.session.userName) {
+  database
+  .query(
+    "UPDATE users SET active_orders = CONCAT(active_orders, '" +
+      req.body.orderJSON +
+      "#'), cart = null WHERE username = '" +
+      req.session.userName +
+      "' ;"
+  )
+  .then(()=>{
+    req.session.itemInCart = 0;
+    res.render(__dirname + "/dummyPayment.ejs", {
+      title: "Dummy Payment",
+      totalAmount: req.body.total,
+    });
+  }
+
+  )
+  .catch();
+ } else {
+  res.redirect('/login-cart')
+ }
+});
 
 // AT LAST
 app.all("*", (req, res) => {
   res.status(404).render(__dirname + "/ejs/info-pg.ejs", {
     title: "Lost ?",
-    pageTitle: "Sadly, Your Destination Is Unknow To Us",
+    pageTitle: "Sadly, Your Destination Is Unknown To Us",
     message:
-      "<br><h6><a style='color:#ff7f00 'href='/'> Click Here To Return To HomePage </a> </h6>",
+      "<h6> 404 : Not Found </h6> <br><h5><a style='color:#ff7f00 'href='/'> Click Here To Return To HomePage </a> </h5>",
   });
 });
-

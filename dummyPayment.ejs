@@ -1,0 +1,35 @@
+<%- include("ejs/header.ejs") -%>
+ <main class="login-bg">
+    <div class="login-form-area">
+      <div class="login-form" style="width: 50%; text-align: center">
+        <div class="row">
+            <div class="col-12 col-md-6 col-lg-6">
+                <h3>Dummy Payments Page</h3>
+                <br>
+                <h5>Paying <%= totalAmount %> USD via Crypto</h5>
+                <br>
+                This is a Dummy Payment Page<br>
+                In Crypto Payments, QR Codes are used for wallet transactions
+                <br><br>
+
+                You will be redirected to Accounts Page Within 20 Seconds<br>
+                <a style='color:#ff7f00' href="/account">Click Here To Redirect Immediately</a>
+            </div>
+            <div class="col-12 col-md-6 col-lg-6">
+                <img src="assets/img/qrcode.png" width="80%"><br>
+                Scan QR To Show Some Support And Buy Me A Coffee
+            </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+<script>
+    
+    window.onload = ()=>{
+        setTimeout(() => {
+            window.location = '/account'
+        }, 20000);
+    }
+</script>
+</html>

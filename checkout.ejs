@@ -45,7 +45,7 @@
         <table class="addTable">
             <% for (var i in addresses) { var details = addresses[i].split("|") %>
                 <tr>
-                    <td style="width: 3%;"><input type="radio" name="address" id="address-<%= i %>"></td>
+                    <td style="width: 3%;"><input type="radio" onchange="generateOrderJSON()" name="address" value="<%= i %>" checked></td>
                     <td><%- '<h5>'+ i +' </h5> <strong>'+ details[0]+' </strong> <br> '+ details[1]  +' <br> '+details[2]  %></td>
                 </tr>
             <% } %>
@@ -57,7 +57,7 @@
     <% } %>
     
     <div>
-      <form action="/addNewAddress/1" method="post" class="pt-30" id="address_input_form">
+      <form action="/addNewAddress/1" method="post" class="pt-30" style="margin-bottom: 2.5px;" id="address_input_form">
         <h5>Add New Address</h5>
         <div class="row">
           <div class="col-12 col-md-6 col-lg-6">
@@ -68,7 +68,7 @@
           </div>
     
           <div class="col-12 col-md-4 col-lg-4">
-            <input class="form-control valid" style="display: inline; margin-bottom: 2.5%;" type="text" onblur="checkIn(this)" name="addressName" placeholder="Address For (eg. Home)" required>
+            <input class="form-control valid" style="display: inline; margin-bottom: 2.5%;" type="text" oninput="checkSymbols(this)" onblur="checkIn(this)" name="addressName" placeholder="Address For (eg. Home)" required>
           </div>
         <div class="col-12 col-md-8 col-lg-8">
           <input class="form-control valid" style="display: inline; margin-bottom: 2.5%;" type="text" name="address" placeholder="Your Address" required>
@@ -84,7 +84,7 @@
           <input class="form-control valid" style="display: inline; margin-bottom: 2.5%;" type="text" name="pin" placeholder="ZIP/PIN Code" required>
         </div>
       </div>
-      <button type="submit" class="btn">Save Address</button>
+      <button type="submit" class="btn">Save Address</button>  <button type="button" onclick="closeAddressForm()" class="btn">Cancel</button>
       </form>
     </div>
             </div>
@@ -106,11 +106,12 @@
                         </tr>
                       </thead>
                       <tbody style="margin-bottom: 3%;">
-                        <% let subTotal = 0 %>
+                        <% let subTotal = 0; var orderProducts = {} %>
                         <% products = JSON.parse(products); %>
                         <% let productLen  = products.length; %>
                             <% for (var i = 0; i < productLen; i++) {  %>
                                 <% subTotal +=  products[i].quantity*products[i].product_price %>
+                                <% orderProducts[products[i].id] = products[i].product_name+","+products[i].quantity; console.log(typeof orderProducts) %>
                                 <tr>
                                   <td><%= products[i].product_name.slice(0, 50) + (products[i].product_name.length > 50 ? "..." : "") %></td>
                                   <td style="text-align: center;"><%= products[i].quantity %></td>
@@ -131,10 +132,8 @@
                       <p>Total </p> <span><%= subTotal %> USD</span> 
                     </li>
                   </ul>
-                  <a class="btn w-100" onclick="fakePayment()">Proceed to Pay With Crypto</a>
-                  <h4 id="fake-payment-msg">
-                    FAKE PAYMENT SUCCESSFULL <br> REDIRECTING IN 5 SECONDS
-                  </h4>
+                  <form method="post" action="/payment"> <input hidden value="" name="orderJSON"> <input hidden value="<%= subTotal %>" name="total"><button type="submit" class="btn w-100">Proceed to Pay With Crypto</button> </form>
+                  
                 </div>
               </div>
             </div>
@@ -144,9 +143,14 @@
     </main>
    
     <script>
+
         function addAddressForm() {
           document.getElementById("address_input_btn").setAttribute("disabled", "true");
           document.getElementById("address_input_form").style.display = 'block';    
+        }
+        function closeAddressForm() {
+          document.getElementById("address_input_btn").removeAttribute("disabled");
+          document.getElementById("address_input_form").style.display = 'none';    
         }
         function checkIn(field) {
           if ( Object.keys(JSON.parse('<%- unescape(JSON.stringify(addresses)) %>')).includes(field.value)){
@@ -154,13 +158,20 @@
                 field.placeholder = "Should Be Unique For An Address"
               }
         }
-        function fakePayment(){
-          document.getElementById("fake-payment-msg").style.display = "block";
-            setTimeout( () => {
-              window.location = "/account"
-            } ,5000);
-          
+        
+        function checkSymbols(field){
+          field.value = field.value.replace(/[\/\\]/g, '-');
         }
+
+        function generateOrderJSON(){
+          var out = {};
+          out[new Date().toISOString()] = {
+            'addSrt' :  document.querySelector('input[name="address"]:checked').value, 
+            'products' :  <%- JSON.stringify(orderProducts) %> 
+          }
+         document.querySelector('input[name="orderJSON"]').value = JSON.stringify(out).replace(/'/g,"''")
+        }
+       generateOrderJSON();
       </script>
       <style>
         #fake-payment-msg{
