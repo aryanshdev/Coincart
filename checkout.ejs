@@ -111,7 +111,7 @@
                         <% let productLen  = products.length; %>
                             <% for (var i = 0; i < productLen; i++) {  %>
                                 <% subTotal +=  products[i].quantity*products[i].product_price %>
-                                <% orderProducts[products[i].id] = products[i].product_name+","+products[i].quantity; console.log(typeof orderProducts) %>
+                                <% orderProducts[products[i].id] = products[i].product_name+","+products[i].quantity;  %>
                                 <tr>
                                   <td><%= products[i].product_name.slice(0, 50) + (products[i].product_name.length > 50 ? "..." : "") %></td>
                                   <td style="text-align: center;"><%= products[i].quantity %></td>

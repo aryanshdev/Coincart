@@ -111,7 +111,7 @@
     <table class="addTable">
         <% for (var i in addresses) { var details = addresses[i].split("|") %>
             <tr>
-                <td><%= i %></td>
+                <td> <%= i %></td>
                 <td><%- '<strong>'+ details[0]+' </strong> <br> '+ details[1]  +' <br> '+details[2]  %></td>
                 <td>
                     <form method="post" action="/delAdd<%= i %>">
@@ -179,19 +179,26 @@
                         <%-  '<tr><td><h6 style="margin: 0;">No Active Orders Found</h6></td><tr></tr>' %>
                       <% } else {  activeOrders = activeOrders.split("#") %>
                       <%  for (var i =0; i < activeOrders.length -1 ; i++) {%>
-                        <% var singleOrderData = JSON.parse(activeOrders[i]); console.log(singleOrderData) %>
+                        <% var singleOrderData = JSON.parse(activeOrders[i]); %>
                           <% for(var j in singleOrderData) {  %>
                           <%  var productsInOrder = singleOrderData[j].products  %>
                           <%  for (var product in productsInOrder) {  %>
-                            <tr><td> <div>
-                               <h6> <%= productsInOrder[product].split(',')[0] %> </h6>
-                               
-                                <p>Quantity : <%= productsInOrder[product].split(',')[1] %> </p>
-                                <p>Order On : <%= new Date(j).toLocaleDateString() %> </p>
-                                <p>Ordered At : <%= singleOrderData[j].addSrt +' - ' + addresses[singleOrderData[j].addSrt].split("|")[2] %></p>
-                              
+                            <tr><td> <div class="main">
+                               <div class="title"><h6 style="color: white; margin-bottom: 0;"> <%= productsInOrder[product].split(',')[0] %> </h6></div>                              
+                                <div class="row">
+                                  <div class="col-sm-12 col-md-9 col-lg-9">
+                                    <p><strong>Quantity : </strong> <%= productsInOrder[product].split(',')[1] %> </p>
+                                    <p><strong>Order On : </strong> <%= new Date(j).toLocaleDateString() %> around  <%= new Date(j).toLocaleTimeString([],{ hour: "2-digit", minute: "2-digit" }) %> </p>
+                                    <p><strong>Ordered At : </strong> <%= singleOrderData[j].addSrt +' - ' + addresses[singleOrderData[j].addSrt].split("|")[2] %></p>
+                                  </div>
+                                  <div class="col-sm-12 col-md-3 col-lg-3 secondSection">
+                                    <a href="/product-<%= product %>#description" style="color: #ff7f00;" >Review</a>
+                                    <a href="/product-<%= product %>" style="color: #ff7f00;">View</a>
+                                  </div>
+                                </div>
                                </div>
-                              </td> </tr>   
+                              </td>
+                             </tr>   
                             <%  }  %>
                           <% } %>
                                
@@ -200,6 +207,7 @@
                           </tbody></table>
                       <table>
                         <h4>Past Orders</h4>
+                        <p>No Past Orders Found</p>
                       </table>
                     </div>
                   </div>
