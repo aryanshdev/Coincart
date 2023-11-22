@@ -4339,7 +4339,7 @@ font-weight: 500;
 }
 
 .login-bg {
-  height: 100vh;
+  min-height: 100vh;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
