@@ -33,7 +33,6 @@ const database = pg(connectionURL);
 app.use(express.static(__dirname + "/public"));
 app.listen(3001);
 
-
 app.get("/", (req, res) => {
   var priceValues = [];
   fetch(
@@ -64,23 +63,24 @@ app.get("/", (req, res) => {
         ])
     )
     .then(() => {
-      database.query("SELECT * FROM PRODUCTS ORDER BY RANDOM() LIMIT 6;").then((result)=> {
-      res.render(__dirname + "/index.ejs", {
-        item_in_cart: req.session.itemInCart ? req.session.itemInCart : 0,
-        title: "CoinCart | Crypto Based Marketplace",
-        btcPrice: priceValues[1],
-        ethPrice: priceValues[2],
-        products : result,
-        ltcPrice: priceValues[3],
-        bnbPrice: priceValues[0],
-        solPrice: priceValues[4],
-      });
+      database
+        .query("SELECT * FROM PRODUCTS ORDER BY RANDOM() LIMIT 6;")
+        .then((result) => {
+          res.render(__dirname + "/index.ejs", {
+            item_in_cart: req.session.itemInCart ? req.session.itemInCart : 0,
+            title: "CoinCart | Crypto Based Marketplace",
+            btcPrice: priceValues[1],
+            ethPrice: priceValues[2],
+            products: result,
+            ltcPrice: priceValues[3],
+            bnbPrice: priceValues[0],
+            solPrice: priceValues[4],
+          });
+        });
     });
-  });
 });
 
-
-app.get("/about",(req,res) =>{
+app.get("/about", (req, res) => {
   var priceValues = [];
   fetch(
     "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=bnb,btc,eth,ltc,sol",
@@ -110,16 +110,58 @@ app.get("/about",(req,res) =>{
         ])
     )
     .then(() => {
-  res.render(__dirname+"/about.ejs", {
-    title: "About Project | CoinCart",
-    item_in_cart: req.session.itemInCart ? req.session.itemInCart : 0,
-    btcPrice: priceValues[1],
-    ethPrice: priceValues[2],
-    ltcPrice: priceValues[3],
-    bnbPrice: priceValues[0],
-    solPrice: priceValues[4]
-  })
+      res.render(__dirname + "/about.ejs", {
+        title: "About Project | CoinCart",
+        item_in_cart: req.session.itemInCart ? req.session.itemInCart : 0,
+        btcPrice: priceValues[1],
+        ethPrice: priceValues[2],
+        ltcPrice: priceValues[3],
+        bnbPrice: priceValues[0],
+        solPrice: priceValues[4],
+      });
+    });
 });
+
+app.get("/privacy", (req, res) => {
+  var priceValues = [];
+  fetch(
+    "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=bnb,btc,eth,ltc,sol",
+    {
+      headers: {
+        "X-CMC_PRO_API_KEY": "41d0ca3c-84de-424b-8965-8be6465e9ca7",
+      },
+    }
+  )
+    .then((response) => response.json())
+    .then((response) => {
+      for (var asset in response.data) {
+        priceValues.push(
+          Math.round(response.data[asset][0].quote.USD.price).toString() +
+            " USD"
+        );
+      }
+    })
+    .catch(
+      (error) =>
+        (priceValues = [
+          "Unable To Fetch Currently",
+          "Unable To Fetch Currently",
+          "Unable To Fetch Currently",
+          "Unable To Fetch Currently",
+          "Unable To Fetch Currently",
+        ])
+    )
+    .then(() => {
+      res.render(__dirname + "/privacy.ejs", {
+        title: "Privacy Policy | CoinCart",
+        item_in_cart: req.session.itemInCart ? req.session.itemInCart : 0,
+        btcPrice: priceValues[1],
+        ethPrice: priceValues[2],
+        ltcPrice: priceValues[3],
+        bnbPrice: priceValues[0],
+        solPrice: priceValues[4],
+      });
+    });
 });
 
 app.get(/^\/login(?:-([\w-]+))?(?:&F=([\w-]+)_([\w-]+))?$/, (req, res) => {
@@ -508,8 +550,7 @@ app.post("/login", (req, res) => {
           req.session.itemInCart = result[0].cart
             .slice(0, -1)
             .split(";").length;
-        }
-        else{
+        } else {
           req.session.itemInCart = 0;
         }
         req.session.save();
@@ -1131,28 +1172,26 @@ app.get("/checkout", (req, res) => {
 });
 
 app.post("/payment", (req, res) => {
- if (req.session.userName) {
-  database
-  .query(
-    "UPDATE users SET active_orders = CONCAT(active_orders, '" +
-      req.body.orderJSON +
-      "#'), cart = null WHERE username = '" +
-      req.session.userName +
-      "' ;"
-  )
-  .then(()=>{
-    req.session.itemInCart = 0;
-    res.render(__dirname + "/dummyPayment.ejs", {
-      title: "Dummy Payment",
-      totalAmount: req.body.total,
-    });
+  if (req.session.userName) {
+    database
+      .query(
+        "UPDATE users SET active_orders = CONCAT(active_orders, '" +
+          req.body.orderJSON +
+          "#'), cart = null WHERE username = '" +
+          req.session.userName +
+          "' ;"
+      )
+      .then(() => {
+        req.session.itemInCart = 0;
+        res.render(__dirname + "/dummyPayment.ejs", {
+          title: "Dummy Payment",
+          totalAmount: req.body.total,
+        });
+      })
+      .catch();
+  } else {
+    res.redirect("/login-cart");
   }
-
-  )
-  .catch();
- } else {
-  res.redirect('/login-cart')
- }
 });
 
 // AT LAST
