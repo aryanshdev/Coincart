@@ -63,16 +63,19 @@ app.get("/", (req, res) => {
         ])
     )
     .then(() => {
+      database.query("SELECT * FROM PRODUCTS ORDER BY RANDOM() LIMIT 6;").then((result)=> {
       res.render(__dirname + "/index.ejs", {
         item_in_cart: req.session.itemInCart ? req.session.itemInCart : 0,
         title: "CoinCart | Crypto Based Marketplace",
         btcPrice: priceValues[1],
         ethPrice: priceValues[2],
+        products : result,
         ltcPrice: priceValues[3],
         bnbPrice: priceValues[0],
         solPrice: priceValues[4],
       });
     });
+  });
 });
 
 app.get(/^\/login(?:-([\w-]+))?(?:&F=([\w-]+)_([\w-]+))?$/, (req, res) => {
