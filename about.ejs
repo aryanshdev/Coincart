@@ -1,0 +1,145 @@
+<%- include("ejs/header.ejs") -%>
+
+    <body>
+        <%- include("ejs/navbar.ejs") -%>
+            <main>
+                <div class="hero-area section-bg2">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="slider-area">
+                                    <div
+                                        class="slider-height2 slider-bg4 d-flex align-items-center justify-content-center">
+                                        <div class="hero-caption hero-caption2">
+                                            <h2>About Project</h2>
+                                            <nav aria-label="breadcrumb">
+                                                <ol class="breadcrumb justify-content-center">
+                                                    <li class="breadcrumb-item">
+                                                        <a href="/">Home</a>
+                                                    </li>
+                                                    <li class="breadcrumb-item"><a href="/shop">Shop</a></li>
+                                                </ol>
+                                            </nav>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <section class="contact-section">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <h2 class="contact-title">About Project</h2>
+                                <p>
+                                    CoinCart is a complete working prototype of a web store that
+                                    prefers Crypto as a payment option. CoinCart has all dummy features a marketplace
+                                    web app should have, namely:
+                                <ul class="list-ul">
+                                    <li>Account Creation & Management
+                                        <ul>
+                                            <li>User Registration</li>
+                                            <li>User Login</li>
+                                            <li>Change Name</li>
+                                            <li>Change Password</li>
+                                            <li>Add & Delete Saved Address</li>
+                                        </ul>
+                                    </li>
+                                    <li>Browse Dummy Products
+                                        <ul>
+                                            <li>Browse Products</li>
+                                            <li>Search Products</li>
+                                            <li>Add Products to Cart</li>
+                                            <li>Share Products</li>
+                                            <li>Review Products</li>
+                                        </ul>
+                                    </li>
+                                    <li>Cart Functionality
+                                        <ul>
+                                            <li>Add Products to Cart</li>
+                                            <li>View Functionality</li>
+                                            <li>Update Cart</li>
+                                            <li>View Total Cost</li>
+                                        </ul>
+                                    </li>
+                                    <li>Dummy Checkout & Payment</li>
+                                </ul><br>
+                                CoinCart uses Live Crypto Rates For Currency Conversions, And Shows Prices in USD to standardization of the prices.
+                                </p>
+
+                                <h2 class="contact-title">Technologies Used</h2>
+                                <ul class="list-ul">
+                                    <li>
+                                        Server-Side
+                                        <ul>
+                                            <li>NodeJS</li>
+                                            <li>Express</li>
+                                            <li>EJS</li>
+                                            <li>Express-Session</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        Client-Side
+                                        <ul>
+                                            <li> CSS <ul>
+                                                <li style="margin-left: 15px;">Bootstrap</li>
+                                               
+                                            </ul></li>
+                                            <li>JavaScript</li>
+                                            <li>EJS</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        Database
+                                        <ul>
+                                            <li>
+                                                PostgreSQL
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        APIs
+                                        <ul>
+                                            <li>Placeholder - For Product Image </li>
+                                            <li>CoinMarketCap API - Live Crypto Prices</li>
+                                            
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        Session Management using Express-Session
+                                    </li>
+                                    <li>
+                                        Hosting
+                                        <ul>
+                                            <li>Render.com - For Node Server Hosting</li>
+                                            <li>Retool.com - For Database</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <br>
+                                Hope You Find This Project Worth Exploring &gt;3  <br><br>
+                                REGARDS,<br>
+                                ARYANSHDEV (Aryansh Gupta)
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+            <style>
+                /* Restore Specific Properties to Initial Values */
+                ul.list-ul  {
+                    list-style-type: initial;
+                    margin-left: inherit;
+                    padding: inherit;
+                }
+
+                ul.list-ul li, ul.list-ul li ul li, ul.list-ul li ol li{
+                    list-style-type: inherit;
+                    margin-left: inherit;
+                    padding: inherit;
+                }
+            </style>
+            <%- include("ejs/footer.ejs") -%>
+    </body>

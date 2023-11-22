@@ -33,6 +33,7 @@ const database = pg(connectionURL);
 app.use(express.static(__dirname + "/public"));
 app.listen(3001);
 
+
 app.get("/", (req, res) => {
   var priceValues = [];
   fetch(
@@ -76,6 +77,49 @@ app.get("/", (req, res) => {
       });
     });
   });
+});
+
+
+app.get("/about",(req,res) =>{
+  var priceValues = [];
+  fetch(
+    "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=bnb,btc,eth,ltc,sol",
+    {
+      headers: {
+        "X-CMC_PRO_API_KEY": "41d0ca3c-84de-424b-8965-8be6465e9ca7",
+      },
+    }
+  )
+    .then((response) => response.json())
+    .then((response) => {
+      for (var asset in response.data) {
+        priceValues.push(
+          Math.round(response.data[asset][0].quote.USD.price).toString() +
+            " USD"
+        );
+      }
+    })
+    .catch(
+      (error) =>
+        (priceValues = [
+          "Unable To Fetch Currently",
+          "Unable To Fetch Currently",
+          "Unable To Fetch Currently",
+          "Unable To Fetch Currently",
+          "Unable To Fetch Currently",
+        ])
+    )
+    .then(() => {
+  res.render(__dirname+"/about.ejs", {
+    title: "About Project | CoinCart",
+    item_in_cart: req.session.itemInCart ? req.session.itemInCart : 0,
+    btcPrice: priceValues[1],
+    ethPrice: priceValues[2],
+    ltcPrice: priceValues[3],
+    bnbPrice: priceValues[0],
+    solPrice: priceValues[4]
+  })
+});
 });
 
 app.get(/^\/login(?:-([\w-]+))?(?:&F=([\w-]+)_([\w-]+))?$/, (req, res) => {
