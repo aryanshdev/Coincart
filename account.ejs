@@ -132,27 +132,27 @@
     <h5>Add New Address</h5>
     <div class="row">
       <div class="col-12 col-md-6 col-lg-6">
-        <input class="form-control valid" style="display: inline; margin-bottom: 2.5%;" type="text" name="fullName" placeholder="Full Name" required>
+        <input class="form-control valid" style="display: inline; margin-bottom: 2.5%;" oninput="checkRestricted(this)" type="text" name="fullName" placeholder="Full Name" required>
       </div>
       <div class="col-12 col-md-6 col-lg-6">
-        <input class="form-control valid" style="display: inline; margin-bottom: 2.5%;" type="tel" name="phoneNum" placeholder="Phone Number" required>
+        <input class="form-control valid" style="display: inline; margin-bottom: 2.5%;" oninput="checkRestricted(this)" type="tel" name="phoneNum" placeholder="Phone Number" required>
       </div>
 
       <div class="col-12 col-md-4 col-lg-4">
         <input class="form-control valid" style="display: inline; margin-bottom: 2.5%;" type="text" oninput="checkSymbols(this)" onblur="checkIn(this)" name="addressName" placeholder="Address For (eg. Home)" required>
       </div>
     <div class="col-12 col-md-8 col-lg-8">
-      <input class="form-control valid" style="display: inline; margin-bottom: 2.5%;" type="text" name="address" placeholder="Your Address" required>
+      <input class="form-control valid" style="display: inline; margin-bottom: 2.5%;" oninput="checkRestricted(this)" type="text" name="address" placeholder="Your Address" required>
     </div>
     
     <div class="col-12 col-md-4 col-lg-4">
-      <input class="form-control valid" style="display: inline; margin-bottom: 2.5%;" type="text" name="state" placeholder="Your State" required>
+      <input class="form-control valid" style="display: inline; margin-bottom: 2.5%;" oninput="checkRestricted(this)" type="text" name="state" placeholder="Your State" required>
     </div>
     <div class="col-12 col-md-4 col-lg-4">
-      <input class="form-control valid" style="display: inline; margin-bottom: 2.5%;" type="text" name="country" placeholder="Your Country" required>
+      <input class="form-control valid" style="display: inline; margin-bottom: 2.5%;" oninput="checkRestricted(this)" type="text" name="country" placeholder="Your Country" required>
     </div>
     <div class="col-12 col-md-4 col-lg-4">
-      <input class="form-control valid" style="display: inline; margin-bottom: 2.5%;" type="text" name="pin" placeholder="ZIP/PIN Code" required>
+      <input class="form-control valid" style="display: inline; margin-bottom: 2.5%;" oninput="checkRestricted(this)" type="text" name="pin" placeholder="ZIP/PIN Code" required>
     </div>
   </div>
   <button type="submit" class="btn">Save Address</button>  <button type="button" onclick="closeAddressForm()" class="btn">Cancel</button>
@@ -280,7 +280,11 @@
   }
   function checkSymbols(field){
     field.value = field.value.replace(/[\/\\]/g, '-');
+    field.value = field.value.replace(/['"]/g, ' ');
   }
+  function checkRestricted(field){
+          field.value = field.value.replace(/['"]/g, ' ');
+        } 
 </script>
 <style>
   #address_input_form{
