@@ -1097,12 +1097,17 @@ hr {
 
 .share-btn {
   border-radius: 50%;
-  padding: 12px 17px !important;
+  padding: 1px !important;
+  text-align: center;
 }
 
-.share-btn img {
-  margin-top: -5px;
-  margin-left: -10px;
+.share-btn svg {
+  fill: white;
+}
+
+.share-btn:hover svg{
+  fill: #ff7f00;
+  transition: 0.25s linear;
 }
 
 .header-area .header-top {

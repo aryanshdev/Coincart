@@ -68,7 +68,17 @@
                                             <p>(<%= totalReviews ? totalReviews : 0 %> Reviews)</p>
                                         </div>
                                         <a href=<%= "/add-"+ code %> style="border:white" class="white-btn mr-10">Add to Cart</a>
-                                        <a href="#" id="shareButton" style="width: 50px;height: 50px;" class="border-btn share-btn"><img src="https://img.icons8.com/fluency-systems-regular/35/ffffff/share-3.png"></a>
+                                        <a id="shareButton" style="width: 50px;height: 50px;" class="border-btn share-btn">
+                                           <div style="width: 90%; height: 90%; margin: auto;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="80%" height="auto" viewBox="0 0 256.000000 256.000000" preserveAspectRatio="xMidYMid meet">
+
+                                                <g transform="translate(0.000000,256.000000) scale(0.100000,-0.100000)">
+                                                <path d="M369 2191 l-29 -29 0 -882 0 -882 29 -29 29 -29 882 0 882 0 29 29 c16 16 29 39 29 51 0 29 -26 76 -45 84 -9 3 -388 6 -841 6 l-824 0 0 824 c0 453 -3 832 -6 841 -8 19 -55 45 -84 45 -12 0 -35 -13 -51 -29z"/>
+                                                <path d="M1821 2113 c-12 -10 -24 -35 -28 -55 -5 -35 -2 -41 62 -108 l68 -70 -214 0 c-308 -1 -410 -23 -558 -124 -130 -89 -232 -233 -277 -391 -23 -81 -32 -596 -12 -635 26 -49 86 -61 133 -26 19 14 20 30 26 298 7 307 12 343 69 443 64 112 167 196 290 237 57 19 94 22 303 26 130 2 237 1 237 -4 0 -4 -29 -38 -65 -75 -75 -78 -82 -104 -36 -150 57 -56 86 -42 258 133 128 130 152 165 139 205 -3 11 -73 85 -154 166 -136 134 -152 147 -184 147 -20 0 -45 -8 -57 -17z"/>
+                                                </g>
+                                                </svg>
+                                            </div>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -233,14 +243,11 @@
       navigator.share({
         title: 'Come Have A Look At This Amazing Product',
         text: "<%= productName %>",
-        url: window.location.href,
+         url: "/product-"+<%= code %>,
       })
       .then(() => console.log('Shared successfully'))
       .catch((error) => console.error('Error sharing:', error));
-    } else {
-      // Fallback: Show custom share modal
-      shareModal.style.display = 'block';
-    }
+    } 
 });
 
     </script>
