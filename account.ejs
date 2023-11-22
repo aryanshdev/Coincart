@@ -188,8 +188,8 @@
                                 <div class="row">
                                   <div class="col-sm-12 col-md-9 col-lg-9">
                                     <p><strong>Quantity : </strong> <%= productsInOrder[product].split(',')[1] %> </p>
-                                    <p><strong>Order On : </strong> <%= new Date(j).toLocaleDateString() %> around  <%= new Date(j).toLocaleTimeString([],{ hour: "2-digit", minute: "2-digit" }) %> </p>
-                                    <p><strong>Ordered At : </strong> <%= singleOrderData[j].addSrt +' - ' + addresses[singleOrderData[j].addSrt].split("|")[2] %></p>
+                                    <p><strong>Ordered On : </strong> <%= new Date(j).toLocaleDateString() %> around  <%= new Date(j).toLocaleTimeString([],{ hour: "2-digit", minute: "2-digit" }) %> </p>
+                                    <p><strong>Ordered To : </strong> <%= singleOrderData[j].addSrt +' - ' + addresses[singleOrderData[j].addSrt].split("|")[2] %></p>
                                   </div>
                                   <div class="col-sm-12 col-md-3 col-lg-3 secondSection">
                                     <a href="/product-<%= product %>#description" style="color: #ff7f00;" >Review</a>
