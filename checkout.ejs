@@ -129,10 +129,16 @@
                       <p>Shipping</p> <span>FREE</span>
                     </li>
                     <li>
-                      <p>Total </p> <span><%= subTotal %> USD</span> 
+                      <p>Total </p> <span><%= subTotal %> USD  <span style="display: inline;" flow="pay" tooltip="In BTC : <%= ((1/parseInt(btcPrice))*subTotal).toFixed(7) %> BTC 
+                        In ETH : <%= ((1/parseInt(ethPrice))*subTotal).toFixed(7) %> ETH 
+                        In LTC : <%= ((1/parseInt(ltcPrice))*subTotal).toFixed(7) %> LTC 
+                        In BNB : <%= ((1/parseInt(bnbPrice))*subTotal).toFixed(7) %> BNB 
+                        In SOL : <%= ((1/parseInt(solPrice))*subTotal).toFixed(7) %> SOL " class="price-exchange"> 
+                        <img style="margin: auto; width: auto;" src='https://img.icons8.com/ios-filled/ff7f00/24/change.png' alt="">
+                    </span></span> 
                     </li>
                   </ul>
-                  <form method="post" action="/payment"> <input hidden value="" name="orderJSON"> <input hidden value="<%= subTotal %>" name="total"><button type="submit" id="paymentProceed" class="btn w-100">Proceed to Pay With Crypto</button> <p style="text-align: center;" id="addressInfo">Add/Select Address To Continue</p></form>
+                  <form method="post" action="/payment"> <input hidden value="" name="orderJSON"><input hidden value="<%= subTotal %>" name="total"> <p style="text-align: center; margin: 15px 0px;" >You Will Be Redirected To A Fake Payment Gateway</p>  <button style="padding: 22px 5%;" type="submit" id="paymentProceed" class="btn w-100">Proceed to Pay With Crypto</button> <p style="text-align: center;" id="addressInfo">Add/Select Address To Continue</p></form>
                   
                 </div>
               </div>

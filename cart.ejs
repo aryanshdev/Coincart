@@ -71,7 +71,13 @@
                                     </td>
                                     <td>
                                         <h5 id="total-subtotal">
-                                            <%= subTotal %> USD
+                                             <%= subTotal %> USD <span style="display: inline;" flow="pay" tooltip="In BTC : <%= ((1/parseInt(btcPrice))*subTotal).toFixed(7) %> BTC 
+                                                In ETH : <%= ((1/parseInt(ethPrice))*subTotal).toFixed(7) %> ETH 
+                                                In LTC : <%= ((1/parseInt(ltcPrice))*subTotal).toFixed(7) %> LTC 
+                                                In BNB : <%= ((1/parseInt(bnbPrice))*subTotal).toFixed(7) %> BNB 
+                                                In SOL : <%= ((1/parseInt(solPrice))*subTotal).toFixed(7) %> SOL " class="price-exchange"> 
+                                                <img style="margin: auto; width: auto;" src='https://img.icons8.com/ios-filled/ff7f00/25/change.png' alt="">
+                                            </span>
                                         </h5>
                                     </td>
                                 </tr>
