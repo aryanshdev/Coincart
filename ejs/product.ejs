@@ -42,7 +42,7 @@
                                         <h3><%= productName %></h3>
                                         <a href="/search&q=<%= category %>" ><p><%= category %></p></a>
                                         <div class="price">
-                                            <span><%= productPrice %> USD <span style="display: inline;" tooltip="In BTC : <%= ((1/parseInt(btcPrice))*productPrice).toFixed(7) %> BTC 
+                                            <span><%= productPrice %> USD <span style="display: inline;" flow="product" tooltip="In BTC : <%= ((1/parseInt(btcPrice))*productPrice).toFixed(7) %> BTC 
                                                 In ETH : <%= ((1/parseInt(ethPrice))*productPrice).toFixed(7) %> ETH 
                                                 In LTC : <%= ((1/parseInt(ltcPrice))*productPrice).toFixed(7) %> LTC 
                                                 In BNB : <%= ((1/parseInt(bnbPrice))*productPrice).toFixed(7) %> BNB 

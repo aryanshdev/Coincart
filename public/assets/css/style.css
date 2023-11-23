@@ -1626,13 +1626,13 @@ hr {
 }
 
 /* START TOOLTIP STYLES */
-[tooltip] {
+[tooltip][flow^="product"] {
   position: relative; /* opinion 1 */
 }
 
 /* Applies to all tooltips */
-[tooltip]::before,
-[tooltip]::after {
+[tooltip][flow^="product"]::before,
+[tooltip][flow^="product"]::after {
   text-transform: none; /* opinion 2 */
   font-size: 0.9em; /* opinion 3 */
   line-height: 1;
@@ -1642,12 +1642,12 @@ hr {
   display: none;
   opacity: 0;
 }
-[tooltip]::before {
+[tooltip][flow^="product"]::before {
   content: "";
-  border: 10px solid transparent; /* opinion 4 */
+  border: 15px solid transparent; /* opinion 4 */
   z-index: 1001; /* absurdity 1 */
 }
-[tooltip]::after {
+[tooltip][flow^="product"]::after {
   content: attr(tooltip); /* Set the tooltip content */
   width: 200px;
   text-align: left !important;
@@ -1670,8 +1670,8 @@ hr {
 }
 
 /* Make the tooltips respond to hover */
-[tooltip]:hover::before,
-[tooltip]:hover::after {
+[tooltip][flow^="product"]:hover::before,
+[tooltip][flow^="product"]:hover::after {
   display: block;
 }
 
@@ -1682,14 +1682,14 @@ hr {
 }
 
 /* FLOW: RIGHT */
-[tooltip]::before {
+[tooltip][flow^="product"]::before {
   top: 50%;
   border-left-width: 0;
   border-right-color: white;
   right: calc(0em - 10px);
   transform: translate(0.5em, -50%);
 }
-[tooltip]::after {
+[tooltip][flow^="product"]::after {
   top: 50%;
   left: calc(100% + 10px);
   transform: translate(0.5em, -50%);
@@ -1711,8 +1711,8 @@ hr {
 }
 
 /* FX All The Things */
-[tooltip]:hover::before,
-[tooltip]:hover::after {
+[tooltip][flow^="product"]:hover::before,
+[tooltip][flow^="product"]:hover::after {
   animation: tooltips-horz 300ms ease-out forwards;
 }
 
@@ -2337,26 +2337,26 @@ hr {
 
 /* Toltip Responsive */
 @media (max-width: 425px) {
-  [tooltip]::before {
+  [tooltip][flow^="product"]::before {
     content: "";
-    border: 10px solid transparent; /* opinion 4 */
+    border: 15px solid transparent; /* opinion 4 */
     z-index: 1001; /* absurdity 1 */
   }
-  [tooltip]::before {
+  [tooltip][flow^="product"]::before {
     top: 100%;
     border-top-width: 0;
     border-bottom-color: white;
   }
-  [tooltip]::after {
-    top: calc(100% + 10px);
+  [tooltip][flow^="product"]::after {
+    top: calc(100% + 14.5px);
   }
-  [tooltip]::before,
-  [tooltip]::after {
+  [tooltip][flow^="product"]::before,
+  [tooltip][flow^="product"]::after {
     left: 50%;
     transform: translate(-50%, 0.5em);
   }
-  [tooltip]:hover::before,
-  [tooltip]:hover::after {
+  [tooltip][flow^="product"]:hover::before,
+  [tooltip][flow^="product"]:hover::after {
     animation: tooltips-vert 300ms ease-out forwards;
   }
 }
