@@ -192,7 +192,7 @@
                                     <p><strong>Ordered To : </strong> <%= singleOrderData[j].addSrt +' - ' + addresses[singleOrderData[j].addSrt].split("|")[2] %></p>
                                   </div>
                                   <div class="col-sm-12 col-md-3 col-lg-3 secondSection">
-                                    <a href="/product-<%= product %>#description" style="color: #ff7f00;" >Review</a>
+                                    <a href="/product-<%= product %>?tab=three" style="color: #ff7f00;" >Review</a>
                                     <a href="/product-<%= product %>" style="color: #ff7f00;">View</a>
                                   </div>
                                 </div>
@@ -285,6 +285,7 @@
   function checkRestricted(field){
           field.value = field.value.replace(/['"]/g, ' ');
         } 
+
 </script>
 <style>
   #address_input_form{
@@ -293,5 +294,12 @@
   #address_input_btn{
     margin: 15px;
   }
+
 </style>
 <%- include("ejs/footer.ejs") %>
+<script>
+     
+     if (new URLSearchParams(window.location.search).has('tab')) {
+    document.querySelector("#nav-"+new URLSearchParams(window.location.search).get('tab') +"-tab").click();
+    }
+</script>

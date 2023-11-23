@@ -741,7 +741,7 @@ app.post("/review::id", (req, res) => {
         );
       }
     })
-    .finally(res.redirect("/product-" + req.params.id));
+    .finally(res.redirect("/product-" + req.params.id +"?tab=three"));
 });
 
 app.get("/add-:id", (req, res) => {

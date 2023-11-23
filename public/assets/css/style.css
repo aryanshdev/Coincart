@@ -326,13 +326,14 @@ hr {
   position: absolute;
   top: 0;
   left: 0;
+  display: flex;
   width: 110%;
   font-weight: 800;
   border-radius: 10px;
   text-align: center;
   height: 105%;
   background-color: rgb(
-    255 127 0 / 70%
+    255 127 0 / 80%
   ); /* Semi-transparent background color */
   z-index: 999; /* Ensure it appears on top of other elements */
 }
