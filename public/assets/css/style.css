@@ -1137,7 +1137,7 @@ hr {
 
 @media only screen and (min-width: 576px) and (max-width: 767px) {
   .header-area .header-top .header-info-left {
-    display: none;
+    display: block;
   }
 }
 

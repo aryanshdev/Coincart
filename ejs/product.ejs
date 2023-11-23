@@ -145,7 +145,7 @@
                                     <div class="row" id="form" style="position: relative;">
                                         
                                 <div id="overlay" class="overlay"> 
-                                    <a href="/login-product-<%= code %>?tab=three" style="text-decoration: underline;margin:auto; color: white; font-weight: 600;font-size: calc(1.375rem + 1.5vw);">Login To Review
+                                    <a href="/login-product-<%= code %>?tab=three" style="text-decoration: underline;margin:auto; color: white; font-weight: 700;font-size: calc(1.375rem + 1.5vw);">Login To Review
                                     </a>
                                      </div>
                                         <div class="star-selection">
@@ -221,7 +221,7 @@
         }
 
         if (<%=  reviews ? (reviews[username] ? 1: 0) : 0 %>){
-            overlay.innerHTML = '<h1 style="color: white; font-weight: 600;">Already Reviewed </h1>';
+            overlay.innerHTML = '<h1 style="color: white; font-weight: 700;">Already Reviewed </h1>';
             overlay.style.display = "";
         }
 
