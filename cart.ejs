@@ -56,7 +56,7 @@
                                     <td >
                                         <% if (item_in_cart > 0) { %>
                                         <form style="display: inline-block; margin: 0 2.5% 2.5% 0; width: fit-content;" method="post" action="/empty-cart"><button type="submit" class="btn">Empty Cart</button></form>
-                                        <form style="display: inline-block; margin: 0 2.5% 2.5% 0;" method="post" action="/update-cart"><input hidden name="newCartString" value="" id="newCartStringContainer"> <button type="submit" class="btn">Update Cart</button> </form>
+                                        <form style="display: inline-block; margin: 0 2.5% 2.5% 0;" method="post"onsubmit="javascript:this.firstElementChild.disabled=true" action="/update-cart"><input hidden name="newCartString" value="" id="newCartStringContainer"> <button type="submit" class="btn">Update Cart</button> </form>
                                         <% } %>
                                     </td>
                                     <td></td>

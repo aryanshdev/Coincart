@@ -18,7 +18,8 @@ app.use(parser.urlencoded({ extended: false }));
 app.set("view engine", "ejs");
 
 // COIN MARKET API URL : ADD  BACK WHEN COMMITING
-
+// MAIN : 41d0ca3c-84de-424b-8965-8be6465e9ca7
+// FAKE : 5fe8f10a-d28c-4767-8a14-96728256fa3c
 // https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=bnb,btc,eth,ltc,sol
 
 // URL END
@@ -27,9 +28,6 @@ const connectionURL =
   "postgresql://retool:69xhVYmQuste@ep-morning-cherry-23207962.us-west-2.retooldb.com/retool?sslmode=require";
 const database = pg(connectionURL);
 
-// let item_in_cart = 0;
-// let req.session.userName= null;
-// let req.session.fullName= null;
 app.use(express.static(__dirname + "/public"));
 app.listen(3001);
 
@@ -39,7 +37,7 @@ app.get("/", (req, res) => {
     "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=bnb,btc,eth,ltc,sol",
     {
       headers: {
-        "X-CMC_PRO_API_KEY": "41d0ca3c-84de-424b-8965-8be6465e9ca7",
+        "X-CMC_PRO_API_KEY": "5fe8f10a-d28c-4767-8a14-96728256fa3c",
       },
     }
   )
@@ -86,7 +84,7 @@ app.get("/about", (req, res) => {
     "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=bnb,btc,eth,ltc,sol",
     {
       headers: {
-        "X-CMC_PRO_API_KEY": "41d0ca3c-84de-424b-8965-8be6465e9ca7",
+        "X-CMC_PRO_API_KEY": "5fe8f10a-d28c-4767-8a14-96728256fa3c",
       },
     }
   )
@@ -128,7 +126,7 @@ app.get("/privacy", (req, res) => {
     "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=bnb,btc,eth,ltc,sol",
     {
       headers: {
-        "X-CMC_PRO_API_KEY": "41d0ca3c-84de-424b-8965-8be6465e9ca7",
+        "X-CMC_PRO_API_KEY": "5fe8f10a-d28c-4767-8a14-96728256fa3c",
       },
     }
   )
@@ -170,7 +168,7 @@ app.get(/^\/login(?:-([\w-]+))?(?:&F=([\w-]+)_([\w-]+))?$/, (req, res) => {
     "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=bnb,btc,eth,ltc,sol",
     {
       headers: {
-        "X-CMC_PRO_API_KEY": "41d0ca3c-84de-424b-8965-8be6465e9ca7",
+        "X-CMC_PRO_API_KEY": "5fe8f10a-d28c-4767-8a14-96728256fa3c",
       },
     }
   )
@@ -228,7 +226,7 @@ app.get("/account", (req, res) => {
     "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=bnb,btc,eth,ltc,sol",
     {
       headers: {
-        "X-CMC_PRO_API_KEY": "41d0ca3c-84de-424b-8965-8be6465e9ca7",
+        "X-CMC_PRO_API_KEY": "5fe8f10a-d28c-4767-8a14-96728256fa3c",
       },
     }
   )
@@ -298,7 +296,7 @@ app.get("/register", (req, res) => {
     "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=bnb,btc,eth,ltc,sol",
     {
       headers: {
-        "X-CMC_PRO_API_KEY": "41d0ca3c-84de-424b-8965-8be6465e9ca7",
+        "X-CMC_PRO_API_KEY": "5fe8f10a-d28c-4767-8a14-96728256fa3c",
       },
     }
   )
@@ -341,7 +339,7 @@ app.get("/product-:id", (req, res) => {
     "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=bnb,btc,eth,ltc,sol",
     {
       headers: {
-        "X-CMC_PRO_API_KEY": "41d0ca3c-84de-424b-8965-8be6465e9ca7",
+        "X-CMC_PRO_API_KEY": "5fe8f10a-d28c-4767-8a14-96728256fa3c",
       },
     }
   )
@@ -420,7 +418,7 @@ app.get("/cart", (req, res) => {
     "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=bnb,btc,eth,ltc,sol",
     {
       headers: {
-        "X-CMC_PRO_API_KEY": "41d0ca3c-84de-424b-8965-8be6465e9ca7",
+        "X-CMC_PRO_API_KEY": "5fe8f10a-d28c-4767-8a14-96728256fa3c",
       },
     }
   )
@@ -597,7 +595,7 @@ app.get("/contact", (req, res) => {
     "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=bnb,btc,eth,ltc,sol",
     {
       headers: {
-        "X-CMC_PRO_API_KEY": "41d0ca3c-84de-424b-8965-8be6465e9ca7",
+        "X-CMC_PRO_API_KEY": "5fe8f10a-d28c-4767-8a14-96728256fa3c",
       },
     }
   )
@@ -783,7 +781,7 @@ app.get("/shop", (req, res) => {
     "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=bnb,btc,eth,ltc,sol",
     {
       headers: {
-        "X-CMC_PRO_API_KEY": "41d0ca3c-84de-424b-8965-8be6465e9ca7",
+        "X-CMC_PRO_API_KEY": "5fe8f10a-d28c-4767-8a14-96728256fa3c",
       },
     }
   )
@@ -854,7 +852,7 @@ app.get("/search&q=:product", (req, res) => {
     "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=bnb,btc,eth,ltc,sol",
     {
       headers: {
-        "X-CMC_PRO_API_KEY": "41d0ca3c-84de-424b-8965-8be6465e9ca7",
+        "X-CMC_PRO_API_KEY": "5fe8f10a-d28c-4767-8a14-96728256fa3c",
       },
     }
   )
@@ -1109,7 +1107,7 @@ app.post("/checkout", (req, res) => {
     "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=bnb,btc,eth,ltc,sol",
     {
       headers: {
-        "X-CMC_PRO_API_KEY": "41d0ca3c-84de-424b-8965-8be6465e9ca7",
+        "X-CMC_PRO_API_KEY": "5fe8f10a-d28c-4767-8a14-96728256fa3c",
       },
     }
   )

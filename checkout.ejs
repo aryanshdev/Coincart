@@ -57,7 +57,7 @@
     <% } %>
     
     <div>
-      <form action="/addNewAddress/1" method="post" class="pt-30" style="margin-bottom: 2.5px;" id="address_input_form">
+      <form action="/addNewAddress/1" method="post" onsubmit="javascript:document.querySelector('button.btn[name=\'addFormSubmit\']').disabled=true" class="pt-30" style="margin-bottom: 2.5px;" id="address_input_form">
         <h5>Add New Address</h5>
         <div class="row">
           <div class="col-12 col-md-6 col-lg-6">
@@ -84,7 +84,7 @@
           <input class="form-control valid" style="display: inline; margin-bottom: 2.5%;" oninput="checkRestricted(this)" type="text" name="pin" placeholder="ZIP/PIN Code" required>
         </div>
       </div>
-      <button type="submit" class="btn">Save Address</button>  <button type="button" onclick="closeAddressForm()" class="btn">Cancel</button>
+      <button type="submit" name="addFormSubmit" class="btn">Save Address</button>  <button type="button" onclick="closeAddressForm()" class="btn">Cancel</button>
       </form>
     </div>
             </div>

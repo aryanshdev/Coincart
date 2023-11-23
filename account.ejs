@@ -114,7 +114,7 @@
                 <td> <%= i %></td>
                 <td><%- '<strong>'+ details[0]+' </strong> <br> '+ details[1]  +' <br> '+details[2]  %></td>
                 <td>
-                    <form method="post" action="/delAdd<%= i %>">
+                    <form method="post" onsubmit="javascript:this.firstChildElement.disabled=true" action="/delAdd<%= i %>">
                         <button type="submit" class="showDeleteButton"><span></span></button>
                     </form>
                 </td>
@@ -128,7 +128,7 @@
 <% } %>
 
 <div>
-  <form action="/addNewAddress" method="post" class="pt-30" id="address_input_form">
+  <form action="/addNewAddress" onsubmit="javascript:document.querySelector('button.btn[name=\'addFormSubmit\']').disabled=true" method="post" class="pt-30" id="address_input_form">
     <h5>Add New Address</h5>
     <div class="row">
       <div class="col-12 col-md-6 col-lg-6">
@@ -155,7 +155,7 @@
       <input class="form-control valid" style="display: inline; margin-bottom: 2.5%;" oninput="checkRestricted(this)" type="text" name="pin" placeholder="ZIP/PIN Code" required>
     </div>
   </div>
-  <button type="submit" class="btn">Save Address</button>  <button type="button" onclick="closeAddressForm()" class="btn">Cancel</button>
+  <button type="submit" name="addFormSubmit" class="btn">Save Address</button>  <button type="button" onclick="closeAddressForm()" class="btn">Cancel</button>
   </form>
 </div>
 
@@ -189,10 +189,10 @@
                                   <div class="col-sm-12 col-md-9 col-lg-9">
                                     <p><strong>Quantity : </strong> <%= productsInOrder[product].split(',')[1] %> </p>
                                     <p><strong>Ordered On : </strong> <%= new Date(j).toLocaleDateString() %> around  <%= new Date(j).toLocaleTimeString([],{ hour: "2-digit", minute: "2-digit" }) %> </p>
-                                    <p><strong>Ordered To : </strong> <%= singleOrderData[j].addSrt +' - ' + addresses[singleOrderData[j].addSrt].split("|")[2] %></p>
+                                    <p><strong>Ordered To : </strong> <%=  addresses[singleOrderData[j].addSrt] ? singleOrderData[j].addSrt +' - ' + addresses[singleOrderData[j].addSrt].split("|")[2] : singleOrderData[j].addSrt %></p>
                                   </div>
                                   <div class="col-sm-12 col-md-3 col-lg-3 secondSection">
-                                    <a href="/product-<%= product %>?tab=three" style="color: #ff7f00;" >Review</a>
+                                    <a href="/product-<%= product %>?tab=three#description" style="color: #ff7f00;" >Review</a>
                                     <a href="/product-<%= product %>" style="color: #ff7f00;">View</a>
                                   </div>
                                 </div>
@@ -223,17 +223,17 @@
                     <div class="offset-xl-1 col-lg-12">
                     <div>
                       <h4>Change Account Name</h4>
-                      <form action="/changename" method="post" style="padding-bottom: 4%;">
+                      <form action="/changename" onsubmit="javascript:document.querySelector('button.btn[name=\'nameFormButton\']').disabled=true" method="post" style="padding-bottom: 4%;">
                         <div class="row">
                           <div class="col-12 col-md-8  col-lg-8">
                             <input class="form-control valid" style="display: inline; margin-bottom: 2.5%;" type="text" name="newName" placeholder="Enter Full Name" required>
                           </div>
                         </div>
-                        <button type="submit" class="btn">Change Name</button>
+                        <button type="submit" name="nameFormButton" class="btn">Change Name</button>
                       </form>
 
                       <h4>Change Password</h4>
-                      <form action="/changepass" method="post" style="padding-bottom: 4%;">
+                      <form action="/changepass" onsubmit="javascript:document.querySelector('button.btn[name=\'passwordFormButton\']').disabled=true" method="post" style="padding-bottom: 4%;">
                         <div class="row">
                           <div class="col-12 col-md-4  col-lg-4">
                             <input class="form-control valid" style="display: inline; margin-bottom: 2.5%;" type="text" name="currentPass" placeholder="Current Password" required>
@@ -246,7 +246,7 @@
                           </div>
                           
                         </div>
-                        <button type="submit" class="btn">Change Password</button>
+                        <button type="submit" name="passwordFormButton" class="btn">Change Password</button>
                       </form>
                      
                     </div>

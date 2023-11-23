@@ -67,7 +67,7 @@
                                             </div>
                                             <p>(<%= totalReviews ? totalReviews : 0 %> Reviews)</p>
                                         </div>
-                                        <a href=<%= "/add-"+ code %> style="border:white" class="white-btn mr-10">Add to Cart</a>
+                                        <a onclick="javascript:this.removeAttribute('href')" href=<%= "/add-"+ code %> style="border:white" class="white-btn mr-10">Add to Cart</a>
                                         <a id="shareButton" style="width: 50px;height: 50px;" class="border-btn share-btn">
                                            <div style="width: 90%; height: 90%; margin: auto;">
                                             <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="80%" height="auto" viewBox="0 0 256.000000 256.000000" preserveAspectRatio="xMidYMid meet">
@@ -87,10 +87,10 @@
                 </div>
             </div>
         </div>
-
+        <a name="description"></a>
 
         <section class="our-client section-padding best-selling">
-            <a name="description"></a>
+   
             <div class="container">
                 <div class="row">
                     <div class="offset-xl-1 col-xl-10">
@@ -221,7 +221,7 @@
         }
 
         if (<%=  reviews ? (reviews[username] ? 1: 0) : 0 %>){
-            overlay.innerHTML = '<h1 style="color: white; font-weight: 700;">Already Reviewed </h1>';
+            overlay.innerHTML = '<h1 style="color: white; margin:auto; font-weight: 700;">Already Reviewed </h1>';
             overlay.style.display = "";
         }
 

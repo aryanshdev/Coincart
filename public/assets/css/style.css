@@ -327,11 +327,10 @@ hr {
   top: 0;
   left: 0;
   display: flex;
-  width: 110%;
-  font-weight: 800;
-  border-radius: 10px;
+  width: 100%;
+  border-radius: 5px;
   text-align: center;
-  height: 105%;
+  height: 110%;
   background-color: rgb(
     255 127 0 / 80%
   ); /* Semi-transparent background color */
