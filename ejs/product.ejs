@@ -67,7 +67,8 @@
                                             </div>
                                             <p>(<%= totalReviews ? totalReviews : 0 %> Reviews)</p>
                                         </div>
-                                        <a href=<%= "/add-"+ code %> style="border:white" class="white-btn mr-10">Add to Cart</a>
+                                        <button style="vertical-align: top;" onclick='javascript:this.disabled = true; window.location="/add-<%= code %>"' class="white-btn mr-10">Add To Cart</button>
+                                        <!-- <a href style="border:white" >Add to Cart</a> -->
                                         <a id="shareButton" style="width: 50px;height: 50px;" class="border-btn share-btn">
                                            <div style="width: 90%; height: 90%; margin: auto;">
                                             <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="80%" height="auto" viewBox="0 0 256.000000 256.000000" preserveAspectRatio="xMidYMid meet">
