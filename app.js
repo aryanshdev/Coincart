@@ -1192,6 +1192,10 @@ app.post("/payment", (req, res) => {
   }
 });
 
+app.get("/ping", (req,res) =>{
+  res.send("<h1>SERVER ONLINE</h1><br>TAKE A CHILL PILL<br><a href='/'> RETURN TO HOME PAGE </a><br><br>&copy;ARYANSH GUPTA")
+})
+
 // AT LAST
 app.all("*", (req, res) => {
   res.status(404).render(__dirname + "/ejs/info-pg.ejs", {
