@@ -1193,7 +1193,7 @@ app.post("/payment", (req, res) => {
 });
 
 app.get("/ping", (req,res) =>{
-  res.send("<h1>SERVER ONLINE</h1><br>TAKE A CHILL PILL<br><a href='/'> RETURN TO HOME PAGE </a><br><br>&copy;ARYANSH GUPTA")
+  res.send("<body style='text-align:center; padding:5%; font-size:larger'><h1>SERVER ONLINE</h1><img src='https://media1.tenor.com/images/770d07a0b28b45dd88a15a93879741a2/tenor.gif?itemid=14178373'> <br><br><br><a href='/'> RETURN TO HOME PAGE </a><br><br>&copy;ARYANSH GUPTA</body>")
 })
 
 // AT LAST

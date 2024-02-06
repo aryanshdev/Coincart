@@ -174,5 +174,19 @@
     </div>
   </main>
 
+  <script>
+    function shareProduct(proCode, proName){ 
+       if (navigator.share) {
+  // Web Share API is supported
+  navigator.share({
+    title: 'Come Have A Look At This Amazing Product',
+    text: proName,
+    url: "/product-"+proCode,
+  })
+} else {
+
+}}
+
+</script>
 
   <%- include("ejs/footer.ejs") -%>
