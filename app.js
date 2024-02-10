@@ -646,42 +646,25 @@ app.post("/register", (req, res) => {
     req.body.password == req.body.password_con &&
     /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(req.body.email)
   ) {
-    database
-      .query(
-        "INSERT INTO users (username,name,password,cart) VALUES ('" +
-          req.body.email.toLowerCase() +
-          "','" +
-          req.body.name +
-          "','" +
-          req.body.password +
-          "',null);"
-      )
-      .then((result) => {
-        res.render(__dirname + "/ejs/info-pg.ejs", {
-          title: "Registeration Success",
-          pageTitle: "Account Registration Successful",
-          message:
-            "<br><br><h6><a style='color:#ff7f00 'href='/login'> Click Here To Conitnue To Login </a> </h6>",
-        });
-      })
-      .catch((error) => {
-        if (error.code == 23505) {
-          res.render(__dirname + "/ejs/info-pg.ejs", {
-            title: "Registeration Success",
-            pageTitle: "Account Already Exists",
-            message:
-              "<br><br><h6><a style='color:#ff7f00 'href='/login'> Click Here </a> To Conitnue To Login or <a style='color:#ff7f00 'href='/register'> Click Here </a> To Create New Account </h6>",
-          });
-        }
-        if (error.errno === -4039) {
-          res.render(__dirname + "/ejs/info-pg.ejs", {
-            title: "Connectivity Issue | CoinCart",
-            pageTitle: "There was a connection issue, please try again later",
-            message:
-              "<br><h6><a style='color:#ff7f00 'href='/'> Click Here To Return To HomePage </a> </h6>",
-          });
-        }
-      });
+    req.session.registrationCode = Math.floor(
+      Math.random() * 1000000
+    ).toString();
+    mailTransporter.sendMail({
+      from: "CoinCart aryanshdevyt@gmail.com",
+      to: req.body.email,
+      subject: "Account Verification Code | CoinCart",
+      html:
+        "<div style='text-align:center;font-family: sans-serif; margin: 2.5%; padding:2.5%; border-radius:15px;  border: 2.5px solid #ff7f00; '> <img src='https://coincart.onrender.com/assets/img/icon/loder.png' width='40%'><hr><h2> Your Verification Code Is </h2> <h1> " +
+        req.session.registrationCode +
+        "</h1> <p> Don't Share It With Anyone <br> If You Did Not Request A Verification Code, Please Ignore This Email. </p></div>",
+    });
+    req.session.registrationINFO =
+      req.body.email.toLowerCase() +
+      "','" +
+      req.body.name +
+      "','" +
+      req.body.password;
+    res.redirect("/otpcheck");
   } else {
     res.sendStatus(400);
   }
@@ -1250,15 +1233,22 @@ app.post("/resetPass:display?", (req, res) => {
   req.session.timesCodeSent = req.session.timesCodeSent
     ? req.session.timesCodeSent + 1
     : 0;
-  req.session.save();
 });
 
-app.get("/otpcheck:display?:alert?", (req, res) => {
-  if (req.session.resetCode) {
+app.get("/otpcheck:display?", (req, res) => {
+  let msg = req.session.resetCode
+    ? "Password Reset"
+    : req.session.registrationCode
+    ? "Verification"
+    : undefined;
+  if (msg) {
     res.render(__dirname + "/ejs/check-otp.ejs", {
       title: "Reset Password | CoinCart",
-      alertMessage:
-        req.params.alert === "1" ? "Wrong Reset Code, Try Again" : null,
+      codeType: msg,
+      otpMessage:
+        "A " +
+        msg +
+        " Code Has Been Sent To Your Email. Please Enter The Code Below. If You Don't Receive The Code Within 3 Minutes, Please Check Spam Folder",
       displayProp: req.params.display ? "block" : "none",
     });
   } else {
@@ -1266,29 +1256,83 @@ app.get("/otpcheck:display?:alert?", (req, res) => {
   }
 });
 
-app.post("/check-otp", (req, res) => {
-  if (req.body.otp === req.session.resetCode) {
-    res.render(__dirname + "/reset-pass-page.ejs", {title:"Enter New Password",displayProp: "none"});
+app.post("/check-otp-:type", (req, res) => {
+  let codeToMatch =
+    req.params.type === "Password Reset"
+      ? req.session.resetCode
+      : req.session.registrationCode;
+  if (req.body.otp === codeToMatch) {
+    if (req.params.type === "Password Reset") {
+      res.render(__dirname + "/reset-pass-page.ejs", {
+        title: "Enter New Password",
+        displayProp: "none",
+      });
+    } else if (req.params.type === "Verification") {
+      database
+        .query(
+          "INSERT INTO users (username,name,password,cart) VALUES ('" +
+            req.session.registrationINFO +
+            "',null);"
+        )
+        .then((result) => {
+          delete req.session.registrationCode;
+          delete req.session.registrationINFO;
+          res.render(__dirname + "/ejs/info-pg.ejs", {
+            title: "Registration Success",
+            pageTitle: "Account Registration Successful",
+            message:
+              "<br><br><h6><a style='color:#ff7f00 'href='/login'> Click Here To Conitnue To Login </a> </h6>",
+          });
+        })
+        .catch((error) => {
+          if (error.code == 23505) {
+            res.render(__dirname + "/ejs/info-pg.ejs", {
+              title: "Registration Success",
+              pageTitle: "Account Already Exists",
+              message:
+                "<br><br><h6><a style='color:#ff7f00 'href='/login'> Click Here </a> To Conitnue To Login or <a style='color:#ff7f00 'href='/register'> Click Here </a> To Create New Account </h6>",
+            });
+          }
+          if (error.errno === -4039) {
+            res.render(__dirname + "/ejs/info-pg.ejs", {
+              title: "Connectivity Issue | CoinCart",
+              pageTitle: "There was a connection issue, please try again later",
+              message:
+                "<br><h6><a style='color:#ff7f00 'href='/'> Click Here To Return To HomePage </a> </h6>",
+            });
+          }
+        });
+    }
   } else {
     res.redirect("/otpcheck-1");
   }
 });
 
 app.post("/reset-pass", (req, res) => {
-  if(req.body.pass === req.body.conpass){
-    database.query("UPDATE users SET password = '" + req.body.pass + "' WHERE username = '" + req.session.resetPassEmail + "';").then(() => {
-     delete req.session.resetCode;
-     delete req.session.resetPassEmail;
-     res.render(__dirname + "/ejs/info-pg.ejs", {
-      title: "Reset Success",
-      pageTitle: "Password Reset Successful",
-      message:
-        "<br><br><h6><a style='color:#ff7f00 'href='/login'> Click Here To Conitnue To Login With New Password </a> </h6>",
+  if (req.body.pass === req.body.conpass) {
+    database
+      .query(
+        "UPDATE users SET password = '" +
+          req.body.pass +
+          "' WHERE username = '" +
+          req.session.resetPassEmail +
+          "';"
+      )
+      .then(() => {
+        delete req.session.resetCode;
+        delete req.session.resetPassEmail;
+        res.render(__dirname + "/ejs/info-pg.ejs", {
+          title: "Reset Success",
+          pageTitle: "Password Reset Successful",
+          message:
+            "<br><br><h6><a style='color:#ff7f00 'href='/login'> Click Here To Conitnue To Login With New Password </a> </h6>",
+        });
+      });
+  } else {
+    res.render(__dirname + "/reset-pass-page.ejs", {
+      title: "Enter New Password",
+      displayProp: "block",
     });
-    });
-  }
-  else{
-    res.render(__dirname + "/reset-pass-page.ejs", {title:"Enter New Password", displayProp: "block"});
   }
 });
 
