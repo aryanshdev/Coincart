@@ -1268,7 +1268,7 @@ app.get("/otpcheck:display?:alert?", (req, res) => {
 
 app.post("/check-otp", (req, res) => {
   if (req.body.otp === req.session.resetCode) {
-    res.render(__dirname + "/reset-pass-page.ejs", {displayProp: "none"});
+    res.render(__dirname + "/reset-pass-page.ejs", {title:"Enter New Password",displayProp: "none"});
   } else {
     res.redirect("/otpcheck-1");
   }
@@ -1288,7 +1288,7 @@ app.post("/reset-pass", (req, res) => {
     });
   }
   else{
-    res.render(__dirname + "/reset-pass-page.ejs", {displayProp: "block"});
+    res.render(__dirname + "/reset-pass-page.ejs", {title:"Enter New Password", displayProp: "block"});
   }
 });
 
