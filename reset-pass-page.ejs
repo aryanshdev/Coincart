@@ -8,22 +8,22 @@
         <div class="login-form-area">
             <div class="login-form">
  
-<form action="/check-otp" method="post" >
+<form action="/reset-pass" method="post" >
     <div class="login-heading">
         <span>Enter Reset Code</span>
     </div>
     <div id="alert-panel" class="alert" style="margin-top: 5%; display: <%=displayProp %>;">
         <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-        Wrong Code, Check Your Code Again And Enter Correct Code.
+        Passwords Do Not Match
       </div>
-    <div class="input-box">
+      <div class="input-box">
         <div class="single-input-fields">
             <label>Enter Reset Password</label>
-            <input name="otp" type="text" maxlength="6" minlength="6" placeholder="Password Reset Code">
-            <button type="submit" class="submit-btn3">Reset Password</button>
+            <input name="pass" type="text" placeholder="Enter New Password">
+            <input name="conpass" type="text" placeholder="Re-Enter New Password">
+            <button type="submit" class="submit-btn3">Confirm Reset Password</button>
         </div>
 
-    </div>
 </form>
 
      </div>
