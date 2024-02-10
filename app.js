@@ -1,35 +1,44 @@
 const express = require("express");
+require("dotenv").config();
 const pg = require("pg-promise")();
 const parser = require("body-parser");
 const fetch = require("node-fetch");
 const session = require("express-session");
+const mailer = require("nodemailer");
 const app = express();
 
 app.use(
   session({
-    secret: "CoinCart_Encryption_Key",
+    secret: process.env.ENC_SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: { maxAge: 600000 },
   })
 );
 
+const mailTransporter = mailer.createTransport({
+  service: "gmail",
+  host: "smtp.gmail.com",
+  secure: false,
+  auth: {
+    user: process.env.EMAIL_USERNAME,
+    pass: process.env.EMAIL_PASSWORD,
+  },
+});
+
 app.use(parser.urlencoded({ extended: false }));
 app.set("view engine", "ejs");
 
 // COIN MARKET API URL : ADD  BACK WHEN COMMITING
-// MAIN : 41d0ca3c-84de-424b-8965-8be6465e9ca7
-// FAKE : 5fe8f10a-d28c-4767-8a14-96728256fa3c
 // https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=bnb,btc,eth,ltc,sol
 
 // URL END
-
 const connectionURL =
   "postgresql://retool:69xhVYmQuste@ep-morning-cherry-23207962.us-west-2.retooldb.com/retool?sslmode=require";
 const database = pg(connectionURL);
 
 app.use(express.static(__dirname + "/public"));
-app.listen(3001);
+app.listen(process.env.PORT || 3001);
 
 app.get("/", (req, res) => {
   var priceValues = [];
@@ -37,7 +46,7 @@ app.get("/", (req, res) => {
     "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=bnb,btc,eth,ltc,sol",
     {
       headers: {
-        "X-CMC_PRO_API_KEY": "41d0ca3c-84de-424b-8965-8be6465e9ca7",
+        "X-CMC_PRO_API_KEY": process.env.COINMARKETCAP_API_KEY_MAIN,
       },
     }
   )
@@ -62,7 +71,7 @@ app.get("/", (req, res) => {
     )
     .then(() => {
       database
-        .query("SELECT * FROM PRODUCTS ORDER BY RANDOM() LIMIT 6;")
+        .query("SELECT * FROM PRODUCTS ORDER BY RANDOM() LIMIT 10;")
         .then((result) => {
           res.render(__dirname + "/index.ejs", {
             item_in_cart: req.session.itemInCart ? req.session.itemInCart : 0,
@@ -84,7 +93,7 @@ app.get("/about", (req, res) => {
     "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=bnb,btc,eth,ltc,sol",
     {
       headers: {
-        "X-CMC_PRO_API_KEY": "41d0ca3c-84de-424b-8965-8be6465e9ca7",
+        "X-CMC_PRO_API_KEY": process.env.COINMARKETCAP_API_KEY_MAIN,
       },
     }
   )
@@ -126,7 +135,7 @@ app.get("/privacy", (req, res) => {
     "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=bnb,btc,eth,ltc,sol",
     {
       headers: {
-        "X-CMC_PRO_API_KEY": "41d0ca3c-84de-424b-8965-8be6465e9ca7",
+        "X-CMC_PRO_API_KEY": process.env.COINMARKETCAP_API_KEY_MAIN,
       },
     }
   )
@@ -168,7 +177,7 @@ app.get(/^\/login(?:-([\w-]+))?(?:&F=([\w-]+)_([\w-]+))?$/, (req, res) => {
     "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=bnb,btc,eth,ltc,sol",
     {
       headers: {
-        "X-CMC_PRO_API_KEY": "41d0ca3c-84de-424b-8965-8be6465e9ca7",
+        "X-CMC_PRO_API_KEY": process.env.COINMARKETCAP_API_KEY_MAIN,
       },
     }
   )
@@ -226,7 +235,7 @@ app.get("/account", (req, res) => {
     "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=bnb,btc,eth,ltc,sol",
     {
       headers: {
-        "X-CMC_PRO_API_KEY": "41d0ca3c-84de-424b-8965-8be6465e9ca7",
+        "X-CMC_PRO_API_KEY": process.env.COINMARKETCAP_API_KEY_MAIN,
       },
     }
   )
@@ -296,7 +305,7 @@ app.get("/register", (req, res) => {
     "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=bnb,btc,eth,ltc,sol",
     {
       headers: {
-        "X-CMC_PRO_API_KEY": "41d0ca3c-84de-424b-8965-8be6465e9ca7",
+        "X-CMC_PRO_API_KEY": process.env.COINMARKETCAP_API_KEY_MAIN,
       },
     }
   )
@@ -339,7 +348,7 @@ app.get("/product-:id", (req, res) => {
     "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=bnb,btc,eth,ltc,sol",
     {
       headers: {
-        "X-CMC_PRO_API_KEY": "41d0ca3c-84de-424b-8965-8be6465e9ca7",
+        "X-CMC_PRO_API_KEY": process.env.COINMARKETCAP_API_KEY_MAIN,
       },
     }
   )
@@ -418,7 +427,7 @@ app.get("/cart", (req, res) => {
     "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=bnb,btc,eth,ltc,sol",
     {
       headers: {
-        "X-CMC_PRO_API_KEY": "41d0ca3c-84de-424b-8965-8be6465e9ca7",
+        "X-CMC_PRO_API_KEY": process.env.COINMARKETCAP_API_KEY_MAIN,
       },
     }
   )
@@ -595,7 +604,7 @@ app.get("/contact", (req, res) => {
     "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=bnb,btc,eth,ltc,sol",
     {
       headers: {
-        "X-CMC_PRO_API_KEY": "41d0ca3c-84de-424b-8965-8be6465e9ca7",
+        "X-CMC_PRO_API_KEY": process.env.COINMARKETCAP_API_KEY_MAIN,
       },
     }
   )
@@ -739,7 +748,7 @@ app.post("/review::id", (req, res) => {
         );
       }
     })
-    .finally(res.redirect("/product-" + req.params.id +"?tab=three"));
+    .finally(res.redirect("/product-" + req.params.id + "?tab=three"));
 });
 
 app.get("/add-:id", (req, res) => {
@@ -781,7 +790,7 @@ app.get("/shop", (req, res) => {
     "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=bnb,btc,eth,ltc,sol",
     {
       headers: {
-        "X-CMC_PRO_API_KEY": "41d0ca3c-84de-424b-8965-8be6465e9ca7",
+        "X-CMC_PRO_API_KEY": process.env.COINMARKETCAP_API_KEY_MAIN,
       },
     }
   )
@@ -852,7 +861,7 @@ app.get("/search&q=:product", (req, res) => {
     "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=bnb,btc,eth,ltc,sol",
     {
       headers: {
-        "X-CMC_PRO_API_KEY": "41d0ca3c-84de-424b-8965-8be6465e9ca7",
+        "X-CMC_PRO_API_KEY": process.env.COINMARKETCAP_API_KEY_MAIN,
       },
     }
   )
@@ -887,7 +896,6 @@ app.get("/search&q=:product", (req, res) => {
         .then((result) => {
           res.render(__dirname + "/ejs/shop.ejs", {
             title: "Your Searched For " + req.params.product,
-
             item_in_cart: req.session.itemInCart ? req.session.itemInCart : 0,
             products: result,
             pageName: req.params.product,
@@ -1107,7 +1115,7 @@ app.post("/checkout", (req, res) => {
     "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=bnb,btc,eth,ltc,sol",
     {
       headers: {
-        "X-CMC_PRO_API_KEY": "41d0ca3c-84de-424b-8965-8be6465e9ca7",
+        "X-CMC_PRO_API_KEY": process.env.COINMARKETCAP_API_KEY_MAIN,
       },
     }
   )
@@ -1192,9 +1200,81 @@ app.post("/payment", (req, res) => {
   }
 });
 
-app.get("/ping", (req,res) =>{
-  res.send("<body style='text-align:center; padding:5%; font-size:larger'><h1>SERVER ONLINE</h1><img src='https://media1.tenor.com/images/770d07a0b28b45dd88a15a93879741a2/tenor.gif?itemid=14178373'> <br><br><br><a href='/'> RETURN TO HOME PAGE </a><br><br>&copy;ARYANSH GUPTA</body>")
-})
+app.get("/ping", (req, res) => {
+  res.send(
+    "<body style='text-align:center; padding:5%; font-size:larger'><h1>SERVER ONLINE</h1><img src='https://media1.tenor.com/images/770d07a0b28b45dd88a15a93879741a2/tenor.gif?itemid=14178373'> <br><br><br><a href='/'> RETURN TO HOME PAGE </a><br><br>&copy;ARYANSH GUPTA</body>"
+  );
+});
+
+app.get("/reset-password:display?", (req, res) => {
+  res.render(__dirname + "/password-reset.ejs", {
+    title: "Reset Password | CoinCart",
+    displayProp: req.params.display ? "block" : "none",
+  });
+});
+
+app.post("/resetPass:display?", (req, res) => {
+
+  if (req.session.timesCodeSent < 5) {
+  database
+    .query("SELECT * FROM users WHERE username = '" + req.body.username + "';")
+    .then((result) => {
+        if (result.length > 0) {
+          req.session.resetCode = Math.floor(
+            Math.random() * 1000000
+          ).toString();
+          mailTransporter.sendMail({
+            from: "CoinCart aryanshdevyt@gmail.com",
+            to: result[0].username,
+            subject: "CoinCart Password Reset",
+            html:  "<div style='text-align:center;font-family: sans-serif; margin: 2.5%; padding:2.5%; border-radius:15px;  border: 2.5px solid #ff7f00; '> <img src='https://coincart.onrender.com/assets/img/icon/loder.png' width='40%'><hr><h2> Your Password Reset Code Is </h2> <h1> " +
+            req.session.resetCode +
+            "</h1> <p> Don't Share It With Anyone <br> If You Did Not Request A Password Reset, Please Ignore This Email. </p></div>",
+          });
+            res.redirect("/otpcheck");
+        } else {
+          res.redirect("/reset-password-1");
+        }
+      
+
+    });
+  }
+  else{
+    res.render(__dirname + "/ejs/info-pg.ejs", {
+      title: "Too Many Attempts",
+      pageTitle: "You Have Reached The Maximum Limit Reset Attempts",
+      message:
+        "<br><h4>Try Again Later</h4> <h6><a style='color:#ff7f00 'href='/login'> Click Here To Return To Login Page </a> </h6>",
+    });
+  }
+  req.session.timesCodeSent =  req.session.timesCodeSent ? req.session.timesCodeSent + 1 : 0;
+  req.session.save();
+});
+
+app.get("/otpcheck:display?:alert?", (req, res) => {
+ if (req.session.resetCode) {
+  res.render(__dirname + "/ejs/check-otp.ejs", {
+    title: "Reset Password | CoinCart",
+    alertMessage:
+      req.params.alert === "1"
+        ? "Wrong Reset Code, Try Again"
+        : null,
+    displayProp: req.params.display ? "block" : "none",
+  });
+ }
+ else{
+    res.redirect("/");
+  
+ }
+} )
+
+app.post("/check-otp", (req, res) => {
+  if (req.body.otp === req.session.resetCode) {
+    
+  } else {
+    res.redirect("/otpcheck-1");
+  }
+});
 
 // AT LAST
 app.all("*", (req, res) => {
