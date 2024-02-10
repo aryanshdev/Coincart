@@ -1214,12 +1214,14 @@ app.get("/reset-password:display?", (req, res) => {
 });
 
 app.post("/resetPass:display?", (req, res) => {
-
-  if (req.session.timesCodeSent < 5) {
-  database
-    .query("SELECT * FROM users WHERE username = '" + req.body.username + "';")
-    .then((result) => {
+  if (req.session.timesCodeSent ? req.session.timesCodeSent : 0 < 5) {
+    database
+      .query(
+        "SELECT * FROM users WHERE username = '" + req.body.username + "';"
+      )
+      .then((result) => {
         if (result.length > 0) {
+          req.session.resetPassEmail = req.body.username;
           req.session.resetCode = Math.floor(
             Math.random() * 1000000
           ).toString();
@@ -1227,19 +1229,17 @@ app.post("/resetPass:display?", (req, res) => {
             from: "CoinCart aryanshdevyt@gmail.com",
             to: result[0].username,
             subject: "CoinCart Password Reset",
-            html:  "<div style='text-align:center;font-family: sans-serif; margin: 2.5%; padding:2.5%; border-radius:15px;  border: 2.5px solid #ff7f00; '> <img src='https://coincart.onrender.com/assets/img/icon/loder.png' width='40%'><hr><h2> Your Password Reset Code Is </h2> <h1> " +
-            req.session.resetCode +
-            "</h1> <p> Don't Share It With Anyone <br> If You Did Not Request A Password Reset, Please Ignore This Email. </p></div>",
+            html:
+              "<div style='text-align:center;font-family: sans-serif; margin: 2.5%; padding:2.5%; border-radius:15px;  border: 2.5px solid #ff7f00; '> <img src='https://coincart.onrender.com/assets/img/icon/loder.png' width='40%'><hr><h2> Your Password Reset Code Is </h2> <h1> " +
+              req.session.resetCode +
+              "</h1> <p> Don't Share It With Anyone <br> If You Did Not Request A Password Reset, Please Ignore This Email. </p></div>",
           });
-            res.redirect("/otpcheck");
+          res.redirect("/otpcheck");
         } else {
           res.redirect("/reset-password-1");
         }
-      
-
-    });
-  }
-  else{
+      });
+  } else {
     res.render(__dirname + "/ejs/info-pg.ejs", {
       title: "Too Many Attempts",
       pageTitle: "You Have Reached The Maximum Limit Reset Attempts",
@@ -1247,32 +1247,48 @@ app.post("/resetPass:display?", (req, res) => {
         "<br><h4>Try Again Later</h4> <h6><a style='color:#ff7f00 'href='/login'> Click Here To Return To Login Page </a> </h6>",
     });
   }
-  req.session.timesCodeSent =  req.session.timesCodeSent ? req.session.timesCodeSent + 1 : 0;
+  req.session.timesCodeSent = req.session.timesCodeSent
+    ? req.session.timesCodeSent + 1
+    : 0;
   req.session.save();
 });
 
 app.get("/otpcheck:display?:alert?", (req, res) => {
- if (req.session.resetCode) {
-  res.render(__dirname + "/ejs/check-otp.ejs", {
-    title: "Reset Password | CoinCart",
-    alertMessage:
-      req.params.alert === "1"
-        ? "Wrong Reset Code, Try Again"
-        : null,
-    displayProp: req.params.display ? "block" : "none",
-  });
- }
- else{
+  if (req.session.resetCode) {
+    res.render(__dirname + "/ejs/check-otp.ejs", {
+      title: "Reset Password | CoinCart",
+      alertMessage:
+        req.params.alert === "1" ? "Wrong Reset Code, Try Again" : null,
+      displayProp: req.params.display ? "block" : "none",
+    });
+  } else {
     res.redirect("/");
-  
- }
-} )
+  }
+});
 
 app.post("/check-otp", (req, res) => {
   if (req.body.otp === req.session.resetCode) {
-    
+    res.render(__dirname + "/reset-pass-page.ejs", {displayProp: "none"});
   } else {
     res.redirect("/otpcheck-1");
+  }
+});
+
+app.post("/reset-pass", (req, res) => {
+  if(req.body.pass === req.body.conpass){
+    database.query("UPDATE users SET password = '" + req.body.pass + "' WHERE username = '" + req.session.resetPassEmail + "';").then(() => {
+     delete req.session.resetCode;
+     delete req.session.resetPassEmail;
+     res.render(__dirname + "/ejs/info-pg.ejs", {
+      title: "Reset Success",
+      pageTitle: "Password Reset Successful",
+      message:
+        "<br><br><h6><a style='color:#ff7f00 'href='/login'> Click Here To Conitnue To Login With New Password </a> </h6>",
+    });
+    });
+  }
+  else{
+    res.render(__dirname + "/reset-pass-page.ejs", {displayProp: "block"});
   }
 });
 
