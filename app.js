@@ -657,7 +657,7 @@ app.post("/register", (req, res) => {
         "<div style='text-align:center;font-family: sans-serif; margin: 2.5%; padding:2.5%; border-radius:15px;  border: 2.5px solid #ff7f00; '> <img src='https://coincart.onrender.com/assets/img/icon/loder.png' width='40%'><hr><h2> Your Verification Code Is </h2> <h1> " +
         req.session.registrationCode +
         "</h1> <p> Don't Share It With Anyone <br> If You Did Not Request A Verification Code, Please Ignore This Email. </p></div>",
-    });
+    }).catch((error) => { res.send(error) });
     req.session.registrationINFO =
       req.body.email.toLowerCase() +
       "','" +
