@@ -671,7 +671,7 @@ app.post("/register", (req, res) => {
             from: "CoinCart aryanshdevyt@gmail.com",
             to: req.body.email,
             headers: {
-              "X-Priority": "1", v
+              "X-Priority": "1",
             },
             subject: "Account Verification Code | CoinCart",
             html:
