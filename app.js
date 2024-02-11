@@ -17,13 +17,15 @@ app.use(
 );
 
 const mailTransporter = mailer.createTransport({
-  service: "gmail",
-  host: "smtp.gmail.com",
-  secure: false,
+  service: 'gmail',
   auth: {
+    type: 'OAuth2',
     user: process.env.EMAIL_USERNAME,
     pass: process.env.EMAIL_PASSWORD,
-  },
+    clientId: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
+    refreshToken: process.env.REFRESH_TOKEN
+  }
 });
 
 app.use(parser.urlencoded({ extended: false }));
@@ -652,6 +654,10 @@ app.post("/register", (req, res) => {
     mailTransporter.sendMail({
       from: "CoinCart aryanshdevyt@gmail.com",
       to: req.body.email,
+      
+      headers: {
+        'X-Priority': '1' 
+      },
       subject: "Account Verification Code | CoinCart",
       html:
         "<div style='text-align:center;font-family: sans-serif; margin: 2.5%; padding:2.5%; border-radius:15px;  border: 2.5px solid #ff7f00; '> <img src='https://coincart.onrender.com/assets/img/icon/loder.png' width='40%'><hr><h2> Your Verification Code Is </h2> <h1> " +
