@@ -22,7 +22,7 @@ const mailTransporter = mailer.createTransport({
   secure: false,
   auth: {
     user: process.env.EMAIL_USERNAME,
-    pass: "ggbtcelhzvezcenr",
+    pass: process.env.EMAIL_PASSWORD,
   },
 });
 
