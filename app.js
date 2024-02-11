@@ -677,7 +677,7 @@ app.post("/register", (req, res) => {
             html:
               "<div style='text-align:center;font-family: sans-serif; margin: 2.5%; padding:2.5%; border-radius:15px;  border: 2.5px solid #ff7f00; '> <img src='https://coincart.onrender.com/assets/img/icon/loder.png' width='40%'><hr><h2> Your Verification Code Is </h2> <h1> " +
               req.session.registrationCode +
-              "</h1> <p> Don't Share It With Anyone <br> If You Did Not Request A Verification Code, Please Ignore This Email. </p></div>",
+              "</h1> <p>This Code Is Valid For 10 Minutes <br> Don't Share It With Anyone <br> If You Did Not Request A Verification Code, Please Ignore This Email. </p></div>",
           });
           req.session.registrationINFO =
             req.body.email.toLowerCase() +
@@ -1243,11 +1243,11 @@ app.post("/resetPass:display?", (req, res) => {
             headers: {
               "X-Priority": "1",
             },
-            subject: "CoinCart Password Reset",
+            subject: "Password Reset Code | CoinCart",
             html:
               "<div style='text-align:center;font-family: sans-serif; margin: 2.5%; padding:2.5%; border-radius:15px;  border: 2.5px solid #ff7f00; '> <img src='https://coincart.onrender.com/assets/img/icon/loder.png' width='40%'><hr><h2> Your Password Reset Code Is </h2> <h1> " +
               req.session.resetCode +
-              "</h1> <p> Don't Share It With Anyone <br> If You Did Not Request A Password Reset, Please Ignore This Email. </p></div>",
+              "</h1> <p> This Code Is Valid For 10 Minutes <br> Don't Share It With Anyone <br> If You Did Not Request A Password Reset, Please Ignore This Email. </p></div>",
           });
           res.redirect("/otpcheck");
         } else {
