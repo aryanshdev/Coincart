@@ -17,15 +17,17 @@ app.use(
 );
 
 const mailTransporter = mailer.createTransport({
-  service: 'gmail',
+  service: "gmail",
+  host: "smtp.gmail.com",
+  secure: false,
   auth: {
-    type: 'OAuth2',
+    type: "OAuth2",
     user: process.env.EMAIL_USERNAME,
     pass: process.env.EMAIL_PASSWORD,
     clientId: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
-    refreshToken: process.env.REFRESH_TOKEN
-  }
+    refreshToken: process.env.REFRESH_TOKEN,
+  },
 });
 
 app.use(parser.urlencoded({ extended: false }));
@@ -301,7 +303,7 @@ app.get("/account", (req, res) => {
     });
 });
 
-app.get("/register", (req, res) => {
+app.get("/register:combinePara?", (req, res) => {
   var priceValues = [];
   fetch(
     "https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=bnb,btc,eth,ltc,sol",
@@ -333,7 +335,15 @@ app.get("/register", (req, res) => {
     .then(() => {
       res.render(__dirname + "/register.ejs", {
         title: "Register | CoinCart",
-
+        displayProp: req.params.combinePara ? "block" : "none",
+        alertMessage:
+          req.params.combinePara === "&A"
+            ? "User Already Exists, Try Logging In Instead"
+            : "&W"
+            ? "Passwords Do Not Match, Make Sure You Enter Same Password In Confirm Password Field"
+            : "&E"
+            ? "Email Seems Sus, Please Enter A Real Email Address"
+            : none,
         item_in_cart: req.session.itemInCart ? req.session.itemInCart : 0,
         btcPrice: priceValues[1],
         ethPrice: priceValues[2],
@@ -648,31 +658,44 @@ app.post("/register", (req, res) => {
     req.body.password == req.body.password_con &&
     /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(req.body.email)
   ) {
-    req.session.registrationCode = Math.floor(
-      Math.random() * 1000000
-    ).toString();
-    mailTransporter.sendMail({
-      from: "CoinCart aryanshdevyt@gmail.com",
-      to: req.body.email,
-      
-      headers: {
-        'X-Priority': '1' 
-      },
-      subject: "Account Verification Code | CoinCart",
-      html:
-        "<div style='text-align:center;font-family: sans-serif; margin: 2.5%; padding:2.5%; border-radius:15px;  border: 2.5px solid #ff7f00; '> <img src='https://coincart.onrender.com/assets/img/icon/loder.png' width='40%'><hr><h2> Your Verification Code Is </h2> <h1> " +
-        req.session.registrationCode +
-        "</h1> <p> Don't Share It With Anyone <br> If You Did Not Request A Verification Code, Please Ignore This Email. </p></div>",
-    }).then(()=> {req.session.registrationINFO =
-      req.body.email.toLowerCase() +
-      "','" +
-      req.body.name +
-      "','" +
-      req.body.password;
-    res.redirect("/otpcheck")}).catch((error) => { res.send(error) });
-   
+    database
+      .query(
+        "SELECT * FROM users WHERE username = '" + req.body.username + "';"
+      )
+      .then((result) => {
+        if (result.length !== 0) {
+          req.session.registrationCode = Math.floor(
+            Math.random() * 1000000
+          ).toString();
+          mailTransporter.sendMail({
+            from: "CoinCart aryanshdevyt@gmail.com",
+            to: req.body.email,
+            headers: {
+              "X-Priority": "1", // Set priority to high (1), medium (3), or low (5)
+            },
+            subject: "Account Verification Code | CoinCart",
+            html:
+              "<div style='text-align:center;font-family: sans-serif; margin: 2.5%; padding:2.5%; border-radius:15px;  border: 2.5px solid #ff7f00; '> <img src='https://coincart.onrender.com/assets/img/icon/loder.png' width='40%'><hr><h2> Your Verification Code Is </h2> <h1> " +
+              req.session.registrationCode +
+              "</h1> <p> Don't Share It With Anyone <br> If You Did Not Request A Verification Code, Please Ignore This Email. </p></div>",
+          });
+          req.session.registrationINFO =
+            req.body.email.toLowerCase() +
+            "','" +
+            req.body.name +
+            "','" +
+            req.body.password;
+          res.redirect("/otpcheck");
+        } else {
+          res.redirect("/register&A");
+        }
+      });
   } else {
-    res.sendStatus(400);
+    if (req.body.password !== req.body.password_con) {
+      res.redirect("/register&W");
+    } else {
+      res.redirect("/register&E");
+    }
   }
 });
 
@@ -1217,6 +1240,9 @@ app.post("/resetPass:display?", (req, res) => {
           mailTransporter.sendMail({
             from: "CoinCart aryanshdevyt@gmail.com",
             to: result[0].username,
+            headers: {
+              "X-Priority": "1", // Set priority to high (1), medium (3), or low (5)
+            },
             subject: "CoinCart Password Reset",
             html:
               "<div style='text-align:center;font-family: sans-serif; margin: 2.5%; padding:2.5%; border-radius:15px;  border: 2.5px solid #ff7f00; '> <img src='https://coincart.onrender.com/assets/img/icon/loder.png' width='40%'><hr><h2> Your Password Reset Code Is </h2> <h1> " +

@@ -12,7 +12,10 @@
                                 <span>Sign Up</span>
                                 <p>Create your account to get full access</p>
                             </div>
-
+                            <div id="alert-panel" class="alert" style="margin-top: 5%; display: <%= displayProp %>;">
+                                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                                <%= alertMessage %>
+                              </div>
                             <div class="input-box">
                                 <div class="single-input-fields">
                                     <label>Full name *</label>
