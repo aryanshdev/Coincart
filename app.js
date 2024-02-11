@@ -663,7 +663,7 @@ app.post("/register", (req, res) => {
         "SELECT * FROM users WHERE username = '" + req.body.username + "';"
       )
       .then((result) => {
-        if (result.length !== 0) {
+        if (result.length === 0) {
           req.session.registrationCode = Math.floor(
             Math.random() * 1000000
           ).toString();
@@ -671,7 +671,7 @@ app.post("/register", (req, res) => {
             from: "CoinCart aryanshdevyt@gmail.com",
             to: req.body.email,
             headers: {
-              "X-Priority": "1", // Set priority to high (1), medium (3), or low (5)
+              "X-Priority": "1", v
             },
             subject: "Account Verification Code | CoinCart",
             html:
@@ -1241,7 +1241,7 @@ app.post("/resetPass:display?", (req, res) => {
             from: "CoinCart aryanshdevyt@gmail.com",
             to: result[0].username,
             headers: {
-              "X-Priority": "1", // Set priority to high (1), medium (3), or low (5)
+              "X-Priority": "1",
             },
             subject: "CoinCart Password Reset",
             html:
