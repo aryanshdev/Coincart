@@ -679,7 +679,7 @@ app.post("/register", (req, res) => {
             },
             subject: "Account Verification Code | CoinCart",
             html:
-              "<div style='text-align:center;font-family: sans-serif; margin: 2.5%; padding:2.5%; border-radius:15px;  border: 2.5px solid #ff7f00; '> <img src='https://coincart.onrender.com/assets/img/icon/loder.png' width='40%'><hr><h2> Your Verification Code Is </h2> <h1> " +
+              "<div style='text-align:center;font-family: sans-serif; margin: 2.5%; padding:2.5%; border-radius:15px;  border: 2.5px solid #ff7f00; '> <img src='https://coincart.onrender.com/assets/img/icon/loder.png' width='35%'><hr><h2> Your Verification Code Is </h2> <h1> " +
               req.session.registrationCode +
               "</h1> <p>This Code Is Valid For 10 Minutes <br> Don't Share It With Anyone <br> If You Did Not Request A Verification Code, Please Ignore This Email. </p></div>",
           });
@@ -1253,7 +1253,7 @@ app.post("/resetPass:display?", (req, res) => {
             },
             subject: "Password Reset Code | CoinCart",
             html:
-              "<div style='text-align:center;font-family: sans-serif; margin: 2.5%; padding:2.5%; border-radius:15px;  border: 2.5px solid #ff7f00; '> <img src='https://coincart.onrender.com/assets/img/icon/loder.png' width='40%'><hr><h2> Your Password Reset Code Is </h2> <h1> " +
+              "<div style='text-align:center;font-family: sans-serif; margin: 2.5%; padding:2.5%; border-radius:15px;  border: 2.5px solid #ff7f00; '> <img src='https://coincart.onrender.com/assets/img/icon/loder.png' width='35%'><hr><h2> Your Password Reset Code Is </h2> <h1> " +
               req.session.resetCode +
               "</h1> <p> This Code Is Valid For 10 Minutes <br> Don't Share It With Anyone <br> If You Did Not Request A Password Reset, Please Ignore This Email. </p></div>",
           });
@@ -1315,8 +1315,6 @@ app.post("/check-otp-:type", (req, res) => {
             "',null);"
         )
         .then((result) => {
-          delete req.session.registrationCode;
-          delete req.session.registrationINFO;
           res.render(__dirname + "/ejs/info-pg.ejs", {
             title: "Registration Success",
             pageTitle: "Account Registration Successful",
@@ -1325,21 +1323,23 @@ app.post("/check-otp-:type", (req, res) => {
           });
           mailTransporter.sendMail({
             from: "CoinCart aryanshdevyt@gmail.com",
-            to: result[0].username,
+            to: req.session.registrationINFO.split(',')[0].slice(0, -1),
             headers: {
               "X-Priority": "3",
             },
             subject: "Welcome To CoinCart",
             html:
-              "<div style='text-align:center;font-family: sans-serif; margin: 2.5%; padding:2.5%; border-radius:15px;  border: 2.5px solid #ff7f00; '> <img src='https://coincart.onrender.com/assets/img/icon/loder.png' width='40%'><hr>" +
-              " <h2> A Little About CoinCart </h2> <br>" +
-              "<p> This Is a Prototype Marketplace Project By Aryansh Gupta (also popular as AryanshDev).\
+              "<div style='text-align:center;font-family: sans-serif; margin: 2.5%; padding:2.5%; border-radius:15px;  border: 2.5px solid #ff7f00; '> <img src='https://coincart.onrender.com/assets/img/icon/loder.png' width='35%'><hr>" +
+              " <h2> A Little About CoinCart </h2> " +
+              "<p> This Is a Prototype Marketplace Project By Aryansh Gupta (also popular as AryanshDev).<br><br>\
                It Is FullStack Web App Running On Node Server. \
                It Provides All Functionalities Of a Online Marketplace Like Adding Items To Cart,\
                 Searching and Reviewing Products Along With Managing Your Account, Adding Addresses And Ordering At That Address (Dummy Ordering) etc. Do Try All Of Them !!! \
-                <br> Feel Free To Share Your Expriences With Me <3 <br>\
+                <br><br> Feel Free To Share Your Expriences With Me <3 <br>\
                  Check Out More At : <a href='https://github.com/aryanshdev/Projects'>My Project Showcase <a/></p></div>",
           });
+          delete req.session.registrationCode;
+          delete req.session.registrationINFO;
         })
         .catch((error) => {
           if (error.code == 23505) {
