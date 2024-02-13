@@ -667,6 +667,10 @@ app.post("/register", (req, res) => {
           req.session.registrationCode = Math.floor(
             Math.random() * 1000000
           ).toString();
+          req.session.registrationCode =
+            req.session.registrationCode.length === 6
+              ? req.session.registrationCode
+              : req.session.registrationCode + "0";
           mailTransporter.sendMail({
             from: "CoinCart aryanshdevyt@gmail.com",
             to: req.body.email,
@@ -1220,7 +1224,7 @@ app.get("/ping", (req, res) => {
 
 app.get("/reset-password:display?", (req, res) => {
   res.render(__dirname + "/password-reset.ejs", {
-    title: "Reset Password | CoinCart",
+    title: "Verify Code | CoinCart",
     displayProp: req.params.display ? "block" : "none",
   });
 });
@@ -1237,6 +1241,10 @@ app.post("/resetPass:display?", (req, res) => {
           req.session.resetCode = Math.floor(
             Math.random() * 1000000
           ).toString();
+          req.session.resetCode =
+            req.session.resetCode.length === 6
+              ? req.session.resetCode
+              : req.session.resetCode + "0";
           mailTransporter.sendMail({
             from: "CoinCart aryanshdevyt@gmail.com",
             to: result[0].username,
@@ -1275,7 +1283,7 @@ app.get("/otpcheck:display?", (req, res) => {
     : undefined;
   if (msg) {
     res.render(__dirname + "/ejs/check-otp.ejs", {
-      title: "Reset Password | CoinCart",
+      title: "Verify Code | CoinCart",
       codeType: msg,
       otpMessage:
         "A " +
@@ -1314,6 +1322,23 @@ app.post("/check-otp-:type", (req, res) => {
             pageTitle: "Account Registration Successful",
             message:
               "<br><br><h6><a style='color:#ff7f00 'href='/login'> Click Here To Conitnue To Login </a> </h6>",
+          });
+          mailTransporter.sendMail({
+            from: "CoinCart aryanshdevyt@gmail.com",
+            to: result[0].username,
+            headers: {
+              "X-Priority": "3",
+            },
+            subject: "Welcome To CoinCart",
+            html:
+              "<div style='text-align:center;font-family: sans-serif; margin: 2.5%; padding:2.5%; border-radius:15px;  border: 2.5px solid #ff7f00; '> <img src='https://coincart.onrender.com/assets/img/icon/loder.png' width='40%'><hr>" +
+              " <h2> A Little About CoinCart </h2> <br>" +
+              "<p> This Is a Prototype Marketplace Project By Aryansh Gupta (also popular as AryanshDev).\
+               It Is FullStack Web App Running On Node Server. \
+               It Provides All Functionalities Of a Online Marketplace Like Adding Items To Cart,\
+                Searching and Reviewing Products Along With Managing Your Account, Adding Addresses And Ordering At That Address (Dummy Ordering) etc. Do Try All Of Them !!! \
+                <br> Feel Free To Share Your Expriences With Me <3 <br>\
+                 Check Out More At : <a href='https://github.com/aryanshdev/Projects'>My Project Showcase <a/></p></div>",
           });
         })
         .catch((error) => {
