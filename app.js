@@ -37,8 +37,7 @@ app.set("view engine", "ejs");
 // https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=bnb,btc,eth,ltc,sol
 
 // URL END
-const connectionURL =
-  "postgresql://retool:69xhVYmQuste@ep-morning-cherry-23207962.us-west-2.retooldb.com/retool?sslmode=require";
+const connectionURL = process.env.DBURL;
 const database = pg(connectionURL);
 
 app.use(express.static(__dirname + "/public"));
